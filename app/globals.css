@@ -10,9 +10,9 @@
     --background-end-rgb: 20, 20, 20;
   }
 
-  * {
+ /* * {
     @apply border-border;
-  }
+  }*/
 
   body {
     @apply bg-black text-white;
