@@ -1,43 +1,52 @@
 'use client'
 
 import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence, useMotionValue, useTransform, useSpring } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import Image from 'next/image'
-import { FaQuoteLeft, FaStar, FaChevronLeft, FaChevronRight } from 'react-icons/fa'
+import { FaQuoteLeft, FaStar } from 'react-icons/fa'
+import { HiChevronLeft, HiChevronRight } from 'react-icons/hi'
 
 const testimonials = [
   {
     id: 1,
     name: 'Amit Gupta',
+    title: 'CEO, Tech Innovations',
     location: 'Green Park, Ludhiana',
     image: '/api/placeholder/100/100',
     rating: 5,
-    text: 'Inscribe is one of the best architects in Ludhiana. 100% satisfied by their Services.',
+    text: 'Inscribe transformed our office space into a modern masterpiece. Their attention to detail and innovative approach exceeded all expectations.',
+    project: 'Corporate Office Redesign',
   },
   {
     id: 2,
     name: 'Priya Sharma',
+    title: 'Homeowner',
     location: 'Model Town, Ludhiana',
     image: '/api/placeholder/100/100',
     rating: 5,
-    text: 'Exceptional design and attention to detail. They transformed our vision into reality perfectly.',
+    text: 'The team at Inscribe brought our dream home to life. Every corner reflects our personality while maintaining functionality.',
+    project: 'Luxury Villa Design',
   },
   {
     id: 3,
     name: 'Rajesh Kumar',
+    title: 'Restaurant Owner',
     location: 'Civil Lines, Ludhiana',
     image: '/api/placeholder/100/100',
     rating: 5,
-    text: 'Professional team with innovative ideas. The entire process was smooth and efficient.',
+    text: 'Our restaurant\'s ambiance has become a talking point. Inscribe perfectly captured the essence we wanted to convey.',
+    project: 'Fine Dining Interior',
   },
   {
     id: 4,
     name: 'Neha Patel',
+    title: 'Boutique Owner',
     location: 'Sarabha Nagar, Ludhiana',
     image: '/api/placeholder/100/100',
     rating: 5,
-    text: 'Their creative approach and practical solutions made our dream home a reality.',
+    text: 'The facade design has increased foot traffic significantly. It\'s modern, inviting, and perfectly represents our brand.',
+    project: 'Retail Facade Design',
   },
 ]
 
@@ -48,109 +57,178 @@ export default function TestimonialsSection() {
   })
 
   const [currentIndex, setCurrentIndex] = useState(0)
+  const [direction, setDirection] = useState(0)
 
-  const nextTestimonial = () => {
-    setCurrentIndex((prev) => (prev + 1) % testimonials.length)
+  const dragX = useMotionValue(0)
+  const dragXSpring = useSpring(dragX, { stiffness: 300, damping: 30 })
+  const opacity = useTransform(dragXSpring, [-200, 0, 200], [0.5, 1, 0.5])
+  const scale = useTransform(dragXSpring, [-200, 0, 200], [0.9, 1, 0.9])
+
+  const slideVariants = {
+    enter: (direction) => ({
+      x: direction > 0 ? 1000 : -1000,
+      opacity: 0,
+      scale: 0.8,
+    }),
+    center: {
+      zIndex: 1,
+      x: 0,
+      opacity: 1,
+      scale: 1,
+    },
+    exit: (direction) => ({
+      zIndex: 0,
+      x: direction < 0 ? 1000 : -1000,
+      opacity: 0,
+      scale: 0.8,
+    }),
   }
 
-  const prevTestimonial = () => {
-    setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length)
+  const swipeConfidenceThreshold = 10000
+  const swipePower = (offset, velocity) => {
+    return Math.abs(offset) * velocity
+  }
+
+  const paginate = (newDirection) => {
+    setDirection(newDirection)
+    setCurrentIndex((prevIndex) => {
+      let newIndex = prevIndex + newDirection
+      if (newIndex < 0) newIndex = testimonials.length - 1
+      if (newIndex >= testimonials.length) newIndex = 0
+      return newIndex
+    })
   }
 
   return (
-    <section className="py-20 lg:py-32 relative overflow-hidden">
-      {/* Background */}
+    <section className="py-32 relative overflow-hidden">
+      {/* Dynamic Background */}
       <div className="absolute inset-0 -z-10">
-        <div className="absolute inset-0 bg-gradient-to-br from-dark-200 via-dark-100 to-black" />
+        <div className="absolute inset-0 bg-gradient-to-b from-dark-100 to-black" />
         <motion.div
-          animate={{
+          animate={{ 
             scale: [1, 1.2, 1],
-            opacity: [0.3, 0.5, 0.3],
+            opacity: [0.1, 0.2, 0.1],
           }}
-          transition={{
-            duration: 10,
+          transition={{ 
+            duration: 20,
             repeat: Infinity,
-            ease: "easeInOut",
+            ease: "easeInOut"
           }}
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary-500/10 rounded-full blur-3xl"
-        />
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+        >
+          <div className="w-[800px] h-[800px] rounded-full bg-gradient-radial from-primary-500/20 to-transparent blur-3xl" />
+        </motion.div>
       </div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <motion.div
           ref={ref}
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          className="text-center mb-16"
+          initial={{ opacity: 0 }}
+          animate={inView ? { opacity: 1 } : {}}
+          className="text-center mb-20"
         >
-          <motion.span
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={inView ? { opacity: 1, scale: 1 } : {}}
-            transition={{ delay: 0.2 }}
-            className="text-primary-500 font-medium uppercase tracking-wider text-sm"
-          >
-            Testimonials
-          </motion.span>
-          <motion.h2
+          <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ delay: 0.3 }}
-            className="font-display font-bold text-4xl sm:text-5xl lg:text-6xl mt-2"
+            transition={{ duration: 0.6 }}
+            className="text-primary-500 font-medium uppercase tracking-widest mb-4"
           >
-            What Our <span className="gradient-text">Customer Said</span>
+            Testimonials
+          </motion.p>
+          
+          <motion.h2
+            initial={{ opacity: 0, y: 30 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.1 }}
+            className="font-display text-5xl md:text-7xl lg:text-8xl"
+          >
+            <span className="font-light">Client</span>{' '}
+            <span className="gradient-text font-bold">Stories</span>
           </motion.h2>
         </motion.div>
 
         {/* Testimonial Slider */}
-        <div className="max-w-4xl mx-auto">
-          <div className="relative">
-            {/* Quote Icon */}
+        <div className="max-w-5xl mx-auto">
+          <div className="relative h-[500px] flex items-center justify-center">
+            {/* Quote Icon Background */}
             <motion.div
               initial={{ opacity: 0, scale: 0 }}
-              animate={inView ? { opacity: 0.1, scale: 1 } : {}}
+              animate={inView ? { opacity: 0.05, scale: 1 } : {}}
               transition={{ delay: 0.5, type: "spring" }}
-              className="absolute -top-10 left-0 text-primary-500"
+              className="absolute top-0 left-1/2 -translate-x-1/2"
             >
-              <FaQuoteLeft className="text-8xl" />
+              <FaQuoteLeft className="text-[300px] text-primary-500" />
             </motion.div>
 
             {/* Testimonial Content */}
-            <AnimatePresence mode="wait">
+            <AnimatePresence initial={false} custom={direction} mode="wait">
               <motion.div
                 key={currentIndex}
-                initial={{ opacity: 0, x: 50 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -50 }}
-                transition={{ duration: 0.5, ease: [0.6, 0.05, 0.01, 0.9] }}
-                className="text-center"
+                custom={direction}
+                variants={slideVariants}
+                initial="enter"
+                animate="center"
+                exit="exit"
+                transition={{
+                  x: { type: "spring", stiffness: 300, damping: 30 },
+                  opacity: { duration: 0.2 },
+                }}
+                drag="x"
+                dragConstraints={{ left: 0, right: 0 }}
+                dragElastic={1}
+                onDragEnd={(e, { offset, velocity }) => {
+                  const swipe = swipePower(offset.x, velocity.x)
+                  if (swipe < -swipeConfidenceThreshold) {
+                    paginate(1)
+                  } else if (swipe > swipeConfidenceThreshold) {
+                    paginate(-1)
+                  }
+                }}
+                style={{ x: dragX, opacity, scale }}
+                className="absolute w-full px-8"
               >
-                <div className="glass-effect p-8 lg:p-12 rounded-3xl relative">
+                <div className="text-center">
                   {/* Rating */}
-                  <div className="flex justify-center gap-1 mb-6">
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.2 }}
+                    className="flex justify-center gap-1 mb-8"
+                  >
                     {[...Array(testimonials[currentIndex].rating)].map((_, i) => (
                       <motion.div
                         key={i}
-                        initial={{ opacity: 0, scale: 0 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ delay: 0.1 * i, type: "spring" }}
+                        initial={{ opacity: 0, scale: 0, rotate: -180 }}
+                        animate={{ opacity: 1, scale: 1, rotate: 0 }}
+                        transition={{ delay: 0.3 + i * 0.1, type: "spring" }}
                       >
-                        <FaStar className="text-yellow-400 text-xl" />
+                        <FaStar className="text-2xl text-yellow-400" />
                       </motion.div>
                     ))}
-                  </div>
+                  </motion.div>
 
                   {/* Text */}
-                  <p className="text-xl lg:text-2xl text-gray-300 mb-8 leading-relaxed">
+                  <motion.p
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.4 }}
+                    className="text-2xl md:text-3xl lg:text-4xl font-light leading-relaxed text-gray-300 mb-12"
+                  >
                     "{testimonials[currentIndex].text}"
-                  </p>
+                  </motion.p>
 
                   {/* Author */}
-                  <div className="flex flex-col items-center">
-                    <div className="relative mb-4">
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.5 }}
+                    className="flex flex-col items-center"
+                  >
+                    <div className="relative mb-6">
                       <motion.div
                         whileHover={{ scale: 1.1 }}
-                        className="relative w-20 h-20 rounded-full overflow-hidden ring-4 ring-primary-500/20"
+                        className="relative w-24 h-24 rounded-full overflow-hidden"
                       >
                         <Image
                           src={testimonials[currentIndex].image}
@@ -159,54 +237,74 @@ export default function TestimonialsSection() {
                           className="object-cover"
                         />
                       </motion.div>
-                      <div className="absolute inset-0 rounded-full bg-primary-500/20 blur-xl" />
+                      <motion.div
+                        animate={{ rotate: 360 }}
+                        transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                        className="absolute inset-0 rounded-full border-2 border-primary-500/30 border-dashed"
+                      />
                     </div>
-                    <h4 className="text-xl font-bold gradient-text">
+                    
+                    <h4 className="text-2xl font-bold gradient-text mb-1">
                       {testimonials[currentIndex].name}
                     </h4>
-                    <p className="text-gray-400 text-sm">
-                      {testimonials[currentIndex].location}
+                    <p className="text-gray-400 mb-2">
+                      {testimonials[currentIndex].title}
                     </p>
-                  </div>
+                    <p className="text-sm text-primary-400">
+                      {testimonials[currentIndex].project}
+                    </p>
+                  </motion.div>
                 </div>
               </motion.div>
             </AnimatePresence>
 
-            {/* Navigation Buttons */}
-            <div className="flex justify-center gap-4 mt-8">
+            {/* Navigation */}
+            <div className="absolute bottom-0 left-0 right-0 flex items-center justify-between">
               <motion.button
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
-                onClick={prevTestimonial}
-                className="p-3 glass-effect rounded-full hover:bg-white/10 transition-colors"
+                onClick={() => paginate(-1)}
+                className="p-4 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 transition-colors"
               >
-                <FaChevronLeft />
+                <HiChevronLeft className="text-2xl" />
               </motion.button>
-              <motion.button
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-                onClick={nextTestimonial}
-                className="p-3 glass-effect rounded-full hover:bg-white/10 transition-colors"
-              >
-                <FaChevronRight />
-              </motion.button>
-            </div>
 
-            {/* Dots Indicator */}
-            <div className="flex justify-center gap-2 mt-6">
-              {testimonials.map((_, index) => (
-                <motion.button
-                  key={index}
-                  onClick={() => setCurrentIndex(index)}
-                  className={`h-2 rounded-full transition-all duration-300 ${
-                    index === currentIndex
-                      ? 'w-8 bg-primary-500'
-                      : 'w-2 bg-gray-600 hover:bg-gray-500'
-                  }`}
-                  whileHover={{ scale: 1.2 }}
-                  whileTap={{ scale: 0.8 }}
-                />
-              ))}
+              {/* Progress Indicators */}
+              <div className="flex gap-2">
+                {testimonials.map((_, index) => (
+                  <motion.button
+                    key={index}
+                    onClick={() => {
+                      setDirection(index > currentIndex ? 1 : -1)
+                      setCurrentIndex(index)
+                    }}
+                    className="relative h-1 overflow-hidden rounded-full bg-white/10"
+                    animate={{ width: index === currentIndex ? 40 : 20 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <motion.div
+                      initial={{ x: '-100%' }}
+                      animate={{ x: index === currentIndex ? '0%' : '-100%' }}
+                      transition={{ duration: 5, ease: "linear" }}
+                      className="absolute inset-0 bg-gradient-to-r from-primary-500 to-accent-orange"
+                      onAnimationComplete={() => {
+                        if (index === currentIndex) {
+                          paginate(1)
+                        }
+                      }}
+                    />
+                  </motion.button>
+                ))}
+              </div>
+
+              <motion.button
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                onClick={() => paginate(1)}
+                className="p-4 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 transition-colors"
+              >
+                <HiChevronRight className="text-2xl" />
+              </motion.button>
             </div>
           </div>
         </div>

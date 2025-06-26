@@ -1,129 +1,198 @@
 'use client'
 
-import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { useState, useRef } from 'react'
+import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import Image from 'next/image'
 import Link from 'next/link'
-import { HiArrowRight, HiEye } from 'react-icons/hi'
+import { HiArrowRight, HiEye, HiPlus } from 'react-icons/hi'
 
-const categories = ['All', 'Commercial', 'Kids Room', 'Interiors', 'Front Elevation']
+const categories = ['All', 'Commercial', 'Residential', 'Interiors', 'Facades']
 
 const projects = [
   {
     id: 1,
-    title: 'Modern Office Complex',
+    title: 'Sky Tower Complex',
     category: 'Commercial',
-    image: '/api/placeholder/600/400',
-    description: 'State-of-the-art commercial space with sustainable design',
+    image: '/api/placeholder/600/800',
+    size: 'tall',
+    year: '2023',
+    location: 'Downtown District',
   },
   {
     id: 2,
-    title: 'Luxury Villa Elevation',
-    category: 'Front Elevation',
+    title: 'Villa Serenity',
+    category: 'Residential',
     image: '/api/placeholder/600/400',
-    description: 'Contemporary facade design with premium materials',
+    size: 'wide',
+    year: '2023',
+    location: 'Green Valley',
   },
   {
     id: 3,
-    title: 'Creative Kids Bedroom',
-    category: 'Kids Room',
-    image: '/api/placeholder/600/400',
-    description: 'Playful and functional space for children',
+    title: 'Modern Workspace',
+    category: 'Interiors',
+    image: '/api/placeholder/600/600',
+    size: 'square',
+    year: '2022',
+    location: 'Tech Park',
   },
   {
     id: 4,
-    title: 'Minimalist Living Room',
-    category: 'Interiors',
-    image: '/api/placeholder/600/400',
-    description: 'Clean lines and sophisticated interior design',
+    title: 'Glass Facade Tower',
+    category: 'Facades',
+    image: '/api/placeholder/600/800',
+    size: 'tall',
+    year: '2023',
+    location: 'Business District',
   },
   {
     id: 5,
-    title: 'Corporate Headquarters',
-    category: 'Commercial',
-    image: '/api/placeholder/600/400',
-    description: 'Modern workspace designed for productivity',
+    title: 'Eco Residence',
+    category: 'Residential',
+    image: '/api/placeholder/600/600',
+    size: 'square',
+    year: '2022',
+    location: 'Suburban Heights',
   },
   {
     id: 6,
-    title: 'Contemporary Home Facade',
-    category: 'Front Elevation',
+    title: 'Corporate HQ',
+    category: 'Commercial',
     image: '/api/placeholder/600/400',
-    description: 'Striking exterior design with modern elements',
+    size: 'wide',
+    year: '2023',
+    location: 'Financial District',
   },
 ]
 
 function ProjectCard({ project, index }) {
   const [isHovered, setIsHovered] = useState(false)
+  const cardRef = useRef(null)
+  
+  const { scrollYProgress } = useScroll({
+    target: cardRef,
+    offset: ["start end", "end start"]
+  })
+  
+  const y = useTransform(scrollYProgress, [0, 1], [100, -100])
+  const opacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0, 1, 1, 0])
+
+  const getSizeClasses = () => {
+    switch (project.size) {
+      case 'tall': return 'md:row-span-2'
+      case 'wide': return 'md:col-span-2'
+      default: return ''
+    }
+  }
 
   return (
     <motion.div
+      ref={cardRef}
       layout
       initial={{ opacity: 0, scale: 0.8 }}
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 0.8 }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
+      transition={{ 
+        duration: 0.6, 
+        delay: index * 0.1,
+        ease: [0.6, 0.05, 0.01, 0.9]
+      }}
+      style={{ opacity }}
+      className={`relative group ${getSizeClasses()}`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className="group relative overflow-hidden rounded-2xl cursor-pointer"
     >
       <motion.div
-        animate={{ scale: isHovered ? 1.1 : 1 }}
-        transition={{ duration: 0.6, ease: [0.6, 0.05, 0.01, 0.9] }}
-        className="relative h-80"
+        style={{ y }}
+        className="relative h-full min-h-[400px] rounded-3xl overflow-hidden cursor-pointer"
       >
-        <Image
-          src={project.image}
-          alt={project.title}
-          fill
-          className="object-cover"
-        />
-        
-        {/* Overlay */}
+        {/* Image */}
+        <motion.div
+          animate={{ scale: isHovered ? 1.1 : 1 }}
+          transition={{ duration: 0.6, ease: [0.6, 0.05, 0.01, 0.9] }}
+          className="absolute inset-0"
+        >
+          <Image
+            src={project.image}
+            alt={project.title}
+            fill
+            className="object-cover"
+          />
+        </motion.div>
+
+        {/* Gradient Overlay */}
         <motion.div
           initial={{ opacity: 0 }}
-          animate={{ opacity: isHovered ? 1 : 0 }}
+          animate={{ opacity: isHovered ? 1 : 0.3 }}
           transition={{ duration: 0.3 }}
           className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent"
         />
 
         {/* Content */}
-        <AnimatePresence>
-          {isHovered && (
+        <div className="absolute inset-0 p-8 flex flex-col justify-end">
+          {/* Category Badge */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ 
+              opacity: isHovered ? 1 : 0, 
+              y: isHovered ? 0 : 20 
+            }}
+            transition={{ duration: 0.3 }}
+            className="mb-4"
+          >
+            <span className="px-4 py-2 bg-white/10 backdrop-blur-md rounded-full text-sm font-medium">
+              {project.category}
+            </span>
+          </motion.div>
+
+          {/* Title and Info */}
+          <motion.div
+            initial={{ y: 20 }}
+            animate={{ y: isHovered ? 0 : 20 }}
+            transition={{ duration: 0.3 }}
+          >
+            <h3 className="text-3xl font-bold mb-2">{project.title}</h3>
+            <p className="text-gray-300 mb-4">
+              {project.location} • {project.year}
+            </p>
+
+            {/* Action Buttons */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 20 }}
-              transition={{ duration: 0.3 }}
-              className="absolute inset-0 p-6 flex flex-col justify-end"
+              animate={{ 
+                opacity: isHovered ? 1 : 0, 
+                y: isHovered ? 0 : 20 
+              }}
+              transition={{ duration: 0.3, delay: 0.1 }}
+              className="flex gap-3"
             >
-              <p className="text-primary-400 text-sm font-medium mb-2">{project.category}</p>
-              <h3 className="text-2xl font-bold mb-2">{project.title}</h3>
-              <p className="text-gray-300 text-sm mb-4">{project.description}</p>
-              
-              <div className="flex gap-3">
-                <Link
-                  href={`/portfolio/${project.id}`}
-                  className="px-4 py-2 bg-primary-500 text-white rounded-lg font-medium hover:bg-primary-600 transition-colors flex items-center gap-2"
-                >
-                  View Project
-                  <HiArrowRight />
-                </Link>
-                <button className="p-2 glass-effect rounded-lg hover:bg-white/20 transition-colors">
-                  <HiEye className="text-xl" />
-                </button>
-              </div>
+              <Link
+                href={`/portfolio/${project.id}`}
+                className="group/btn flex items-center gap-2 px-6 py-3 bg-white text-black rounded-full font-medium hover:bg-primary-500 hover:text-white transition-colors"
+              >
+                View Project
+                <HiArrowRight className="group-hover/btn:translate-x-1 transition-transform" />
+              </Link>
+              <button className="p-3 bg-white/10 backdrop-blur-md rounded-full hover:bg-white/20 transition-colors">
+                <HiEye className="text-xl" />
+              </button>
             </motion.div>
-          )}
-        </AnimatePresence>
-
-        {/* Category Badge */}
-        <div className="absolute top-4 left-4">
-          <span className="px-3 py-1 glass-effect rounded-full text-xs font-medium">
-            {project.category}
-          </span>
+          </motion.div>
         </div>
+
+        {/* Hover Corner Accent */}
+        <motion.div
+          initial={{ scale: 0, opacity: 0 }}
+          animate={{ 
+            scale: isHovered ? 1 : 0, 
+            opacity: isHovered ? 1 : 0 
+          }}
+          transition={{ duration: 0.3 }}
+          className="absolute top-4 right-4 w-12 h-12 bg-primary-500 rounded-full flex items-center justify-center"
+        >
+          <HiPlus className="text-2xl" />
+        </motion.div>
       </motion.div>
     </motion.div>
   )
@@ -136,90 +205,93 @@ export default function PortfolioSection() {
   })
 
   const [selectedCategory, setSelectedCategory] = useState('All')
+  const [hoveredCategory, setHoveredCategory] = useState(null)
 
   const filteredProjects = selectedCategory === 'All' 
     ? projects 
     : projects.filter(project => project.category === selectedCategory)
 
   return (
-    <section className="py-20 lg:py-32 relative overflow-hidden bg-dark-200/50">
+    <section className="py-32 relative overflow-hidden bg-gradient-to-b from-black to-dark-100">
       {/* Background Elements */}
       <div className="absolute inset-0 -z-10">
-        <motion.div
-          animate={{
-            x: [0, 100, 0],
-            y: [0, -100, 0],
-          }}
-          transition={{
-            duration: 20,
-            repeat: Infinity,
-            ease: "linear",
-          }}
-          className="absolute top-0 left-0 w-96 h-96 bg-primary-500/5 rounded-full blur-3xl"
-        />
+        <div className="absolute inset-0 opacity-20">
+          <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary-500/10 rounded-full blur-3xl" />
+          <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-accent-orange/10 rounded-full blur-3xl" />
+        </div>
       </div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <motion.div
           ref={ref}
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
+          initial={{ opacity: 0 }}
+          animate={inView ? { opacity: 1 } : {}}
           className="text-center mb-16"
         >
-          <motion.span
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={inView ? { opacity: 1, scale: 1 } : {}}
-            transition={{ delay: 0.2 }}
-            className="text-primary-500 font-medium uppercase tracking-wider text-sm"
-          >
-            Our Work
-          </motion.span>
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ delay: 0.3 }}
-            className="font-display font-bold text-4xl sm:text-5xl lg:text-6xl mt-2"
-          >
-            Our <span className="gradient-text">Portfolios</span>
-          </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ delay: 0.4 }}
-            className="text-gray-400 text-lg mt-4 max-w-2xl mx-auto"
+            transition={{ duration: 0.6 }}
+            className="text-primary-500 font-medium uppercase tracking-widest mb-4"
           >
-            Check out some of our latest and greatest projects.
+            Portfolio
           </motion.p>
+          
+          <motion.h2
+            initial={{ opacity: 0, y: 30 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.1 }}
+            className="font-display text-5xl md:text-7xl lg:text-8xl"
+          >
+            <span className="font-light">Our</span>{' '}
+            <span className="gradient-text font-bold">Masterpieces</span>
+          </motion.h2>
         </motion.div>
 
-        {/* Category Filter */}
+        {/* Filter Tabs */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.5 }}
-          className="flex flex-wrap justify-center gap-4 mb-12"
+          transition={{ delay: 0.3 }}
+          className="flex flex-wrap justify-center gap-4 mb-16"
         >
           {categories.map((category, index) => (
             <motion.button
               key={category}
               initial={{ opacity: 0, scale: 0.9 }}
               animate={inView ? { opacity: 1, scale: 1 } : {}}
-              transition={{ delay: 0.6 + index * 0.1 }}
+              transition={{ delay: 0.4 + index * 0.05 }}
               onClick={() => setSelectedCategory(category)}
-              className={`px-6 py-2 rounded-full font-medium transition-all duration-300 ${
+              onMouseEnter={() => setHoveredCategory(category)}
+              onMouseLeave={() => setHoveredCategory(null)}
+              className={`relative px-8 py-3 rounded-full font-medium transition-all duration-300 ${
                 selectedCategory === category
-                  ? 'bg-primary-500 text-white shadow-[0_0_20px_rgba(239,68,68,0.5)]'
-                  : 'glass-effect hover:bg-white/10'
+                  ? 'text-black'
+                  : 'text-gray-400 hover:text-white'
               }`}
             >
-              {category}
+              <span className="relative z-10">{category}</span>
+              
+              {/* Active/Hover Background */}
+              <motion.div
+                initial={false}
+                animate={{ 
+                  scale: selectedCategory === category || hoveredCategory === category ? 1 : 0,
+                  opacity: selectedCategory === category ? 1 : 0.5
+                }}
+                transition={{ duration: 0.2 }}
+                className="absolute inset-0 bg-gradient-to-r from-primary-500 to-accent-orange rounded-full"
+              />
             </motion.button>
           ))}
         </motion.div>
 
-        {/* Projects Grid */}
-        <motion.div layout className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {/* Projects Grid - Masonry Layout */}
+        <motion.div 
+          layout
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 auto-rows-[400px]"
+        >
           <AnimatePresence mode="popLayout">
             {filteredProjects.map((project, index) => (
               <ProjectCard key={project.id} project={project} index={index} />
@@ -227,20 +299,31 @@ export default function PortfolioSection() {
           </AnimatePresence>
         </motion.div>
 
-        {/* View All Button */}
+        {/* View All CTA */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.8 }}
+          transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="text-center mt-16"
+          className="text-center mt-20"
         >
           <Link
             href="/portfolio"
-            className="group inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-primary-500 to-primary-600 text-white rounded-full font-medium hover:shadow-[0_0_30px_rgba(239,68,68,0.5)] transition-all duration-300"
+            className="group relative inline-flex items-center gap-3 px-12 py-6 overflow-hidden"
           >
-            View All Projects
-            <HiArrowRight className="group-hover:translate-x-2 transition-transform" />
+            <span className="relative z-10 text-lg font-medium gradient-text group-hover:text-white transition-colors">
+              View Complete Portfolio
+            </span>
+            <HiArrowRight className="relative z-10 text-xl text-primary-500 group-hover:text-white group-hover:translate-x-2 transition-all" />
+            
+            {/* Animated Background */}
+            <div className="absolute inset-0 border-2 border-primary-500/30 rounded-full" />
+            <motion.div
+              className="absolute inset-0 bg-gradient-to-r from-primary-500 to-accent-orange rounded-full"
+              initial={{ scale: 0, opacity: 0 }}
+              whileHover={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 0.3 }}
+            />
           </Link>
         </motion.div>
       </div>

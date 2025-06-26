@@ -1,9 +1,9 @@
 {
   "name": "inscribe-architects",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbo",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
@@ -12,10 +12,10 @@
   "dependencies": {
     "@react-three/drei": "^9.92.7",
     "@react-three/fiber": "^8.15.12",
+    "@studio-freight/lenis": "^1.0.29",
     "clsx": "^2.1.0",
-    "critters": "^0.0.23",
     "framer-motion": "^11.0.3",
-    "next": "14.1.0",
+    "next": "^15.3.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^5.0.1",

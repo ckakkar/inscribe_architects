@@ -2,126 +2,207 @@
 
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
-import { FaLightbulb, FaHeart, FaShoppingBag, FaGlassMartini, FaTools, FaTree } from 'react-icons/fa'
+import { useState } from 'react'
+import Link from 'next/link'
+import { HiArrowRight } from 'react-icons/hi'
+import { 
+  FaLightbulb, FaHeart, FaShoppingBag, 
+  FaGlassMartini, FaTools, FaTree 
+} from 'react-icons/fa'
 
 const services = [
   {
+    id: 'interior',
     icon: FaLightbulb,
     title: 'Interior Design',
-    description: 'We can do your Homes, Flats & Apartments, Rooms – Living /Kids / Drawing',
+    subtitle: 'Transform Spaces',
+    description: 'Homes, Flats, Apartments - We bring life to your living spaces',
     color: 'from-yellow-400 to-orange-500',
-    delay: 0,
+    image: '/api/placeholder/400/500',
+    features: ['Living Rooms', 'Bedrooms', 'Kitchens'],
   },
   {
+    id: 'facade',
     icon: FaHeart,
     title: 'Facade Design',
-    description: 'We provide wonderful upgrade of building exteriors and Facades for all type of Residential and Commercial buildings',
+    subtitle: 'First Impressions',
+    description: 'Stunning exteriors that make your building stand out',
     color: 'from-pink-400 to-red-500',
-    delay: 0.1,
+    image: '/api/placeholder/400/500',
+    features: ['Modern', 'Classic', 'Sustainable'],
   },
   {
+    id: 'commercial',
     icon: FaShoppingBag,
-    title: "Commercial Planning's",
-    description: 'We can do design and architectural solutioning for your offices,Factories, Banks and Hospitals Etc',
+    title: 'Commercial',
+    subtitle: 'Business Spaces',
+    description: 'Offices, factories, and retail spaces designed for success',
     color: 'from-purple-400 to-indigo-500',
-    delay: 0.2,
+    image: '/api/placeholder/400/500',
+    features: ['Offices', 'Retail', 'Industrial'],
   },
   {
+    id: 'bar-resto',
     icon: FaGlassMartini,
-    title: 'Bar & Resto Design',
-    description: 'Inscribe provide design of small and Medium Restaurant and bars. We have experience with hotels and Guest Houses with Optimum space utilization and all legal aspects',
+    title: 'Bar & Restaurant',
+    subtitle: 'Dining Experiences',
+    description: 'Creating ambiances that complement culinary excellence',
     color: 'from-blue-400 to-cyan-500',
-    delay: 0.3,
+    image: '/api/placeholder/400/500',
+    features: ['Bars', 'Cafes', 'Fine Dining'],
   },
   {
+    id: 'renovation',
     icon: FaTools,
     title: 'Renovation',
-    description: 'Providing a new life and meaning to old building and homes while retaining their old charm is our speciality.',
+    subtitle: 'Reimagine & Restore',
+    description: 'Breathing new life into existing structures',
     color: 'from-green-400 to-teal-500',
-    delay: 0.4,
+    image: '/api/placeholder/400/500',
+    features: ['Restoration', 'Modernization', 'Preservation'],
   },
   {
+    id: 'terrace',
     icon: FaTree,
-    title: 'Terrace Garden',
-    description: 'One of your specialty is to convert you terrace tops into meaningful gardens and bars fro personal use. Try us for this and you will be proud of your choice.',
+    title: 'Terrace Gardens',
+    subtitle: 'Urban Oasis',
+    description: 'Transform rooftops into personal paradises',
     color: 'from-lime-400 to-green-500',
-    delay: 0.5,
+    image: '/api/placeholder/400/500',
+    features: ['Gardens', 'Lounges', 'Entertainment'],
   },
 ]
 
-function ServiceCard({ service }) {
-  const x = useMotionValue(0)
-  const y = useMotionValue(0)
-
-  const mouseXSpring = useSpring(x)
-  const mouseYSpring = useSpring(y)
-
-  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["17.5deg", "-17.5deg"])
-  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-17.5deg", "17.5deg"])
+function ServiceCard({ service, index }) {
+  const [isHovered, setIsHovered] = useState(false)
+  const mouseX = useMotionValue(0)
+  const mouseY = useMotionValue(0)
+  const rotateX = useTransform(mouseY, [-0.5, 0.5], [10, -10])
+  const rotateY = useTransform(mouseX, [-0.5, 0.5], [-10, 10])
+  const springRotateX = useSpring(rotateX, { stiffness: 300, damping: 30 })
+  const springRotateY = useSpring(rotateY, { stiffness: 300, damping: 30 })
 
   const handleMouseMove = (e) => {
     const rect = e.currentTarget.getBoundingClientRect()
     const width = rect.width
     const height = rect.height
-    const mouseX = e.clientX - rect.left
-    const mouseY = e.clientY - rect.top
-    const xPct = mouseX / width - 0.5
-    const yPct = mouseY / height - 0.5
-    x.set(xPct)
-    y.set(yPct)
+    const x = (e.clientX - rect.left) / width - 0.5
+    const y = (e.clientY - rect.top) / height - 0.5
+    mouseX.set(x)
+    mouseY.set(y)
   }
 
   const handleMouseLeave = () => {
-    x.set(0)
-    y.set(0)
+    mouseX.set(0)
+    mouseY.set(0)
+    setIsHovered(false)
   }
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 50 }}
+      initial={{ opacity: 0, y: 100 }}
       whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, delay: service.delay }}
-      viewport={{ once: true }}
+      transition={{ 
+        duration: 0.8, 
+        delay: index * 0.1,
+        ease: [0.6, 0.05, 0.01, 0.9]
+      }}
+      viewport={{ once: true, margin: "-100px" }}
       onMouseMove={handleMouseMove}
+      onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={handleMouseLeave}
       style={{
-        rotateY,
-        rotateX,
+        rotateX: springRotateX,
+        rotateY: springRotateY,
         transformStyle: "preserve-3d",
       }}
-      className="group relative h-full"
+      className="relative group h-[500px] perspective-1000"
     >
-      <div className="relative h-full glass-effect p-8 rounded-2xl border border-white/10 hover:border-primary-500/50 transition-all duration-300 hover:shadow-[0_0_30px_rgba(239,68,68,0.3)]">
-        {/* Background Gradient */}
-        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-          <div className={`absolute inset-0 bg-gradient-to-br ${service.color} opacity-10 rounded-2xl`} />
-        </div>
-
-        {/* Icon */}
-        <motion.div
-          whileHover={{ scale: 1.1, rotate: 360 }}
-          transition={{ duration: 0.6 }}
-          className="relative z-10 mb-6"
-        >
-          <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${service.color} p-4 flex items-center justify-center`}>
-            <service.icon className="text-2xl text-white" />
-          </div>
-        </motion.div>
-
+      <div className="relative h-full rounded-3xl overflow-hidden bg-gradient-to-b from-dark-200/50 to-dark-300/50 backdrop-blur-sm border border-white/5">
+        {/* Background Pattern */}
+        <div className={`absolute inset-0 opacity-10 bg-gradient-to-br ${service.color}`} />
+        
         {/* Content */}
-        <h3 className="text-2xl font-bold mb-3 group-hover:gradient-text transition-all duration-300">
-          {service.title}
-        </h3>
-        <p className="text-gray-400 group-hover:text-gray-300 transition-colors">
-          {service.description}
-        </p>
+        <div className="relative h-full p-8 flex flex-col">
+          {/* Icon */}
+          <motion.div
+            animate={{ 
+              scale: isHovered ? 1.2 : 1,
+              rotate: isHovered ? 360 : 0 
+            }}
+            transition={{ duration: 0.6 }}
+            className="mb-6"
+          >
+            <div className={`w-20 h-20 rounded-2xl bg-gradient-to-br ${service.color} p-5 flex items-center justify-center`}>
+              <service.icon className="text-3xl text-white" />
+            </div>
+          </motion.div>
 
-        {/* Hover Effect Border */}
-        <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-          <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-primary-500 via-accent-orange to-primary-500 p-[1px]">
-            <div className="h-full w-full rounded-2xl bg-dark-100" />
+          {/* Text Content */}
+          <div className="flex-1">
+            <p className="text-sm uppercase tracking-wider text-gray-500 mb-2">
+              {service.subtitle}
+            </p>
+            <h3 className="text-3xl font-bold mb-4">
+              {service.title}
+            </h3>
+            <p className="text-gray-400 mb-6 leading-relaxed">
+              {service.description}
+            </p>
+
+            {/* Features */}
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ 
+                opacity: isHovered ? 1 : 0, 
+                height: isHovered ? 'auto' : 0 
+              }}
+              transition={{ duration: 0.3 }}
+              className="space-y-2 mb-6 overflow-hidden"
+            >
+              {service.features.map((feature, i) => (
+                <motion.div
+                  key={feature}
+                  initial={{ x: -20, opacity: 0 }}
+                  animate={{ 
+                    x: isHovered ? 0 : -20, 
+                    opacity: isHovered ? 1 : 0 
+                  }}
+                  transition={{ delay: i * 0.1 }}
+                  className="flex items-center gap-2 text-sm text-gray-300"
+                >
+                  <div className={`w-1 h-1 rounded-full bg-gradient-to-r ${service.color}`} />
+                  {feature}
+                </motion.div>
+              ))}
+            </motion.div>
           </div>
+
+          {/* CTA */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ 
+              opacity: isHovered ? 1 : 0, 
+              y: isHovered ? 0 : 20 
+            }}
+            transition={{ duration: 0.3 }}
+          >
+            <Link
+              href={`/services#${service.id}`}
+              className="inline-flex items-center gap-2 text-primary-400 font-medium group/link"
+            >
+              Learn More
+              <HiArrowRight className="group-hover/link:translate-x-2 transition-transform" />
+            </Link>
+          </motion.div>
         </div>
+
+        {/* Hover Border Glow */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: isHovered ? 1 : 0 }}
+          className={`absolute inset-0 rounded-3xl bg-gradient-to-r ${service.color} opacity-20 blur-xl -z-10 scale-110`}
+        />
       </div>
     </motion.div>
   )
@@ -134,71 +215,94 @@ export default function ServicesSection() {
   })
 
   return (
-    <section className="py-20 lg:py-32 relative overflow-hidden">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 -z-10 opacity-5">
-        <div className="absolute inset-0 grid-pattern" />
+    <section className="py-32 relative overflow-hidden bg-black">
+      {/* Background Elements */}
+      <div className="absolute inset-0 -z-10">
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary-500/5 to-transparent" />
+        <motion.div
+          animate={{ 
+            rotate: 360,
+            scale: [1, 1.2, 1],
+          }}
+          transition={{ 
+            rotate: { duration: 50, repeat: Infinity, ease: "linear" },
+            scale: { duration: 20, repeat: Infinity, ease: "easeInOut" }
+          }}
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px]"
+        >
+          <div className="w-full h-full rounded-full bg-gradient-to-r from-primary-500/5 via-transparent to-accent-orange/5 blur-3xl" />
+        </motion.div>
       </div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <motion.div
           ref={ref}
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          className="text-center mb-16"
+          initial={{ opacity: 0 }}
+          animate={inView ? { opacity: 1 } : {}}
+          className="text-center mb-20"
         >
-          <motion.span
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={inView ? { opacity: 1, scale: 1 } : {}}
-            transition={{ delay: 0.2 }}
-            className="text-primary-500 font-medium uppercase tracking-wider text-sm"
-          >
-            What We Do
-          </motion.span>
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ delay: 0.3 }}
-            className="font-display font-bold text-4xl sm:text-5xl lg:text-6xl mt-2"
-          >
-            Our <span className="gradient-text">Services</span>
-          </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ delay: 0.4 }}
-            className="text-gray-400 text-lg mt-4 max-w-2xl mx-auto"
+            transition={{ duration: 0.6 }}
+            className="text-primary-500 font-medium uppercase tracking-widest mb-4"
           >
-            We provide architectural designs keeping in mind the needs of our clients – both immediate and future.
+            What We Do
+          </motion.p>
+          
+          <motion.h2
+            initial={{ opacity: 0, y: 30 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.1 }}
+            className="font-display text-5xl md:text-7xl lg:text-8xl"
+          >
+            <span className="font-light">Our</span>{' '}
+            <span className="gradient-text font-bold">Services</span>
+          </motion.h2>
+          
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="text-xl text-gray-400 mt-6 max-w-3xl mx-auto"
+          >
+            We don't just design spaces, we craft experiences that inspire and endure
           </motion.p>
         </motion.div>
 
         {/* Services Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {services.map((service, index) => (
-            <ServiceCard key={index} service={service} />
+            <ServiceCard key={service.id} service={service} index={index} />
           ))}
         </div>
 
         {/* Bottom CTA */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.8 }}
+          transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="text-center mt-16"
+          className="text-center mt-20"
         >
-          <p className="text-gray-400 mb-6">
-            Architecture is the art and science of creating usable spaces for people.
-          </p>
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="px-8 py-4 bg-gradient-to-r from-primary-500 to-primary-600 text-white rounded-full font-medium hover:shadow-[0_0_30px_rgba(239,68,68,0.5)] transition-all duration-300"
+          <Link
+            href="/services"
+            className="group relative inline-flex items-center gap-3 px-12 py-6 overflow-hidden rounded-full border border-primary-500/30"
           >
-            Explore All Services
-          </motion.button>
+            <span className="relative z-10 text-lg font-medium">
+              Explore All Services
+            </span>
+            <HiArrowRight className="relative z-10 text-xl group-hover:translate-x-2 transition-transform" />
+            
+            {/* Animated Background */}
+            <motion.div
+              className="absolute inset-0 bg-gradient-to-r from-primary-500 to-accent-orange"
+              initial={{ x: '-100%' }}
+              whileHover={{ x: 0 }}
+              transition={{ duration: 0.3 }}
+            />
+          </Link>
         </motion.div>
       </div>
     </section>

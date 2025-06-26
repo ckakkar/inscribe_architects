@@ -1,109 +1,132 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { motion, useScroll, useTransform, useMotionValue, useSpring } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
+import { useRef, useEffect } from 'react'
 import Link from 'next/link'
-import { HiArrowRight, HiPhone, HiMail } from 'react-icons/hi'
+import { HiArrowRight, HiPhone, HiMail, HiLocationMarker } from 'react-icons/hi'
 
 export default function CTASection() {
+  const containerRef = useRef(null)
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
   })
 
+  const mouseX = useMotionValue(0)
+  const mouseY = useMotionValue(0)
+  const smoothMouseX = useSpring(mouseX, { stiffness: 25, damping: 30 })
+  const smoothMouseY = useSpring(mouseY, { stiffness: 25, damping: 30 })
+
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"]
+  })
+
+  const rotate = useTransform(scrollYProgress, [0, 1], [0, 360])
+  const scale = useTransform(scrollYProgress, [0, 0.5, 1], [0.8, 1, 0.8])
+
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      const { clientX, clientY } = e
+      const { innerWidth, innerHeight } = window
+      const x = (clientX / innerWidth - 0.5) * 30
+      const y = (clientY / innerHeight - 0.5) * 30
+      mouseX.set(x)
+      mouseY.set(y)
+    }
+
+    window.addEventListener('mousemove', handleMouseMove)
+    return () => window.removeEventListener('mousemove', handleMouseMove)
+  }, [mouseX, mouseY])
+
   return (
-    <section className="py-20 lg:py-32 relative overflow-hidden">
-      {/* Animated Background */}
+    <section ref={containerRef} className="py-32 relative overflow-hidden">
+      {/* Dynamic Background */}
       <div className="absolute inset-0 -z-10">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary-900/20 via-dark-100 to-accent-orange/20" />
         <motion.div
-          animate={{
-            backgroundPosition: ['0% 0%', '100% 100%'],
-          }}
-          transition={{
-            duration: 20,
-            repeat: Infinity,
-            repeatType: 'reverse',
-          }}
-          className="absolute inset-0 opacity-30"
-          style={{
-            backgroundImage: 'url("data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23ef4444" fill-opacity="0.1"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")',
-            backgroundSize: '60px 60px',
-          }}
-        />
+          style={{ rotate }}
+          className="absolute inset-0"
+        >
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1200px] h-[1200px]">
+            <div className="w-full h-full rounded-full bg-gradient-conic from-primary-500/20 via-transparent to-accent-orange/20 blur-3xl" />
+          </div>
+        </motion.div>
+        
+        {/* Floating Elements */}
+        <motion.div
+          style={{ x: smoothMouseX, y: smoothMouseY }}
+          className="absolute inset-0"
+        >
+          <div className="absolute top-20 left-20 w-32 h-32 bg-primary-500/10 rounded-full blur-2xl" />
+          <div className="absolute bottom-20 right-20 w-40 h-40 bg-accent-orange/10 rounded-full blur-2xl" />
+        </motion.div>
       </div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           ref={ref}
-          initial={{ opacity: 0, y: 50 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, ease: [0.6, 0.05, 0.01, 0.9] }}
-          className="max-w-4xl mx-auto"
+          initial={{ opacity: 0 }}
+          animate={inView ? { opacity: 1 } : {}}
+          style={{ scale }}
+          className="max-w-6xl mx-auto"
         >
           {/* Main CTA Card */}
-          <motion.div
-            whileHover={{ scale: 1.02 }}
-            transition={{ type: "spring", stiffness: 300 }}
-            className="relative"
-          >
-            <div className="gradient-border">
-              <div className="glass-effect p-12 lg:p-16 rounded-3xl text-center relative overflow-hidden">
-                {/* Floating Elements */}
-                <motion.div
-                  animate={{
-                    rotate: 360,
-                    scale: [1, 1.2, 1],
-                  }}
-                  transition={{
-                    rotate: { duration: 20, repeat: Infinity, ease: "linear" },
-                    scale: { duration: 4, repeat: Infinity, ease: "easeInOut" },
-                  }}
-                  className="absolute -top-10 -right-10 w-40 h-40 bg-primary-500/10 rounded-full blur-2xl"
-                />
-                <motion.div
-                  animate={{
-                    rotate: -360,
-                    scale: [1, 1.3, 1],
-                  }}
-                  transition={{
-                    rotate: { duration: 15, repeat: Infinity, ease: "linear" },
-                    scale: { duration: 5, repeat: Infinity, ease: "easeInOut" },
-                  }}
-                  className="absolute -bottom-10 -left-10 w-60 h-60 bg-accent-orange/10 rounded-full blur-3xl"
-                />
+          <div className="relative">
+            {/* Glow Effect */}
+            <motion.div
+              animate={{ 
+                scale: [1, 1.05, 1],
+                opacity: [0.5, 0.8, 0.5],
+              }}
+              transition={{ 
+                duration: 4,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+              className="absolute inset-0 bg-gradient-to-r from-primary-500/20 to-accent-orange/20 blur-3xl"
+            />
 
-                {/* Content */}
-                <div className="relative z-10">
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.8 }}
+              className="relative bg-gradient-to-br from-dark-200/80 to-dark-300/80 backdrop-blur-xl rounded-3xl border border-white/10 overflow-hidden"
+            >
+              {/* Content */}
+              <div className="p-12 lg:p-20">
+                <div className="max-w-4xl mx-auto text-center">
+                  {/* Badge */}
                   <motion.div
-                    initial={{ opacity: 0, scale: 0.9 }}
+                    initial={{ opacity: 0, scale: 0.8 }}
                     animate={inView ? { opacity: 1, scale: 1 } : {}}
-                    transition={{ delay: 0.2 }}
-                    className="inline-flex items-center gap-2 text-primary-500 font-medium mb-4"
+                    transition={{ delay: 0.2, type: "spring" }}
+                    className="inline-flex items-center gap-2 px-4 py-2 bg-primary-500/10 border border-primary-500/30 rounded-full mb-8"
                   >
-                    <div className="w-8 h-[1px] bg-primary-500" />
-                    Ready to Start?
-                    <div className="w-8 h-[1px] bg-primary-500" />
+                    <div className="w-2 h-2 bg-primary-500 rounded-full animate-pulse" />
+                    <span className="text-sm font-medium text-primary-400">Ready to Start?</span>
                   </motion.div>
 
+                  {/* Heading */}
                   <motion.h2
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={{ opacity: 0, y: 30 }}
                     animate={inView ? { opacity: 1, y: 0 } : {}}
                     transition={{ delay: 0.3 }}
-                    className="font-display font-bold text-4xl sm:text-5xl lg:text-6xl mb-6"
+                    className="font-display text-5xl md:text-6xl lg:text-7xl mb-6"
                   >
-                    Have any <span className="gradient-text">project?</span>{' '}
-                    <br className="hidden sm:block" />
-                    Send a <span className="gradient-text">message</span>
+                    <span className="font-light">Let's Build</span>
+                    <br />
+                    <span className="gradient-text font-bold">Something Amazing</span>
                   </motion.h2>
 
                   <motion.p
                     initial={{ opacity: 0, y: 20 }}
                     animate={inView ? { opacity: 1, y: 0 } : {}}
                     transition={{ delay: 0.4 }}
-                    className="text-gray-400 text-lg mb-10 max-w-2xl mx-auto"
+                    className="text-xl text-gray-400 mb-12 max-w-2xl mx-auto"
                   >
-                    Hire us! We make you smile :) Let's transform your vision into architectural excellence.
+                    Transform your vision into architectural excellence. 
+                    Our team is ready to bring your dream project to life.
                   </motion.p>
 
                   {/* CTA Buttons */}
@@ -111,24 +134,40 @@ export default function CTASection() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={inView ? { opacity: 1, y: 0 } : {}}
                     transition={{ delay: 0.5 }}
-                    className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+                    className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16"
                   >
                     <Link
                       href="/contact"
-                      className="group px-8 py-4 bg-primary-500 text-white rounded-full font-medium hover:bg-primary-600 transition-all duration-300 hover:shadow-[0_0_30px_rgba(239,68,68,0.5)] flex items-center gap-2"
+                      className="group relative px-10 py-5 overflow-hidden rounded-full"
                     >
-                      Request a Quote
-                      <HiArrowRight className="group-hover:translate-x-2 transition-transform" />
+                      <span className="relative z-10 flex items-center gap-3 text-lg font-medium text-black">
+                        Start Your Project
+                        <motion.div
+                          animate={{ x: [0, 5, 0] }}
+                          transition={{ duration: 1.5, repeat: Infinity }}
+                        >
+                          <HiArrowRight className="text-xl" />
+                        </motion.div>
+                      </span>
+                      
+                      {/* Button Background */}
+                      <motion.div
+                        className="absolute inset-0 bg-gradient-to-r from-primary-500 to-accent-orange"
+                        whileHover={{ scale: 1.05 }}
+                        transition={{ duration: 0.3 }}
+                      />
+                      <motion.div
+                        className="absolute inset-0 bg-white opacity-0 group-hover:opacity-100"
+                        transition={{ duration: 0.3 }}
+                      />
                     </Link>
-                    
-                    <span className="text-gray-600">or</span>
-                    
-                    <Link
-                      href="/contact"
-                      className="px-8 py-4 glass-effect rounded-full font-medium hover:bg-white/10 transition-all duration-300 border border-white/10 hover:border-primary-500/50"
-                    >
-                      Hire Us
-                    </Link>
+
+                    <button className="group px-10 py-5 rounded-full border-2 border-white/20 hover:border-primary-500/50 transition-all duration-300">
+                      <span className="flex items-center gap-3 text-lg font-medium">
+                        Schedule a Call
+                        <HiPhone className="text-xl group-hover:rotate-12 transition-transform" />
+                      </span>
+                    </button>
                   </motion.div>
 
                   {/* Contact Info */}
@@ -136,28 +175,68 @@ export default function CTASection() {
                     initial={{ opacity: 0 }}
                     animate={inView ? { opacity: 1 } : {}}
                     transition={{ delay: 0.6 }}
-                    className="mt-12 flex flex-col sm:flex-row gap-6 justify-center items-center text-sm text-gray-400"
+                    className="grid md:grid-cols-3 gap-8"
                   >
-                    <a
+                    {/* Phone */}
+                    <motion.a
                       href="tel:+919814224971"
-                      className="flex items-center gap-2 hover:text-primary-400 transition-colors"
+                      whileHover={{ y: -5 }}
+                      className="group flex flex-col items-center gap-3 p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-primary-500/50 transition-all duration-300"
                     >
-                      <HiPhone className="text-primary-500" />
-                      +91-9814224971
-                    </a>
-                    <div className="hidden sm:block w-1 h-1 bg-gray-600 rounded-full" />
-                    <a
+                      <div className="p-3 rounded-full bg-primary-500/10 group-hover:bg-primary-500/20 transition-colors">
+                        <HiPhone className="text-2xl text-primary-500" />
+                      </div>
+                      <div className="text-center">
+                        <p className="text-sm text-gray-500 mb-1">Call Us</p>
+                        <p className="font-medium">+91-9814224971</p>
+                      </div>
+                    </motion.a>
+
+                    {/* Email */}
+                    <motion.a
                       href="mailto:info@inscribearchitects.com"
-                      className="flex items-center gap-2 hover:text-primary-400 transition-colors"
+                      whileHover={{ y: -5 }}
+                      className="group flex flex-col items-center gap-3 p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-primary-500/50 transition-all duration-300"
                     >
-                      <HiMail className="text-primary-500" />
-                      info@inscribearchitects.com
-                    </a>
+                      <div className="p-3 rounded-full bg-primary-500/10 group-hover:bg-primary-500/20 transition-colors">
+                        <HiMail className="text-2xl text-primary-500" />
+                      </div>
+                      <div className="text-center">
+                        <p className="text-sm text-gray-500 mb-1">Email Us</p>
+                        <p className="font-medium">info@inscribearchitects.com</p>
+                      </div>
+                    </motion.a>
+
+                    {/* Location */}
+                    <motion.div
+                      whileHover={{ y: -5 }}
+                      className="group flex flex-col items-center gap-3 p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-primary-500/50 transition-all duration-300 cursor-pointer"
+                    >
+                      <div className="p-3 rounded-full bg-primary-500/10 group-hover:bg-primary-500/20 transition-colors">
+                        <HiLocationMarker className="text-2xl text-primary-500" />
+                      </div>
+                      <div className="text-center">
+                        <p className="text-sm text-gray-500 mb-1">Visit Us</p>
+                        <p className="font-medium">Ludhiana, Punjab</p>
+                      </div>
+                    </motion.div>
                   </motion.div>
                 </div>
               </div>
-            </div>
-          </motion.div>
+
+              {/* Decorative Corner Elements */}
+              <div className="absolute top-0 left-0 w-32 h-32">
+                <svg className="w-full h-full text-primary-500/20">
+                  <path d="M0,0 L32,0 L0,32 Z" fill="currentColor" />
+                </svg>
+              </div>
+              <div className="absolute bottom-0 right-0 w-32 h-32 rotate-180">
+                <svg className="w-full h-full text-accent-orange/20">
+                  <path d="M0,0 L32,0 L0,32 Z" fill="currentColor" />
+                </svg>
+              </div>
+            </motion.div>
+          </div>
         </motion.div>
       </div>
     </section>
