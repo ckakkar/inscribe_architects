@@ -1,16 +1,17 @@
 'use client'
 
+import { useState, forwardRef } from 'react'
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
 import { cn } from '@/lib/utils'
 
-const Card = ({
+const Card = forwardRef(function Card({
   children,
   className,
   variant = 'default',
   hover = true,
   onClick,
   ...props
-}) => {
+}, ref) {
   const x = useMotionValue(0)
   const y = useMotionValue(0)
 
@@ -68,6 +69,7 @@ const Card = ({
   if (variant === '3d') {
     return (
       <motion.div
+        ref={ref}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
         style={{
@@ -90,6 +92,7 @@ const Card = ({
 
   return (
     <motion.div
+      ref={ref}
       className={cn(cardClass, className)}
       onClick={onClick}
       whileHover={hover ? { scale: 1.02, y: -5 } : {}}
@@ -99,17 +102,18 @@ const Card = ({
       {children}
     </motion.div>
   )
-}
+})
 
 // Hover Card with Content Reveal
-export const HoverCard = ({
+export const HoverCard = forwardRef(function HoverCard({
   children,
   hoverContent,
   className,
   ...props
-}) => {
+}, ref) {
   return (
     <motion.div
+      ref={ref}
       className={cn('relative group', className)}
       whileHover="hover"
       {...props}
@@ -130,19 +134,20 @@ export const HoverCard = ({
       </Card>
     </motion.div>
   )
-}
+})
 
 // Flip Card
-export const FlipCard = ({
+export const FlipCard = forwardRef(function FlipCard({
   frontContent,
   backContent,
   className,
   ...props
-}) => {
+}, ref) {
   const [isFlipped, setIsFlipped] = useState(false)
 
   return (
     <div
+      ref={ref}
       className={cn('relative preserve-3d cursor-pointer', className)}
       onClick={() => setIsFlipped(!isFlipped)}
       {...props}
@@ -173,19 +178,19 @@ export const FlipCard = ({
       </motion.div>
     </div>
   )
-}
+})
 
 // Stats Card
-export const StatsCard = ({
+export const StatsCard = forwardRef(function StatsCard({
   stat,
   label,
   icon: Icon,
   trend,
   className,
   ...props
-}) => {
+}, ref) {
   return (
-    <Card variant="glass" className={cn('relative overflow-hidden', className)} {...props}>
+    <Card ref={ref} variant="glass" className={cn('relative overflow-hidden', className)} {...props}>
       {Icon && (
         <div className="absolute top-4 right-4 text-4xl text-primary-500/20">
           <Icon />
@@ -213,19 +218,19 @@ export const StatsCard = ({
       )}
     </Card>
   )
-}
+})
 
 // Feature Card
-export const FeatureCard = ({
+export const FeatureCard = forwardRef(function FeatureCard({
   icon: Icon,
   title,
   description,
   color = 'from-primary-400 to-primary-600',
   className,
   ...props
-}) => {
+}, ref) {
   return (
-    <Card variant="glass" hover className={className} {...props}>
+    <Card ref={ref} variant="glass" hover className={className} {...props}>
       <motion.div
         whileHover={{ rotate: 360, scale: 1.1 }}
         transition={{ duration: 0.6 }}
@@ -242,6 +247,6 @@ export const FeatureCard = ({
       <p className="text-gray-400">{description}</p>
     </Card>
   )
-}
+})
 
 export default Card

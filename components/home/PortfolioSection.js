@@ -14,7 +14,7 @@ const projects = [
     id: 1,
     title: 'Sky Tower Complex',
     category: 'Commercial',
-    image: '/api/placeholder/600/800',
+    image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&h=800&fit=crop',
     size: 'tall',
     year: '2023',
     location: 'Downtown District',
@@ -23,7 +23,7 @@ const projects = [
     id: 2,
     title: 'Villa Serenity',
     category: 'Residential',
-    image: '/api/placeholder/600/400',
+    image: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=600&h=400&fit=crop',
     size: 'wide',
     year: '2023',
     location: 'Green Valley',
@@ -32,7 +32,7 @@ const projects = [
     id: 3,
     title: 'Modern Workspace',
     category: 'Interiors',
-    image: '/api/placeholder/600/600',
+    image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&h=600&fit=crop',
     size: 'square',
     year: '2022',
     location: 'Tech Park',
@@ -41,7 +41,7 @@ const projects = [
     id: 4,
     title: 'Glass Facade Tower',
     category: 'Facades',
-    image: '/api/placeholder/600/800',
+    image: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=600&h=800&fit=crop',
     size: 'tall',
     year: '2023',
     location: 'Business District',
@@ -50,7 +50,7 @@ const projects = [
     id: 5,
     title: 'Eco Residence',
     category: 'Residential',
-    image: '/api/placeholder/600/600',
+    image: 'https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=600&h=600&fit=crop',
     size: 'square',
     year: '2022',
     location: 'Suburban Heights',
@@ -59,7 +59,7 @@ const projects = [
     id: 6,
     title: 'Corporate HQ',
     category: 'Commercial',
-    image: '/api/placeholder/600/400',
+    image: 'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=600&h=400&fit=crop',
     size: 'wide',
     year: '2023',
     location: 'Financial District',
@@ -118,6 +118,7 @@ function ProjectCard({ project, index }) {
             alt={project.title}
             fill
             className="object-cover"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
         </motion.div>
 

@@ -2,10 +2,11 @@
 
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
+import { forwardRef } from 'react'
 import { cn } from '@/lib/utils'
 import AnimatedText, { GradientAnimatedText } from './AnimatedText'
 
-const SectionTitle = ({
+const SectionTitle = forwardRef(function SectionTitle({
   subtitle,
   title,
   titleGradient,
@@ -19,7 +20,7 @@ const SectionTitle = ({
   dividerColor = 'bg-primary-500',
   children,
   ...props
-}) => {
+}, forwardedRef) {
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
@@ -54,7 +55,7 @@ const SectionTitle = ({
 
   return (
     <div
-      ref={ref}
+      ref={forwardedRef || ref}
       className={cn('w-full', containerClassName)}
       {...props}
     >
@@ -143,22 +144,22 @@ const SectionTitle = ({
       </div>
     </div>
   )
-}
+})
 
 // Decorative Section Title
-export const DecorativeSectionTitle = ({
+export const DecorativeSectionTitle = forwardRef(function DecorativeSectionTitle({
   title,
   subtitle,
   className,
   ...props
-}) => {
+}, forwardedRef) {
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
   })
 
   return (
-    <div ref={ref} className={cn('relative text-center', className)} {...props}>
+    <div ref={forwardedRef || ref} className={cn('relative text-center', className)} {...props}>
       {/* Background Text */}
       <motion.div
         initial={{ opacity: 0, scale: 0.8 }}
@@ -195,16 +196,16 @@ export const DecorativeSectionTitle = ({
       </div>
     </div>
   )
-}
+})
 
 // Split Section Title
-export const SplitSectionTitle = ({
+export const SplitSectionTitle = forwardRef(function SplitSectionTitle({
   title,
   subtitle,
   description,
   className,
   ...props
-}) => {
+}, forwardedRef) {
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
@@ -216,7 +217,7 @@ export const SplitSectionTitle = ({
   const secondHalf = words.slice(midPoint).join(' ')
 
   return (
-    <div ref={ref} className={cn('space-y-6', className)} {...props}>
+    <div ref={forwardedRef || ref} className={cn('space-y-6', className)} {...props}>
       {subtitle && (
         <motion.p
           initial={{ opacity: 0, x: -30 }}
@@ -260,17 +261,17 @@ export const SplitSectionTitle = ({
       )}
     </div>
   )
-}
+})
 
 // Inline Decorated Title
-export const InlineDecoratedTitle = ({
+export const InlineDecoratedTitle = forwardRef(function InlineDecoratedTitle({
   title,
   decorator = '—',
   className,
   ...props
-}) => {
+}, forwardedRef) {
   return (
-    <div className={cn('flex items-center gap-4', className)} {...props}>
+    <div ref={forwardedRef} className={cn('flex items-center gap-4', className)} {...props}>
       <motion.span
         initial={{ scaleX: 0 }}
         whileInView={{ scaleX: 1 }}
@@ -291,6 +292,6 @@ export const InlineDecoratedTitle = ({
       />
     </div>
   )
-}
+})
 
 export default SectionTitle

@@ -1,10 +1,10 @@
 'use client'
 
 import { motion, useInView } from 'framer-motion'
-import { useRef } from 'react'
+import { useRef, forwardRef } from 'react'
 import { cn } from '@/lib/utils'
 
-const AnimatedText = ({
+const AnimatedText = forwardRef(function AnimatedText({
   children,
   className,
   variant = 'fadeUp',
@@ -13,7 +13,7 @@ const AnimatedText = ({
   once = true,
   stagger = 0.05,
   ...props
-}) => {
+}, forwardedRef) {
   const ref = useRef(null)
   const isInView = useInView(ref, { once, amount: 0.5 })
 
@@ -112,7 +112,7 @@ const AnimatedText = ({
   if (variant === 'typewriter') {
     return (
       <motion.span
-        ref={ref}
+        ref={forwardedRef || ref}
         initial="hidden"
         animate={isInView ? "visible" : "hidden"}
         variants={selectedVariant}
@@ -126,7 +126,7 @@ const AnimatedText = ({
 
   return (
     <motion.span
-      ref={ref}
+      ref={forwardedRef || ref}
       initial="hidden"
       animate={isInView ? "visible" : "hidden"}
       variants={containerVariants}
@@ -145,10 +145,10 @@ const AnimatedText = ({
       ))}
     </motion.span>
   )
-}
+})
 
 // Animated Letter Component for character-by-character animation
-export const AnimatedLetters = ({
+export const AnimatedLetters = forwardRef(function AnimatedLetters({
   children,
   className,
   variant = 'fadeUp',
@@ -156,7 +156,7 @@ export const AnimatedLetters = ({
   stagger = 0.03,
   once = true,
   ...props
-}) => {
+}, forwardedRef) {
   const ref = useRef(null)
   const isInView = useInView(ref, { once, amount: 0.5 })
   
@@ -183,7 +183,7 @@ export const AnimatedLetters = ({
 
   return (
     <motion.span
-      ref={ref}
+      ref={forwardedRef || ref}
       initial="hidden"
       animate={isInView ? "visible" : "hidden"}
       variants={containerVariants}
@@ -201,21 +201,22 @@ export const AnimatedLetters = ({
       ))}
     </motion.span>
   )
-}
+})
 
 // Gradient Animated Text
-export const GradientAnimatedText = ({
+export const GradientAnimatedText = forwardRef(function GradientAnimatedText({
   children,
   className,
   gradientFrom = 'from-primary-400',
   gradientTo = 'to-accent-orange',
   animateGradient = true,
   ...props
-}) => {
+}, forwardedRef) {
   const gradientClass = animateGradient ? 'animate-gradient' : ''
   
   return (
     <AnimatedText
+      ref={forwardedRef}
       className={cn(
         'bg-clip-text text-transparent bg-gradient-to-r',
         gradientFrom,
@@ -228,12 +229,16 @@ export const GradientAnimatedText = ({
       {children}
     </AnimatedText>
   )
-}
+})
 
 // Glitch Text Effect
-export const GlitchText = ({ children, className, ...props }) => {
+export const GlitchText = forwardRef(function GlitchText({ 
+  children, 
+  className, 
+  ...props 
+}, forwardedRef) {
   return (
-    <span className={cn('relative inline-block', className)} {...props}>
+    <span ref={forwardedRef} className={cn('relative inline-block', className)} {...props}>
       <span className="relative z-10">{children}</span>
       <span 
         className="absolute inset-0 text-primary-500 opacity-70 animate-pulse"
@@ -251,6 +256,6 @@ export const GlitchText = ({ children, className, ...props }) => {
       </span>
     </span>
   )
-}
+})
 
 export default AnimatedText

@@ -1,11 +1,11 @@
 'use client'
 
-import { useRef } from 'react'
+import { useRef, forwardRef } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import Image from 'next/image'
 import { cn } from '@/lib/utils'
 
-const ParallaxImage = ({
+const ParallaxImage = forwardRef(function ParallaxImage({
   src,
   alt,
   className,
@@ -17,7 +17,7 @@ const ParallaxImage = ({
   overlayColor = 'from-black/60 to-transparent',
   children,
   ...props
-}) => {
+}, forwardedRef) {
   const ref = useRef(null)
   
   const { scrollYProgress } = useScroll({
@@ -33,7 +33,7 @@ const ParallaxImage = ({
 
   return (
     <div 
-      ref={ref} 
+      ref={forwardedRef || ref} 
       className={cn('relative overflow-hidden', containerClassName)}
       {...props}
     >
@@ -68,16 +68,16 @@ const ParallaxImage = ({
       )}
     </div>
   )
-}
+})
 
 // Parallax Container with Multiple Layers
-export const ParallaxContainer = ({
+export const ParallaxContainer = forwardRef(function ParallaxContainer({
   children,
   className,
   backgroundImage,
   foregroundImage,
   ...props
-}) => {
+}, forwardedRef) {
   const ref = useRef(null)
   
   const { scrollYProgress } = useScroll({
@@ -90,7 +90,7 @@ export const ParallaxContainer = ({
   const textY = useTransform(scrollYProgress, [0, 1], [-30, 30])
 
   return (
-    <div ref={ref} className={cn('relative', className)} {...props}>
+    <div ref={forwardedRef || ref} className={cn('relative', className)} {...props}>
       {/* Background Layer */}
       {backgroundImage && (
         <motion.div
@@ -102,6 +102,7 @@ export const ParallaxContainer = ({
             alt="Background"
             fill
             className="object-cover"
+            sizes="100vw"
           />
         </motion.div>
       )}
@@ -125,22 +126,23 @@ export const ParallaxContainer = ({
             alt="Foreground"
             fill
             className="object-cover"
+            sizes="100vw"
           />
         </motion.div>
       )}
     </div>
   )
-}
+})
 
 // Reveal Image on Scroll
-export const RevealImage = ({
+export const RevealImage = forwardRef(function RevealImage({
   src,
   alt,
   className,
   containerClassName,
   direction = 'up',
   ...props
-}) => {
+}, forwardedRef) {
   const ref = useRef(null)
   
   const { scrollYProgress } = useScroll({
@@ -174,7 +176,7 @@ export const RevealImage = ({
   const clipPath = clipPathValues[direction] || clipPathValues.up
 
   return (
-    <div ref={ref} className={cn('relative overflow-hidden', containerClassName)} {...props}>
+    <div ref={forwardedRef || ref} className={cn('relative overflow-hidden', containerClassName)} {...props}>
       <motion.div
         style={{ clipPath }}
         className="relative w-full h-full"
@@ -184,14 +186,15 @@ export const RevealImage = ({
           alt={alt}
           fill
           className={cn('object-cover', className)}
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
       </motion.div>
     </div>
   )
-}
+})
 
 // Floating Image
-export const FloatingImage = ({
+export const FloatingImage = forwardRef(function FloatingImage({
   src,
   alt,
   className,
@@ -199,9 +202,10 @@ export const FloatingImage = ({
   floatDistance = 20,
   rotate = true,
   ...props
-}) => {
+}, forwardedRef) {
   return (
     <motion.div
+      ref={forwardedRef}
       animate={{
         y: [0, -floatDistance, 0],
         rotate: rotate ? [0, 5, 0] : 0,
@@ -219,20 +223,21 @@ export const FloatingImage = ({
         alt={alt}
         fill
         className="object-contain"
+        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
       />
     </motion.div>
   )
-}
+})
 
 // Zoom Parallax Image
-export const ZoomParallaxImage = ({
+export const ZoomParallaxImage = forwardRef(function ZoomParallaxImage({
   src,
   alt,
   className,
   containerClassName,
   zoomRange = [1, 1.5],
   ...props
-}) => {
+}, forwardedRef) {
   const ref = useRef(null)
   
   const { scrollYProgress } = useScroll({
@@ -245,7 +250,7 @@ export const ZoomParallaxImage = ({
 
   return (
     <div 
-      ref={ref} 
+      ref={forwardedRef || ref} 
       className={cn('relative overflow-hidden', containerClassName)}
       {...props}
     >
@@ -258,10 +263,11 @@ export const ZoomParallaxImage = ({
           alt={alt}
           fill
           className={cn('object-cover', className)}
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
       </motion.div>
     </div>
   )
-}
+})
 
 export default ParallaxImage

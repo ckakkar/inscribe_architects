@@ -13,7 +13,7 @@ const testimonials = [
     name: 'Amit Gupta',
     title: 'CEO, Tech Innovations',
     location: 'Green Park, Ludhiana',
-    image: '/api/placeholder/100/100',
+    image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face',
     rating: 5,
     text: 'Inscribe transformed our office space into a modern masterpiece. Their attention to detail and innovative approach exceeded all expectations.',
     project: 'Corporate Office Redesign',
@@ -23,7 +23,7 @@ const testimonials = [
     name: 'Priya Sharma',
     title: 'Homeowner',
     location: 'Model Town, Ludhiana',
-    image: '/api/placeholder/100/100',
+    image: 'https://images.unsplash.com/photo-1494790108755-2616b612b647?w=100&h=100&fit=crop&crop=face',
     rating: 5,
     text: 'The team at Inscribe brought our dream home to life. Every corner reflects our personality while maintaining functionality.',
     project: 'Luxury Villa Design',
@@ -33,7 +33,7 @@ const testimonials = [
     name: 'Rajesh Kumar',
     title: 'Restaurant Owner',
     location: 'Civil Lines, Ludhiana',
-    image: '/api/placeholder/100/100',
+    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face',
     rating: 5,
     text: 'Our restaurant\'s ambiance has become a talking point. Inscribe perfectly captured the essence we wanted to convey.',
     project: 'Fine Dining Interior',
@@ -43,7 +43,7 @@ const testimonials = [
     name: 'Neha Patel',
     title: 'Boutique Owner',
     location: 'Sarabha Nagar, Ludhiana',
-    image: '/api/placeholder/100/100',
+    image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face',
     rating: 5,
     text: 'The facade design has increased foot traffic significantly. It\'s modern, inviting, and perfectly represents our brand.',
     project: 'Retail Facade Design',
@@ -235,6 +235,7 @@ export default function TestimonialsSection() {
                           alt={testimonials[currentIndex].name}
                           fill
                           className="object-cover"
+                          sizes="100px"
                         />
                       </motion.div>
                       <motion.div

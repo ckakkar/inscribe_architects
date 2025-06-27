@@ -148,10 +148,11 @@ export default function AboutSection() {
                   className="relative h-[600px]"
                 >
                   <Image
-                    src="/api/placeholder/600/600"
-                    alt="Shelly Kakkar"
+                    src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=600&fit=crop&crop=face"
+                    alt="Shelly Kakkar - Founder"
                     fill
                     className="object-cover"
+                    priority
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
                 </motion.div>

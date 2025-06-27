@@ -7,7 +7,7 @@ import PageTransition from '@/components/common/PageTransition'
 import { portfolioCategories } from '@/lib/constants'
 import { HiEye, HiExternalLink } from 'react-icons/hi'
 
-// Mock portfolio data - replace with actual data
+// Updated portfolio data with real placeholder images
 const portfolioProjects = [
   {
     id: 1,
@@ -15,7 +15,7 @@ const portfolioProjects = [
     category: 'Commercial',
     client: 'Tech Corp',
     year: '2023',
-    image: '/api/placeholder/800/600',
+    image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&h=600&fit=crop',
     description: 'A state-of-the-art office complex featuring sustainable design principles and modern amenities.',
     features: ['Green Building', 'Solar Panels', 'Smart Systems'],
   },
@@ -25,7 +25,7 @@ const portfolioProjects = [
     category: 'Residential',
     client: 'Private Client',
     year: '2023',
-    image: '/api/placeholder/800/600',
+    image: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&h=600&fit=crop',
     description: 'Contemporary luxury villa with panoramic views and premium finishes throughout.',
     features: ['Pool', 'Home Theater', 'Smart Home'],
   },
@@ -35,7 +35,7 @@ const portfolioProjects = [
     category: 'Interiors',
     client: 'Urban Living',
     year: '2023',
-    image: '/api/placeholder/800/600',
+    image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&h=600&fit=crop',
     description: 'Clean, minimalist interior design maximizing space and natural light.',
     features: ['Space Optimization', 'Natural Materials', 'Custom Furniture'],
   },
@@ -45,7 +45,7 @@ const portfolioProjects = [
     category: 'Front Elevation',
     client: 'Finance Inc',
     year: '2022',
-    image: '/api/placeholder/800/600',
+    image: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800&h=600&fit=crop',
     description: 'Striking facade design combining glass and steel for a modern corporate image.',
     features: ['Glass Facade', 'LED Lighting', 'Vertical Gardens'],
   },
@@ -55,7 +55,7 @@ const portfolioProjects = [
     category: 'Renovation',
     client: 'Heritage Trust',
     year: '2022',
-    image: '/api/placeholder/800/600',
+    image: 'https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=800&h=600&fit=crop',
     description: 'Careful restoration preserving historical elements while adding modern functionality.',
     features: ['Heritage Conservation', 'Structural Reinforcement', 'Modern Amenities'],
   },
@@ -65,7 +65,7 @@ const portfolioProjects = [
     category: 'Commercial',
     client: 'Hospitality Group',
     year: '2022',
-    image: '/api/placeholder/800/600',
+    image: 'https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=800&h=600&fit=crop',
     description: 'Intimate boutique hotel design focusing on guest experience and local culture.',
     features: ['Themed Rooms', 'Rooftop Restaurant', 'Spa'],
   },
@@ -173,6 +173,7 @@ export default function PortfolioPage() {
                       alt={project.title}
                       fill
                       className="object-cover group-hover:scale-110 transition-transform duration-500"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     />
                     
                     {/* Overlay */}
@@ -232,6 +233,7 @@ export default function PortfolioPage() {
                   alt={selectedProject.title}
                   fill
                   className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 1200px"
                 />
               </div>
               

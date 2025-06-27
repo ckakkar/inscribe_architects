@@ -1,14 +1,14 @@
 'use client'
 
-import { useRef, useState } from 'react'
+import { useRef, useState, forwardRef } from 'react'
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
 
-export default function MagneticButton({ 
+const MagneticButton = forwardRef(function MagneticButton({ 
   children, 
   className = '', 
   strength = 0.3,
   ...props 
-}) {
+}, forwardedRef) {
   const ref = useRef(null)
   const [isHovered, setIsHovered] = useState(false)
   
@@ -45,7 +45,7 @@ export default function MagneticButton({
 
   return (
     <motion.div
-      ref={ref}
+      ref={forwardedRef || ref}
       onMouseMove={handleMouseMove}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
@@ -56,4 +56,6 @@ export default function MagneticButton({
       {children}
     </motion.div>
   )
-}
+})
+
+export default MagneticButton

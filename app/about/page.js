@@ -129,10 +129,11 @@ export default function AboutPage() {
             >
               <div className="relative h-[600px] rounded-2xl overflow-hidden">
                 <Image
-                  src="/api/placeholder/600/600"
+                  src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=600&h=600&fit=crop"
                   alt="Inscribe Architects Office"
                   fill
                   className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 600px"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
               </div>

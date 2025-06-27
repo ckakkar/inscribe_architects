@@ -309,9 +309,13 @@ export default function ContactPage() {
             viewport={{ once: true }}
             className="relative h-96 rounded-2xl overflow-hidden gradient-border"
           >
-            {/* Replace with actual map integration */}
-            <div className="w-full h-full bg-dark-300 flex items-center justify-center">
-              <p className="text-gray-400">Map Integration Here</p>
+            {/* Placeholder for map integration */}
+            <div className="w-full h-full bg-gradient-to-br from-dark-300 to-dark-200 flex items-center justify-center">
+              <div className="text-center">
+                <HiLocationMarker className="text-6xl text-primary-500 mx-auto mb-4" />
+                <p className="text-gray-300 text-lg mb-2">Barewal Road, Ludhiana</p>
+                <p className="text-gray-500">Punjab, India - 141012</p>
+              </div>
             </div>
           </motion.div>
         </div>

@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import { twMerge } from 'tailwind-merge'
 import { clsx } from 'clsx'
+import { forwardRef } from 'react'
 
 const buttonVariants = {
   primary: 'bg-primary-500 text-white hover:bg-primary-600 hover:shadow-[0_0_30px_rgba(239,68,68,0.5)]',
@@ -17,7 +18,7 @@ const buttonSizes = {
   lg: 'px-8 py-4 text-lg',
 }
 
-export default function Button({
+const Button = forwardRef(function Button({
   children,
   variant = 'primary',
   size = 'md',
@@ -28,11 +29,12 @@ export default function Button({
   icon,
   iconPosition = 'right',
   ...props
-}) {
+}, ref) {
   const cn = (...inputs) => twMerge(clsx(inputs))
 
   return (
     <motion.button
+      ref={ref}
       whileHover={{ scale: disabled ? 1 : 1.05 }}
       whileTap={{ scale: disabled ? 1 : 0.95 }}
       onClick={onClick}
@@ -52,4 +54,6 @@ export default function Button({
       {icon && iconPosition === 'right' && <span className="flex-shrink-0">{icon}</span>}
     </motion.button>
   )
-}
+})
+
+export default Button
