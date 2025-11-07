@@ -8,10 +8,6 @@
     --font-space: 'Space Grotesk', sans-serif;
   }
 
-  * {
-    @apply border-border;
-  }
-
   body {
     @apply bg-black text-white antialiased;
   }
@@ -31,7 +27,7 @@
   }
 }
 
-/* Scrollbar */
+/* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 4px;
 }
@@ -42,4 +38,13 @@
 
 ::-webkit-scrollbar-thumb {
   @apply bg-gradient-to-b from-primary-500 to-accent-orange rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-primary-600;
+}
+
+/* Selection */
+::selection {
+  @apply bg-primary-500 text-white;
 }
