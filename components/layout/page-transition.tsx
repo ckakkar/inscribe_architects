@@ -8,12 +8,25 @@ interface PageTransitionProps {
 }
 
 export function PageTransition({ children }: PageTransitionProps) {
+  // Use View Transitions API if available, otherwise fallback to Framer Motion
+  const prefersReducedMotion = typeof window !== 'undefined' 
+    ? window.matchMedia('(prefers-reduced-motion: reduce)').matches 
+    : false
+
+  if (prefersReducedMotion) {
+    return <>{children}</>
+  }
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 20 }}
-      transition={{ duration: 0.5, ease: [0.6, 0.05, 0.01, 0.9] }}
+      transition={{ 
+        duration: 0.6, 
+        ease: [0.22, 1, 0.36, 1], // Modern easing
+      }}
+      className="gpu-accelerated"
     >
       {children}
     </motion.div>

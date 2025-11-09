@@ -15,6 +15,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           'inline-flex items-center justify-center font-light transition-colors duration-200',
           'focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-grey-mouse/30',
           'disabled:pointer-events-none disabled:opacity-30',
+          'touch-target active:opacity-70',
           {
             'bg-black text-beige-100 hover:bg-black/90':
               variant === 'default',
@@ -23,9 +24,9 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
             'hover:bg-grey-mouse/10': variant === 'ghost',
           },
           {
-            'px-6 py-2.5 text-xs tracking-wider uppercase': size === 'sm',
-            'px-8 py-3 text-sm tracking-wider uppercase': size === 'md',
-            'px-10 py-3.5 text-sm tracking-wider uppercase': size === 'lg',
+            'px-6 py-3 sm:py-2.5 text-xs tracking-wider uppercase min-h-[44px]': size === 'sm',
+            'px-8 py-3.5 sm:py-3 text-sm tracking-wider uppercase min-h-[44px]': size === 'md',
+            'px-10 py-4 sm:py-3.5 text-sm sm:text-base tracking-wider uppercase min-h-[48px] sm:min-h-[44px]': size === 'lg',
           },
           className
         )}

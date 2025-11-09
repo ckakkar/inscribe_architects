@@ -6,17 +6,34 @@ import { motion, useMotionValue, useSpring } from 'framer-motion'
 export function CustomCursor() {
   const [mounted, setMounted] = useState(false)
   const [isPointer, setIsPointer] = useState(false)
+  const [isHovering, setIsHovering] = useState(false)
 
   const cursorX = useMotionValue(-100)
   const cursorY = useMotionValue(-100)
 
-  const springConfig = { damping: 25, stiffness: 700 }
+  // Advanced spring configuration for ultra-smooth movement
+  const springConfig = { 
+    damping: 20, 
+    stiffness: 400,
+    mass: 0.5,
+  }
+  
   const cursorXSpring = useSpring(cursorX, springConfig)
   const cursorYSpring = useSpring(cursorY, springConfig)
+
+  // Scale based on hover state
+  const dotScale = isPointer ? 0.3 : isHovering ? 1.2 : 1
+  const ringScale = isPointer ? 2 : isHovering ? 0.8 : 1
 
   useEffect(() => {
     // Only run on client and not on touch devices
     if (typeof window === 'undefined' || 'ontouchstart' in window) {
+      return
+    }
+
+    // Check for reduced motion
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (prefersReducedMotion) {
       return
     }
 
@@ -29,16 +46,26 @@ export function CustomCursor() {
 
     const handleMouseOver = (e: MouseEvent) => {
       const target = e.target as HTMLElement
-      const isLink = target.closest('a, button, [role="button"]')
+      const isLink = target.closest('a, button, [role="button"], [data-cursor="pointer"]')
+      const isHoverable = target.closest('[data-cursor="hover"]')
+      
       setIsPointer(!!isLink)
+      setIsHovering(!!isHoverable)
     }
 
-    window.addEventListener('mousemove', moveCursor)
-    window.addEventListener('mouseover', handleMouseOver)
+    const handleMouseOut = () => {
+      setIsPointer(false)
+      setIsHovering(false)
+    }
+
+    window.addEventListener('mousemove', moveCursor, { passive: true })
+    window.addEventListener('mouseover', handleMouseOver, { passive: true })
+    window.addEventListener('mouseout', handleMouseOut, { passive: true })
 
     return () => {
       window.removeEventListener('mousemove', moveCursor)
       window.removeEventListener('mouseover', handleMouseOver)
+      window.removeEventListener('mouseout', handleMouseOut)
     }
   }, [cursorX, cursorY])
 
@@ -46,27 +73,44 @@ export function CustomCursor() {
 
   return (
     <>
-      {/* Main Cursor Dot */}
+      {/* Main Cursor Dot - Enhanced with better blend mode */}
       <motion.div
-        className="fixed top-0 left-0 w-1 h-1 bg-black rounded-full pointer-events-none z-[9999] mix-blend-difference"
+        className="fixed top-0 left-0 w-1.5 h-1.5 bg-black rounded-full pointer-events-none z-[9999] mix-blend-difference gpu-accelerated"
         style={{
           translateX: cursorXSpring,
           translateY: cursorYSpring,
-          scale: isPointer ? 0.5 : 1,
+          scale: dotScale,
         }}
       />
       
-      {/* Cursor Ring */}
+      {/* Cursor Ring - Enhanced with opacity animation */}
       <motion.div
-        className="fixed top-0 left-0 w-8 h-8 border border-grey-mouse/50 rounded-full pointer-events-none z-[9998]"
+        className="fixed top-0 left-0 w-8 h-8 border border-grey-mouse/50 rounded-full pointer-events-none z-[9998] gpu-accelerated"
         style={{
           translateX: cursorXSpring,
           translateY: cursorYSpring,
           x: -16,
           y: -16,
-          scale: isPointer ? 1.5 : 1,
+          scale: ringScale,
+          opacity: isPointer ? 0.3 : isHovering ? 0.7 : 0.5,
         }}
       />
+
+      {/* Hover effect ring */}
+      {isHovering && (
+        <motion.div
+          className="fixed top-0 left-0 w-16 h-16 border border-grey-mouse/20 rounded-full pointer-events-none z-[9997] gpu-accelerated"
+          initial={{ scale: 0, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          exit={{ scale: 0, opacity: 0 }}
+          style={{
+            translateX: cursorXSpring,
+            translateY: cursorYSpring,
+            x: -32,
+            y: -32,
+          }}
+        />
+      )}
     </>
   )
 }

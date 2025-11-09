@@ -87,6 +87,17 @@ const config: Config = {
           '0%': { opacity: '0' },
           '100%': { opacity: '1' },
         },
+        reveal: {
+          '0%': { opacity: '0', transform: 'translateY(20px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+      },
+      transitionTimingFunction: {
+        'expo-out': 'cubic-bezier(0.22, 1, 0.36, 1)',
+        'expo-in-out': 'cubic-bezier(0.87, 0, 0.13, 1)',
+      },
+      backdropBlur: {
+        'modern': '20px',
       },
     },
   },

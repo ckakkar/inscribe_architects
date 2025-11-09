@@ -7,8 +7,8 @@ import { contactInfo } from '@/lib/constants'
 export function Footer() {
   return (
     <footer className="relative bg-beige-200 border-t border-grey-mouse/20 overflow-hidden">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-12">
           {/* Brand */}
           <div>
             <Link href="/">
@@ -26,13 +26,13 @@ export function Footer() {
           <div>
             <h4 className="font-light text-sm mb-4 uppercase tracking-wider text-grey-mouse">Quick Links</h4>
             <nav className="flex flex-col gap-3">
-              <Link href="/about" className="text-grey-mouse hover:text-black transition-colors text-sm font-light">
+              <Link href="/about" className="touch-target text-grey-mouse hover:text-black active:text-black transition-colors text-sm font-light py-1">
                 About
               </Link>
-              <Link href="/projects" className="text-grey-mouse hover:text-black transition-colors text-sm font-light">
+              <Link href="/projects" className="touch-target text-grey-mouse hover:text-black active:text-black transition-colors text-sm font-light py-1">
                 Projects
               </Link>
-              <Link href="/contact" className="text-grey-mouse hover:text-black transition-colors text-sm font-light">
+              <Link href="/contact" className="touch-target text-grey-mouse hover:text-black active:text-black transition-colors text-sm font-light py-1">
                 Contact
               </Link>
             </nav>
@@ -53,11 +53,11 @@ export function Footer() {
           <div>
             <h4 className="font-light text-sm mb-4 uppercase tracking-wider text-grey-mouse">Contact</h4>
             <div className="flex flex-col gap-3">
-              <a href={`tel:${contactInfo.phone}`} className="flex items-center gap-2 text-grey-mouse hover:text-black transition-colors text-sm font-light">
+              <a href={`tel:${contactInfo.phone}`} className="touch-target flex items-center gap-2 text-grey-mouse hover:text-black active:text-black transition-colors text-sm font-light py-1">
                 <Phone size={14} />
                 <span>{contactInfo.phone}</span>
               </a>
-              <a href={`mailto:${contactInfo.email}`} className="flex items-center gap-2 text-grey-mouse hover:text-black transition-colors text-sm font-light">
+              <a href={`mailto:${contactInfo.email}`} className="touch-target flex items-center gap-2 text-grey-mouse hover:text-black active:text-black transition-colors text-sm font-light py-1">
                 <Mail size={14} />
                 <span>{contactInfo.email}</span>
               </a>
@@ -85,10 +85,10 @@ export function Footer() {
           </div>
           <button
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="p-2 border border-grey-mouse/30 hover:border-grey-mouse/50 transition-colors"
+            className="touch-target p-3 border border-grey-mouse/30 hover:border-grey-mouse/50 active:opacity-70 transition-colors"
             aria-label="Scroll to top"
           >
-            <ArrowUp size={16} className="text-grey-mouse" />
+            <ArrowUp size={18} className="text-grey-mouse" />
           </button>
         </div>
       </div>
