@@ -6,31 +6,33 @@ import { contactInfo } from '@/lib/constants'
 
 export function Footer() {
   return (
-    <footer className="relative bg-[#0a0a0a] border-t border-white/5 overflow-hidden">
+    <footer className="relative bg-beige-200 border-t border-grey-mouse/20 overflow-hidden">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Brand */}
           <div>
-            <h3 className="font-display text-lg font-light mb-4 tracking-wider">
-              <span className="text-white">INSCRIBE</span>
-              <span className="text-white/60"> ARCHITECTS</span>
-            </h3>
-            <p className="text-white/40 text-sm font-light leading-relaxed">
+            <Link href="/">
+              <h3 className="font-display text-lg font-light mb-4 tracking-wider hover:opacity-80 transition-opacity cursor-pointer">
+                <span className="text-black">INSCRIBE</span>
+                <span className="text-grey-mouse"> ARCHITECTS</span>
+              </h3>
+            </Link>
+            <p className="text-grey-mouse text-sm font-light leading-relaxed">
               Creating innovative architectural designs since 2001
             </p>
           </div>
 
           {/* Quick Links */}
           <div>
-            <h4 className="font-light text-sm mb-4 uppercase tracking-wider text-white/60">Quick Links</h4>
+            <h4 className="font-light text-sm mb-4 uppercase tracking-wider text-grey-mouse">Quick Links</h4>
             <nav className="flex flex-col gap-3">
-              <Link href="/about" className="text-white/40 hover:text-white transition-colors text-sm font-light">
+              <Link href="/about" className="text-grey-mouse hover:text-black transition-colors text-sm font-light">
                 About
               </Link>
-              <Link href="/projects" className="text-white/40 hover:text-white transition-colors text-sm font-light">
+              <Link href="/projects" className="text-grey-mouse hover:text-black transition-colors text-sm font-light">
                 Projects
               </Link>
-              <Link href="/contact" className="text-white/40 hover:text-white transition-colors text-sm font-light">
+              <Link href="/contact" className="text-grey-mouse hover:text-black transition-colors text-sm font-light">
                 Contact
               </Link>
             </nav>
@@ -38,44 +40,55 @@ export function Footer() {
 
           {/* Services */}
           <div>
-            <h4 className="font-light text-sm mb-4 uppercase tracking-wider text-white/60">Services</h4>
+            <h4 className="font-light text-sm mb-4 uppercase tracking-wider text-grey-mouse">Services</h4>
             <nav className="flex flex-col gap-3">
-              <span className="text-white/40 text-sm font-light">Interior Design</span>
-              <span className="text-white/40 text-sm font-light">Facade Design</span>
-              <span className="text-white/40 text-sm font-light">Commercial Planning</span>
+              <span className="text-grey-mouse text-sm font-light">Commercial Architecture</span>
+              <span className="text-grey-mouse text-sm font-light">Residential Design</span>
+              <span className="text-grey-mouse text-sm font-light">Heritage Conservation</span>
+              <span className="text-grey-mouse text-sm font-light">Urban Planning</span>
             </nav>
           </div>
 
           {/* Contact */}
           <div>
-            <h4 className="font-light text-sm mb-4 uppercase tracking-wider text-white/60">Contact</h4>
+            <h4 className="font-light text-sm mb-4 uppercase tracking-wider text-grey-mouse">Contact</h4>
             <div className="flex flex-col gap-3">
-              <a href={`tel:${contactInfo.phone}`} className="flex items-center gap-2 text-white/40 hover:text-white transition-colors text-sm font-light">
+              <a href={`tel:${contactInfo.phone}`} className="flex items-center gap-2 text-grey-mouse hover:text-black transition-colors text-sm font-light">
                 <Phone size={14} />
                 <span>{contactInfo.phone}</span>
               </a>
-              <a href={`mailto:${contactInfo.email}`} className="flex items-center gap-2 text-white/40 hover:text-white transition-colors text-sm font-light">
+              <a href={`mailto:${contactInfo.email}`} className="flex items-center gap-2 text-grey-mouse hover:text-black transition-colors text-sm font-light">
                 <Mail size={14} />
                 <span>{contactInfo.email}</span>
               </a>
-              <div className="flex items-center gap-2 text-white/40 text-sm font-light">
+              <div className="flex items-center gap-2 text-grey-mouse text-sm font-light">
                 <MapPin size={14} />
                 <span>{contactInfo.address}</span>
               </div>
+              {contactInfo.officeHours && (
+                <p className="text-grey-mouse/70 text-xs font-light mt-2">
+                  {contactInfo.officeHours}
+                </p>
+              )}
             </div>
           </div>
         </div>
 
-        <div className="mt-12 pt-8 border-t border-white/5 flex flex-col sm:flex-row justify-between items-center gap-4">
-          <p className="text-white/30 text-xs font-light">
-            © 2024 Inscribe Architects. All rights reserved.
-          </p>
+        <div className="mt-12 pt-8 border-t border-grey-mouse/20 flex flex-col sm:flex-row justify-between items-center gap-4">
+          <div>
+            <p className="text-grey-mouse text-xs font-light mb-1">
+              © 2024 Inscribe Architects. All rights reserved.
+            </p>
+            <p className="text-grey-mouse/70 text-xs font-light">
+              Licensed by Council of Architecture, India
+            </p>
+          </div>
           <button
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="p-2 border border-white/10 hover:border-white/20 transition-colors"
+            className="p-2 border border-grey-mouse/30 hover:border-grey-mouse/50 transition-colors"
             aria-label="Scroll to top"
           >
-            <ArrowUp size={16} className="text-white/40" />
+            <ArrowUp size={16} className="text-grey-mouse" />
           </button>
         </div>
       </div>

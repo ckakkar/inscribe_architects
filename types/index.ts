@@ -37,3 +37,34 @@ export interface FormErrors {
   email?: string
   message?: string
 }
+
+export interface Award {
+  id: string
+  title: string
+  organization: string
+  year: string
+}
+
+export interface Testimonial {
+  id: string
+  name: string
+  role: string
+  company: string
+  content: string
+  project?: string
+}
+
+export interface ProcessStep {
+  id: string
+  number: string
+  title: string
+  description: string
+}
+
+export interface TeamMember {
+  id: string
+  name: string
+  role: string
+  bio: string
+  image?: string
+}

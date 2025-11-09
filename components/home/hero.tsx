@@ -1,58 +1,124 @@
 'use client'
 
+import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 
 export function Hero() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      {/* Architectural Decorative Elements */}
+      <div className="absolute inset-0 pointer-events-none">
+        {/* Corner Geometric Shapes */}
+        <div className="absolute top-20 left-10 w-32 h-32 border border-grey-mouse/10 rotate-45" />
+        <div className="absolute top-20 left-10 w-24 h-24 border border-grey-mouse/15 rotate-45" />
+        <div className="absolute bottom-20 right-10 w-32 h-32 border border-grey-mouse/10 rotate-45" />
+        <div className="absolute bottom-20 right-10 w-24 h-24 border border-grey-mouse/15 rotate-45" />
+        
+        {/* Architectural Lines */}
+        <div className="absolute top-1/2 left-0 w-1/4 h-px bg-gradient-to-r from-transparent via-grey-mouse/10 to-transparent" />
+        <div className="absolute top-1/2 right-0 w-1/4 h-px bg-gradient-to-l from-transparent via-grey-mouse/10 to-transparent" />
+        
+        {/* Vertical Architectural Lines */}
+        <div className="absolute left-1/4 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-grey-mouse/5 to-transparent" />
+        <div className="absolute right-1/4 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-grey-mouse/5 to-transparent" />
+      </div>
+
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="max-w-4xl mx-auto text-center">
           {/* Main Title */}
-          <div className="mb-16">
-            <h1 className="font-display font-light text-6xl sm:text-7xl lg:text-8xl leading-[0.95] mb-8 tracking-tight">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+            className="mb-16"
+          >
+            <h1 className="font-display font-light text-6xl sm:text-7xl lg:text-8xl mb-10 tracking-tight text-black">
               INSCRIBE
             </h1>
-            <div className="h-px bg-white/10 w-16 mx-auto my-12" />
-            <h2 className="font-display font-light text-3xl sm:text-4xl lg:text-5xl tracking-[0.15em] text-white/50">
+            <motion.div
+              initial={{ width: 0 }}
+              animate={{ width: 120 }}
+              transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+              className="relative h-[1.5px] bg-grey-mouse/40 mx-auto my-14 arch-line"
+            />
+            <motion.h2
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.8, delay: 0.5 }}
+              className="font-display font-light text-3xl sm:text-4xl lg:text-5xl tracking-[0.1em] text-grey-mouse mt-14"
+            >
               ARCHITECTS
-            </h2>
-          </div>
+            </motion.h2>
+          </motion.div>
 
           {/* Tagline */}
-          <div className="mb-20">
-            <p className="text-base md:text-lg text-white/40 font-light leading-relaxed max-w-xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
+            className="mb-20"
+          >
+            <p className="text-lg md:text-xl text-black-soft font-light leading-relaxed max-w-2xl mx-auto mb-6">
               We don't just design buildings.
               <br />
-              <span className="text-white/60">We craft experiences.</span>
+              <span className="text-black font-normal">We craft experiences.</span>
             </p>
-          </div>
+            <p className="text-base text-grey-mouse font-light leading-relaxed max-w-xl mx-auto">
+              Award-winning architecture firm specializing in sustainable design,
+              commercial spaces, and heritage conservation across India.
+            </p>
+          </motion.div>
 
           {/* Stats */}
-          <div className="mb-20">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            className="mb-20"
+          >
             <div className="flex flex-col sm:flex-row items-center justify-center gap-12 sm:gap-16">
-              <div className="text-center">
-                <p className="text-2xl md:text-3xl font-light text-white mb-1">25+</p>
-                <p className="text-xs font-light text-white/30 uppercase tracking-wider">Years</p>
-              </div>
-              <div className="w-px h-8 bg-white/5 hidden sm:block" />
-              <div className="text-center">
-                <p className="text-2xl md:text-3xl font-light text-white mb-1">1100+</p>
-                <p className="text-xs font-light text-white/30 uppercase tracking-wider">Projects</p>
-              </div>
+              <motion.div
+                className="text-center"
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.6, delay: 0.8 }}
+              >
+                <p className="text-3xl md:text-4xl font-light text-black mb-2">25+</p>
+                <p className="text-xs font-light text-grey-mouse uppercase tracking-wider">Years</p>
+              </motion.div>
+              <motion.div
+                className="w-px h-8 bg-grey-mouse/20 hidden sm:block"
+                initial={{ scaleY: 0 }}
+                animate={{ scaleY: 1 }}
+                transition={{ duration: 0.6, delay: 0.9 }}
+              />
+              <motion.div
+                className="text-center"
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.6, delay: 1 }}
+              >
+                <p className="text-3xl md:text-4xl font-light text-black mb-2">1100+</p>
+                <p className="text-xs font-light text-grey-mouse uppercase tracking-wider">Projects</p>
+              </motion.div>
             </div>
-          </div>
+          </motion.div>
 
           {/* CTA */}
-          <div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.8, ease: [0.22, 1, 0.36, 1] }}
+          >
             <Link href="/projects">
-              <Button size="lg" variant="outline">
+              <Button size="lg" variant="outline" className="group">
                 Explore Our Vision
-                <ArrowRight className="ml-2" size={16} />
+                <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform duration-300" size={16} />
               </Button>
             </Link>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

@@ -16,18 +16,18 @@ export default function ProjectsPage() {
             transition={{ duration: 0.6 }}
             className="mb-20"
           >
-            <p className="text-white/40 text-xs font-light uppercase tracking-[0.2em] mb-6">
+            <p className="text-grey-mouse text-xs font-light uppercase tracking-[0.2em] mb-6">
               Portfolio
             </p>
             <h1 className="font-display text-5xl md:text-7xl font-light mb-6 leading-tight">
-              Our <span className="text-white/90">Projects</span>
+              Our <span className="text-black">Projects</span>
             </h1>
-            <p className="text-base md:text-lg text-white/50 font-light max-w-2xl">
+            <p className="text-lg md:text-xl text-black-soft font-light max-w-2xl leading-relaxed">
               Explore our collection of innovative architectural masterpieces.
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {projects.map((project, index) => (
               <motion.div
                 key={project.id}
@@ -40,16 +40,19 @@ export default function ProjectsPage() {
                   src={project.image}
                   alt={project.title}
                   fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-700"
+                  className="object-cover group-hover:opacity-80 transition-opacity duration-500"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 <div className="absolute inset-0 p-6 flex flex-col justify-end opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                  <span className="text-white/40 text-xs font-light uppercase tracking-wider mb-2">
+                  <span className="text-beige-100/80 text-xs font-light uppercase tracking-wider mb-2">
                     {project.category}
                   </span>
-                  <h3 className="text-xl font-light mb-1 text-white/90">{project.title}</h3>
-                  <p className="text-white/40 text-xs font-light">
+                  <h3 className="text-xl font-light mb-2 text-beige-100">{project.title}</h3>
+                  <p className="text-sm text-beige-100/80 font-light mb-3">
                     {project.location} • {project.year}
+                  </p>
+                  <p className="text-sm text-beige-100/90 font-light leading-relaxed line-clamp-2">
+                    {project.description}
                   </p>
                 </div>
               </motion.div>

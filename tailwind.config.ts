@@ -9,32 +9,66 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        primary: {
-          50: '#fafafa',
-          100: '#f5f5f5',
-          200: '#e5e5e5',
-          300: '#d4d4d4',
-          400: '#a3a3a3',
-          500: '#737373',
-          600: '#525252',
-          700: '#404040',
-          800: '#262626',
-          900: '#171717',
+        beige: {
+          50: '#FDFCFA',
+          100: '#FAF8F4',
+          200: '#F5F1E8',
+          300: '#EDE8DC',
+          400: '#E5DDCE',
+          500: '#D9CFBC',
         },
-        accent: {
-          orange: '#d97706',
-          yellow: '#ca8a04',
+        grey: {
+          mouse: '#8B8B7A',
+          light: '#A5A595',
+          dark: '#6B6B5A',
+        },
+        black: {
+          DEFAULT: '#0A0A0A',
+          soft: '#1A1A1A',
+          medium: '#2C2C2C',
+          deep: '#0F0F0F',
+        },
+        primary: {
+          50: '#FDFCFA',
+          100: '#FAF8F4',
+          200: '#F5F1E8',
+          300: '#EDE8DC',
+          400: '#E5DDCE',
+          500: '#D9CFBC',
+          600: '#8B8B7A',
+          700: '#6B6B5A',
+          800: '#2C2C2C',
+          900: '#1A1A1A',
         },
       },
       fontFamily: {
         sans: ['var(--font-inter)'],
         display: ['var(--font-space)'],
       },
+      fontSize: {
+        'xs': ['0.75rem', { lineHeight: '1.5', letterSpacing: '0.05em' }],
+        'sm': ['0.875rem', { lineHeight: '1.6', letterSpacing: '0.01em' }],
+        'base': ['1rem', { lineHeight: '1.75', letterSpacing: '-0.01em' }],
+        'lg': ['1.125rem', { lineHeight: '1.75', letterSpacing: '-0.01em' }],
+        'xl': ['1.25rem', { lineHeight: '1.6', letterSpacing: '-0.02em' }],
+        '2xl': ['1.5rem', { lineHeight: '1.5', letterSpacing: '-0.02em' }],
+        '3xl': ['1.875rem', { lineHeight: '1.4', letterSpacing: '-0.02em' }],
+        '4xl': ['2.25rem', { lineHeight: '1.3', letterSpacing: '-0.03em' }],
+        '5xl': ['3rem', { lineHeight: '1.2', letterSpacing: '-0.03em' }],
+        '6xl': ['3.75rem', { lineHeight: '1.1', letterSpacing: '-0.04em' }],
+        '7xl': ['4.5rem', { lineHeight: '1.1', letterSpacing: '-0.04em' }],
+        '8xl': ['6rem', { lineHeight: '1', letterSpacing: '-0.05em' }],
+      },
       animation: {
         'float': 'float 6s ease-in-out infinite',
         'glow': 'glow 2s ease-in-out infinite',
         'slide-up': 'slideUp 0.6s ease-out',
         'fade-in': 'fadeIn 0.6s ease-out',
+      },
+      boxShadow: {
+        'soft': '0 2px 8px rgba(0, 0, 0, 0.04)',
+        'medium': '0 4px 16px rgba(0, 0, 0, 0.06)',
+        'large': '0 8px 32px rgba(0, 0, 0, 0.08)',
       },
       keyframes: {
         float: {

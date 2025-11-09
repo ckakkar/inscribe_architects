@@ -20,8 +20,9 @@ const spaceGrotesk = Space_Grotesk({
 })
 
 export const metadata: Metadata = {
-  title: 'Inscribe Architects - Award Winning Architecture Firm',
-  description: 'Creating innovative, sustainable architectural designs since 2001',
+  title: 'Inscribe Architects - Award Winning Architecture Firm | 25+ Years of Excellence',
+  description: 'Leading architecture firm in India specializing in commercial, residential, and heritage conservation projects. Over 1,100 completed projects with sustainable design excellence.',
+  keywords: 'architecture, architectural design, commercial architecture, residential design, heritage conservation, sustainable design, India architects',
 }
 
 export default function RootLayout({
@@ -38,8 +39,16 @@ export default function RootLayout({
           
           <div className="relative min-h-screen">
             {/* Background */}
-            <div className="fixed inset-0 -z-10 bg-[#0a0a0a]">
-              <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff03_1px,transparent_1px),linear-gradient(to_bottom,#ffffff03_1px,transparent_1px)] bg-[size:32px_32px]" />
+            <div className="fixed inset-0 -z-10 bg-beige-100">
+              {/* Architectural Grid Pattern */}
+              <div className="absolute inset-0 bg-[linear-gradient(to_right,#00000002_1px,transparent_1px),linear-gradient(to_bottom,#00000002_1px,transparent_1px)] bg-[size:24px_24px]" />
+              {/* Architectural Section Lines */}
+              <div className="absolute inset-0">
+                <div className="absolute left-[10%] top-0 bottom-0 w-px bg-grey-mouse/5" />
+                <div className="absolute right-[10%] top-0 bottom-0 w-px bg-grey-mouse/5" />
+                <div className="absolute top-[20%] left-0 right-0 h-px bg-grey-mouse/5" />
+                <div className="absolute bottom-[20%] left-0 right-0 h-px bg-grey-mouse/5" />
+              </div>
             </div>
 
             <Header />

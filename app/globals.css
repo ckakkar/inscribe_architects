@@ -8,12 +8,29 @@
     --font-space: 'Space Grotesk', sans-serif;
   }
 
-  body {
-    @apply bg-[#0a0a0a] text-white antialiased;
-  }
-
   html {
     scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-beige-100 text-black-soft antialiased;
+    font-feature-settings: 'kern' 1, 'liga' 1;
+    text-rendering: optimizeLegibility;
+    line-height: 1.6;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    font-weight: 300;
+  }
+
+  p {
+    line-height: 1.75;
+    letter-spacing: -0.01em;
   }
 
   * {
@@ -29,6 +46,39 @@
   .text-balance {
     text-wrap: balance;
   }
+
+  /* Architectural Grid Pattern */
+  .arch-grid {
+    background-image: 
+      linear-gradient(to right, rgba(0, 0, 0, 0.02) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(0, 0, 0, 0.02) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+
+  /* Architectural Line Work */
+  .arch-line {
+    position: relative;
+  }
+
+  .arch-line::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 40px;
+    height: 1px;
+    background: linear-gradient(to right, rgba(139, 139, 122, 0.3), transparent);
+  }
+
+  .arch-line::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    width: 40px;
+    height: 1px;
+    background: linear-gradient(to left, rgba(139, 139, 122, 0.3), transparent);
+  }
 }
 
 /* Custom Scrollbar */
@@ -41,14 +91,19 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-white/20 rounded-full;
+  @apply bg-grey-mouse/30 rounded-full;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  @apply bg-white/30;
+  @apply bg-grey-mouse/50;
 }
 
 /* Selection */
 ::selection {
-  @apply bg-white/20 text-white;
+  @apply bg-black text-beige-100;
+}
+
+/* Better focus styles */
+:focus-visible {
+  @apply outline-2 outline-offset-2 outline-grey-mouse/50;
 }
