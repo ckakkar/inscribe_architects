@@ -32,7 +32,7 @@ export default function ContactPage() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-5xl mx-auto">
             <div className="text-center mb-12 sm:mb-16 md:mb-20">
-              <p className="text-grey-mouse text-xs font-light uppercase tracking-[0.2em] mb-4 sm:mb-6">
+              <p className="text-grey-mouse/70 text-xs font-light uppercase tracking-[0.15em] mb-4 sm:mb-6">
                 Contact
               </p>
               <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light mb-4 sm:mb-6 leading-tight text-black">
@@ -44,10 +44,10 @@ export default function ContactPage() {
               {/* Contact Info */}
               <div className="space-y-4 sm:space-y-6">
                 <div className="space-y-1 mb-6 sm:mb-8">
-                  <p className="text-grey-mouse text-xs font-light uppercase tracking-wider mb-4 sm:mb-6">
+                  <p className="text-grey-mouse/70 text-xs font-light uppercase tracking-[0.15em] mb-4 sm:mb-6">
                     Contact Information
                   </p>
-                  <p className="text-sm sm:text-base text-black-soft font-light leading-relaxed">
+                  <p className="text-sm sm:text-base text-grey-mouse/80 font-light leading-relaxed">
                     Ready to start your next project? Get in touch with our team to discuss your architectural needs. We're here to help bring your vision to life.
                   </p>
                   {contactInfo.officeHours && (

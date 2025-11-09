@@ -4,6 +4,7 @@ import { PageTransition } from '@/components/layout/page-transition'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
 import { projects } from '@/lib/constants'
+import { fadeInUp, fadeInUpViewportWithDelay } from '@/lib/utils/animations'
 
 export default function ProjectsPage() {
   return (
@@ -11,18 +12,16 @@ export default function ProjectsPage() {
       <div className="min-h-screen pt-20 sm:pt-24 md:pt-32 pb-12 sm:pb-16 md:pb-20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            {...fadeInUp}
             className="mb-12 sm:mb-16 md:mb-20"
           >
-            <p className="text-grey-mouse text-xs font-light uppercase tracking-[0.2em] mb-4 sm:mb-6">
+            <p className="text-grey-mouse/70 text-xs font-light uppercase tracking-[0.15em] mb-4 sm:mb-6">
               Portfolio
             </p>
             <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-light mb-4 sm:mb-6 leading-tight">
               Our <span className="text-black">Projects</span>
             </h1>
-            <p className="text-base sm:text-lg md:text-xl text-black-soft font-light max-w-2xl leading-relaxed">
+            <p className="text-base sm:text-lg md:text-xl text-grey-mouse/80 font-light max-w-2xl leading-relaxed">
               Explore our portfolio of over 1,100 completed projects across residential, commercial, and institutional sectors in Ludhiana, Punjab, and beyond.
             </p>
           </motion.div>
@@ -31,9 +30,7 @@ export default function ProjectsPage() {
             {projects.map((project, index) => (
               <motion.div
                 key={project.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1, duration: 0.6 }}
+                {...fadeInUpViewportWithDelay(index * 0.05)}
                 className="group relative overflow-hidden aspect-[4/5]"
               >
                 <Image

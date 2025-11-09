@@ -10,21 +10,12 @@ import { usePathname } from 'next/navigation'
 export function Header() {
   const [scrolled, setScrolled] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const [isMobile, setIsMobile] = useState(false)
   const pathname = usePathname()
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 50)
+    const handleScroll = () => setScrolled(window.scrollY > 20)
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
-
-  // Detect mobile screen size
-  useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 640)
-    checkMobile()
-    window.addEventListener('resize', checkMobile, { passive: true })
-    return () => window.removeEventListener('resize', checkMobile)
   }, [])
 
   // Close mobile menu on route change
@@ -34,24 +25,16 @@ export function Header() {
 
   // Prevent body scroll when mobile menu is open
   useEffect(() => {
-    if (!mobileMenuOpen) return
-
-    const scrollY = window.scrollY
-    document.body.style.overflow = 'hidden'
-    // Prevent scroll on iOS
-    document.body.style.position = 'fixed'
-    document.body.style.width = '100%'
-    document.body.style.top = `-${scrollY}px`
-
-    return () => {
-      const scrollY = document.body.style.top
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden'
+      document.documentElement.style.overflow = 'hidden'
+    } else {
       document.body.style.overflow = ''
-      document.body.style.position = ''
-      document.body.style.width = ''
-      document.body.style.top = ''
-      if (scrollY) {
-        window.scrollTo(0, parseInt(scrollY.replace('px', '')) * -1)
-      }
+      document.documentElement.style.overflow = ''
+    }
+    return () => {
+      document.body.style.overflow = ''
+      document.documentElement.style.overflow = ''
     }
   }, [mobileMenuOpen])
 
@@ -66,87 +49,73 @@ export function Header() {
     return () => window.removeEventListener('keydown', handleEscape)
   }, [mobileMenuOpen])
 
-  // Calculate header height dynamically
-  const headerHeight = scrolled 
-    ? (isMobile ? 56 : 64) 
-    : (isMobile ? 64 : 80)
-
   return (
     <motion.header
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-      data-menu-open={mobileMenuOpen}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled || mobileMenuOpen
-          ? 'border-b border-grey-mouse/20 py-3 sm:py-4 shadow-soft' 
-          : 'py-4 sm:py-6'
-      } ${
-        mobileMenuOpen 
-          ? '' 
-          : scrolled 
-            ? 'backdrop-blur-modern' 
-            : ''
+      initial={{ y: -100, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        scrolled
+          ? 'bg-beige-100/95 backdrop-blur-md border-b border-grey-mouse/10 py-3'
+          : 'bg-transparent py-4'
       }`}
-      style={mobileMenuOpen ? {
-        backgroundColor: 'rgb(250, 248, 244)',
-        backdropFilter: 'blur(20px) saturate(180%)',
-        WebkitBackdropFilter: 'blur(20px) saturate(180%)',
-      } : {}}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
-          {/* Logo with Architectural Line */}
+          {/* Logo - Simplified */}
           <Link 
             href="/" 
-            className="group touch-target"
+            className="group"
             onClick={() => setMobileMenuOpen(false)}
           >
-            <div className="flex items-center gap-2 sm:gap-3">
-              <div className="w-6 sm:w-8 h-px bg-grey-mouse/30 group-hover:bg-black transition-colors" />
-              <h1 className="font-display text-base sm:text-lg md:text-xl font-light tracking-wider">
-                <span className="text-black">INSCRIBE</span>
-                <span className="text-grey-mouse hidden sm:inline"> ARCHITECTS</span>
-                <span className="text-grey-mouse sm:hidden"> ARCH</span>
-              </h1>
-            </div>
+            <h1 className="font-display text-lg sm:text-xl font-light tracking-[0.15em]">
+              <span className="text-black">INSCRIBE</span>
+              <span className="text-grey-mouse/60 hidden sm:inline"> ARCHITECTS</span>
+            </h1>
           </Link>
 
-          {/* Desktop Nav */}
-          <nav className="hidden lg:flex items-center gap-8 xl:gap-12">
+          {/* Desktop Nav - Minimal */}
+          <nav className="hidden lg:flex items-center gap-10">
             {navLinks.map((link) => (
               <Link
                 key={link.name}
                 href={link.href}
-                className={`text-sm font-light transition-colors duration-200 uppercase tracking-[0.1em] ${
+                className={`text-xs font-light transition-colors duration-300 uppercase tracking-[0.15em] relative ${
                   pathname === link.href 
                     ? 'text-black' 
-                    : 'text-grey-mouse hover:text-black'
+                    : 'text-grey-mouse/80 hover:text-black'
                 }`}
               >
                 {link.name}
+                {pathname === link.href && (
+                  <motion.div
+                    layoutId="activeNav"
+                    className="absolute -bottom-1 left-0 right-0 h-px bg-black"
+                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                  />
+                )}
               </Link>
             ))}
           </nav>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile Menu Button - Minimal */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden touch-target p-2.5 sm:p-3 text-grey-mouse hover:text-black active:opacity-70 transition-all relative z-50"
+            className="lg:hidden p-2 -mr-2 text-grey-mouse/70 hover:text-black transition-colors relative z-50"
             aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
             aria-expanded={mobileMenuOpen}
           >
             <motion.div
-              animate={{ rotate: mobileMenuOpen ? 90 : 0 }}
-              transition={{ duration: 0.2 }}
+              animate={{ rotate: mobileMenuOpen ? 180 : 0 }}
+              transition={{ duration: 0.3, ease: "easeOut" }}
             >
-              {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
             </motion.div>
           </button>
         </div>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Modern Mobile Menu - Slide from right */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <>
@@ -156,50 +125,73 @@ export function Header() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setMobileMenuOpen(false)}
-              className="lg:hidden fixed inset-0 bg-black/30 backdrop-blur-sm z-40"
-              style={{ top: headerHeight }}
+              className="lg:hidden fixed inset-0 bg-black/20 backdrop-blur-sm z-40"
               transition={{ duration: 0.2 }}
             />
             
-            {/* Mobile Menu Panel */}
+            {/* Mobile Menu Panel - Slide from right */}
             <motion.div 
-              initial={{ opacity: 0, y: -20, scale: 0.98 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: -20, scale: 0.98 }}
-              transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-              className="lg:hidden fixed left-0 right-0 backdrop-blur-modern border-t border-grey-mouse/20 z-50 overflow-y-auto"
-              style={{ 
-                top: headerHeight,
-                maxHeight: `calc(100vh - ${headerHeight}px)`,
-                WebkitOverflowScrolling: 'touch'
-              }}
+              initial={{ x: '100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '100%' }}
+              transition={{ type: "spring", damping: 30, stiffness: 300 }}
+              className="lg:hidden fixed top-0 right-0 bottom-0 w-80 max-w-[85vw] bg-beige-100 z-50 shadow-2xl"
             >
-              <nav className="container mx-auto px-4 py-4 sm:py-6 flex flex-col">
-                {navLinks.map((link, index) => (
-                  <motion.div
-                    key={link.name}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ 
-                      duration: 0.3, 
-                      delay: index * 0.05,
-                      ease: [0.22, 1, 0.36, 1]
-                    }}
+              <div className="h-full flex flex-col">
+                {/* Menu Header */}
+                <div className="flex items-center justify-between p-6 border-b border-grey-mouse/10">
+                  <h2 className="font-display text-sm font-light tracking-[0.15em] text-grey-mouse/60 uppercase">
+                    Menu
+                  </h2>
+                  <button
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="p-2 -mr-2 text-grey-mouse/70 hover:text-black transition-colors"
+                    aria-label="Close menu"
                   >
-                    <Link
-                      href={link.href}
-                      onClick={() => setMobileMenuOpen(false)}
-                      className={`touch-target block text-base sm:text-lg font-light transition-colors uppercase tracking-wider py-4 sm:py-5 border-b border-grey-mouse/10 last:border-b-0 ${
-                        pathname === link.href
-                          ? 'text-black font-normal'
-                          : 'text-grey-mouse hover:text-black active:text-black'
-                      }`}
-                    >
-                      {link.name}
-                    </Link>
-                  </motion.div>
-                ))}
-              </nav>
+                    <X size={18} />
+                  </button>
+                </div>
+
+                {/* Navigation Links */}
+                <nav className="flex-1 py-8 px-6 overflow-y-auto">
+                  <div className="space-y-1">
+                    {navLinks.map((link, index) => (
+                      <motion.div
+                        key={link.name}
+                        initial={{ opacity: 0, x: 20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ 
+                          duration: 0.3, 
+                          delay: index * 0.05,
+                          ease: "easeOut"
+                        }}
+                      >
+                        <Link
+                          href={link.href}
+                          onClick={() => setMobileMenuOpen(false)}
+                        className={`block py-3 text-base font-light transition-colors uppercase tracking-[0.15em] ${
+                          pathname === link.href
+                            ? 'text-black'
+                            : 'text-grey-mouse/80 hover:text-black'
+                        }`}
+                        >
+                          {link.name}
+                        </Link>
+                        {index < navLinks.length - 1 && (
+                          <div className="h-px bg-grey-mouse/5 my-2" />
+                        )}
+                      </motion.div>
+                    ))}
+                  </div>
+                </nav>
+
+                {/* Menu Footer */}
+                <div className="p-6 border-t border-grey-mouse/10">
+                  <p className="text-xs text-grey-mouse/50 font-light">
+                    © 2024 Inscribe Architects
+                  </p>
+                </div>
+              </div>
             </motion.div>
           </>
         )}

@@ -1,95 +1,72 @@
 'use client'
 
 import Link from 'next/link'
-import { Mail, Phone, MapPin, ArrowUp } from 'lucide-react'
+import { Mail, Phone, MapPin } from 'lucide-react'
 import { contactInfo } from '@/lib/constants'
 
 export function Footer() {
   return (
-    <footer className="relative bg-beige-200 border-t border-grey-mouse/20 overflow-hidden">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-12">
+    <footer className="relative border-t border-grey-mouse/10 bg-beige-100">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-16">
           {/* Brand */}
-          <div>
+          <div className="md:col-span-1">
             <Link href="/">
-              <h3 className="font-display text-lg font-light mb-4 tracking-wider hover:opacity-80 transition-opacity cursor-pointer">
+              <h3 className="font-display text-base font-light mb-6 tracking-[0.15em] hover:opacity-70 transition-opacity">
                 <span className="text-black">INSCRIBE</span>
-                <span className="text-grey-mouse"> ARCHITECTS</span>
+                <span className="text-grey-mouse/75"> ARCHITECTS</span>
               </h3>
             </Link>
-            <p className="text-grey-mouse text-sm font-light leading-relaxed">
-              Crafting thoughtful homes & commercial spaces since 2001. Based in Ludhiana, Punjab.
+            <p className="text-grey-mouse/85 text-sm font-light leading-relaxed max-w-xs">
+              Crafting thoughtful homes & commercial spaces since 2001.
             </p>
           </div>
 
-          {/* Quick Links */}
+          {/* Navigation */}
           <div>
-            <h4 className="font-light text-sm mb-4 uppercase tracking-wider text-grey-mouse">Quick Links</h4>
-            <nav className="flex flex-col gap-3">
-              <Link href="/about" className="touch-target text-grey-mouse hover:text-black active:text-black transition-colors text-sm font-light py-1">
+            <h4 className="font-light text-xs mb-6 uppercase tracking-[0.15em] text-grey-mouse/80">Navigation</h4>
+            <nav className="flex flex-col gap-4">
+              <Link href="/about" className="text-grey-mouse/85 hover:text-black transition-colors text-sm font-light">
                 About
               </Link>
-              <Link href="/projects" className="touch-target text-grey-mouse hover:text-black active:text-black transition-colors text-sm font-light py-1">
+              <Link href="/projects" className="text-grey-mouse/85 hover:text-black transition-colors text-sm font-light">
                 Projects
               </Link>
-              <Link href="/contact" className="touch-target text-grey-mouse hover:text-black active:text-black transition-colors text-sm font-light py-1">
+              <Link href="/contact" className="text-grey-mouse/85 hover:text-black transition-colors text-sm font-light">
                 Contact
               </Link>
             </nav>
           </div>
 
-          {/* Services */}
-          <div>
-            <h4 className="font-light text-sm mb-4 uppercase tracking-wider text-grey-mouse">Services</h4>
-            <nav className="flex flex-col gap-3">
-              <span className="text-grey-mouse text-sm font-light">Residential Architecture</span>
-              <span className="text-grey-mouse text-sm font-light">Commercial Architecture</span>
-              <span className="text-grey-mouse text-sm font-light">Interior Design</span>
-              <span className="text-grey-mouse text-sm font-light">3D Visualization</span>
-            </nav>
-          </div>
-
           {/* Contact */}
           <div>
-            <h4 className="font-light text-sm mb-4 uppercase tracking-wider text-grey-mouse">Contact</h4>
-            <div className="flex flex-col gap-3">
-              <a href={`tel:${contactInfo.phone}`} className="touch-target flex items-center gap-2 text-grey-mouse hover:text-black active:text-black transition-colors text-sm font-light py-1">
-                <Phone size={14} />
+            <h4 className="font-light text-xs mb-6 uppercase tracking-[0.15em] text-grey-mouse/80">Contact</h4>
+            <div className="flex flex-col gap-4">
+              <a href={`tel:${contactInfo.phone}`} className="flex items-center gap-3 text-grey-mouse/85 hover:text-black transition-colors text-sm font-light">
+                <Phone size={14} className="text-grey-mouse/70" />
                 <span>{contactInfo.phone}</span>
               </a>
-              <a href={`mailto:${contactInfo.email}`} className="touch-target flex items-center gap-2 text-grey-mouse hover:text-black active:text-black transition-colors text-sm font-light py-1">
-                <Mail size={14} />
+              <a href={`mailto:${contactInfo.email}`} className="flex items-center gap-3 text-grey-mouse/85 hover:text-black transition-colors text-sm font-light">
+                <Mail size={14} className="text-grey-mouse/70" />
                 <span>{contactInfo.email}</span>
               </a>
-              <div className="flex items-center gap-2 text-grey-mouse text-sm font-light">
-                <MapPin size={14} />
+              <div className="flex items-start gap-3 text-grey-mouse/85 text-sm font-light">
+                <MapPin size={14} className="text-grey-mouse/70 mt-0.5 flex-shrink-0" />
                 <span>{contactInfo.address}</span>
               </div>
-              {contactInfo.officeHours && (
-                <p className="text-grey-mouse/70 text-xs font-light mt-2">
-                  {contactInfo.officeHours}
-                </p>
-              )}
             </div>
           </div>
         </div>
 
-        <div className="mt-12 pt-8 border-t border-grey-mouse/20 flex flex-col sm:flex-row justify-between items-center gap-4">
-          <div>
-            <p className="text-grey-mouse text-xs font-light mb-1">
+        <div className="mt-16 pt-8 border-t border-grey-mouse/10">
+          <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
+            <p className="text-grey-mouse/70 text-xs font-light">
               © 2024 Inscribe Architects. All rights reserved.
             </p>
-            <p className="text-grey-mouse/70 text-xs font-light">
+            <p className="text-grey-mouse/65 text-xs font-light">
               Licensed by Council of Architecture, India
             </p>
           </div>
-          <button
-            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="touch-target p-3 border border-grey-mouse/30 hover:border-grey-mouse/50 active:opacity-70 transition-colors"
-            aria-label="Scroll to top"
-          >
-            <ArrowUp size={18} className="text-grey-mouse" />
-          </button>
         </div>
       </div>
     </footer>

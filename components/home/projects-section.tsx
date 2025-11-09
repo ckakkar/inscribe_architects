@@ -6,31 +6,19 @@ import Link from 'next/link'
 import { projects } from '@/lib/constants'
 import { Button } from '@/components/ui/button'
 import { ArrowRight } from 'lucide-react'
+import { fadeInUpViewportWithDelay } from '@/lib/utils/animations'
 
 export function ProjectsSection() {
   return (
     <section className="py-16 sm:py-24 md:py-32 relative">
-      {/* Architectural Section Dividers - Hidden on mobile */}
-      <div className="absolute left-0 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-grey-mouse/10 to-transparent hidden sm:block" />
-      <div className="absolute right-0 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-grey-mouse/10 to-transparent hidden sm:block" />
-      
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Architectural Section Number */}
-        <div className="absolute left-4 sm:left-8 top-16 sm:top-24 md:top-32 text-grey-mouse/20 font-display text-4xl sm:text-5xl md:text-6xl font-light -rotate-90 origin-left hidden lg:block">
-          01
-        </div>
         
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-50px" }}
-          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+          {...fadeInUpViewportWithDelay(0)}
           className="text-center mb-12 sm:mb-16 md:mb-24"
         >
-          <p className="text-grey-mouse text-xs font-light uppercase tracking-[0.2em] mb-6 relative inline-block">
-            <span className="absolute -left-8 top-1/2 -translate-y-1/2 w-6 h-px bg-grey-mouse/30" />
+          <p className="text-grey-mouse/70 text-xs font-light uppercase tracking-[0.15em] mb-6">
             Portfolio
-            <span className="absolute -right-8 top-1/2 -translate-y-1/2 w-6 h-px bg-grey-mouse/30" />
           </p>
           <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-light text-black">
             Featured{' '}
@@ -44,110 +32,43 @@ export function ProjectsSection() {
           {projects.slice(0, 6).map((project, index) => (
             <motion.div
               key={project.id}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.6, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
-              whileHover={{ y: -8 }}
-              className="relative overflow-hidden aspect-[4/5] group cursor-pointer border border-grey-mouse/10 hover:border-grey-mouse/40 transition-all duration-500 arch-reveal"
+              {...fadeInUpViewportWithDelay(index * 0.05)}
+              className="relative overflow-hidden aspect-[4/5] group cursor-pointer border border-grey-mouse/10 hover:border-grey-mouse/30 transition-colors duration-300"
             >
-              {/* Animated Corner Lines */}
-              <motion.div
-                className="absolute top-0 left-0 w-8 h-px bg-grey-mouse/40 z-20"
-                initial={{ scaleX: 0 }}
-                whileHover={{ scaleX: 1 }}
-                transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-              />
-              <motion.div
-                className="absolute top-0 left-0 h-8 w-px bg-grey-mouse/40 z-20"
-                initial={{ scaleY: 0 }}
-                whileHover={{ scaleY: 1 }}
-                transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-              />
-              <motion.div
-                className="absolute top-0 right-0 w-8 h-px bg-grey-mouse/40 z-20"
-                initial={{ scaleX: 0 }}
-                whileHover={{ scaleX: 1 }}
-                transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-              />
-              <motion.div
-                className="absolute top-0 right-0 h-8 w-px bg-grey-mouse/40 z-20"
-                initial={{ scaleY: 0 }}
-                whileHover={{ scaleY: 1 }}
-                transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-              />
-              
-              {/* Image with reveal effect */}
-              <motion.div
-                className="absolute inset-0"
-                whileHover={{ scale: 1.05 }}
-                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-              >
+              {/* Image */}
+              <div className="absolute inset-0">
                 <Image
                   src={project.image}
                   alt={project.title}
                   fill
                   className="object-cover"
                 />
-              </motion.div>
+              </div>
               
-              {/* Gradient overlay with animation */}
-              <motion.div
-                className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"
-                initial={{ opacity: 0.3 }}
-                whileHover={{ opacity: 1 }}
-                transition={{ duration: 0.4 }}
-              />
+              {/* Gradient overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               
-              {/* Content reveal */}
-              <motion.div
-                className="absolute inset-0 p-4 sm:p-6 flex flex-col justify-end"
-                initial={{ opacity: 0, y: 20 }}
-                whileHover={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-              >
-                <motion.span
-                  className="text-beige-100/80 text-xs font-light uppercase tracking-wider mb-2"
-                  initial={{ x: -20, opacity: 0 }}
-                  whileHover={{ x: 0, opacity: 1 }}
-                  transition={{ duration: 0.4, delay: 0.1 }}
-                >
+              {/* Content */}
+              <div className="absolute inset-0 p-4 sm:p-6 flex flex-col justify-end opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <span className="text-beige-100/80 text-xs font-light uppercase tracking-wider mb-2">
                   {project.category}
-                </motion.span>
-                <motion.h3
-                  className="text-lg sm:text-xl font-light mb-1 sm:mb-2 text-beige-100"
-                  initial={{ x: -20, opacity: 0 }}
-                  whileHover={{ x: 0, opacity: 1 }}
-                  transition={{ duration: 0.4, delay: 0.15 }}
-                >
+                </span>
+                <h3 className="text-lg sm:text-xl font-light mb-1 sm:mb-2 text-beige-100">
                   {project.title}
-                </motion.h3>
-                <motion.p
-                  className="text-xs sm:text-sm text-beige-100/80 font-light mb-2 sm:mb-3"
-                  initial={{ x: -20, opacity: 0 }}
-                  whileHover={{ x: 0, opacity: 1 }}
-                  transition={{ duration: 0.4, delay: 0.2 }}
-                >
+                </h3>
+                <p className="text-xs sm:text-sm text-beige-100/80 font-light mb-2 sm:mb-3">
                   {project.location} • {project.year}
-                </motion.p>
-                <motion.p
-                  className="text-xs sm:text-sm text-beige-100/90 font-light leading-relaxed line-clamp-2"
-                  initial={{ x: -20, opacity: 0 }}
-                  whileHover={{ x: 0, opacity: 1 }}
-                  transition={{ duration: 0.4, delay: 0.25 }}
-                >
+                </p>
+                <p className="text-xs sm:text-sm text-beige-100/90 font-light leading-relaxed line-clamp-2">
                   {project.description}
-                </motion.p>
-              </motion.div>
+                </p>
+              </div>
             </motion.div>
           ))}
         </div>
 
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.3 }}
+          {...fadeInUpViewportWithDelay(0.2)}
           className="text-center"
         >
           <Link href="/projects" className="inline-block">

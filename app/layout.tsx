@@ -61,17 +61,10 @@ export default function RootLayout({
           <ScrollProgress />
           
           <div className="relative min-h-screen">
-            {/* Background */}
+            {/* Background - Minimal */}
             <div className="fixed inset-0 -z-10 bg-beige-100">
-              {/* Architectural Grid Pattern - Reduced animation on mobile */}
-              <div className="absolute inset-0 bg-[linear-gradient(to_right,#00000002_1px,transparent_1px),linear-gradient(to_bottom,#00000002_1px,transparent_1px)] bg-[size:24px_24px] arch-grid-animate sm:arch-grid-animate" />
-              {/* Architectural Section Lines - Hidden on mobile for performance */}
-              <div className="absolute inset-0 hidden sm:block">
-                <div className="absolute left-[10%] top-0 bottom-0 w-px bg-grey-mouse/5" />
-                <div className="absolute right-[10%] top-0 bottom-0 w-px bg-grey-mouse/5" />
-                <div className="absolute top-[20%] left-0 right-0 h-px bg-grey-mouse/5" />
-                <div className="absolute bottom-[20%] left-0 right-0 h-px bg-grey-mouse/5" />
-              </div>
+              {/* Subtle grid pattern */}
+              <div className="absolute inset-0 bg-[linear-gradient(to_right,#00000001_1px,transparent_1px),linear-gradient(to_bottom,#00000001_1px,transparent_1px)] bg-[size:32px_32px] opacity-30" />
             </div>
 
             <Header />
