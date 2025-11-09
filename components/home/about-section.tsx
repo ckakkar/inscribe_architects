@@ -6,23 +6,23 @@ import { AnimatedCounter } from '@/components/shared/animated-counter'
 
 export function AboutSection() {
   return (
-    <section className="py-32 relative">
-      {/* Architectural Section Marker */}
-      <div className="absolute left-0 top-1/2 -translate-y-1/2 w-12 h-px bg-grey-mouse/20" />
-      <div className="absolute right-0 top-1/2 -translate-y-1/2 w-12 h-px bg-grey-mouse/20" />
+    <section className="py-16 sm:py-24 md:py-32 relative">
+      {/* Architectural Section Marker - Hidden on mobile */}
+      <div className="absolute left-0 top-1/2 -translate-y-1/2 w-12 h-px bg-grey-mouse/20 hidden sm:block" />
+      <div className="absolute right-0 top-1/2 -translate-y-1/2 w-12 h-px bg-grey-mouse/20 hidden sm:block" />
       
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Architectural Section Number */}
-        <div className="absolute left-8 top-32 text-grey-mouse/20 font-display text-6xl font-light -rotate-90 origin-left hidden lg:block">
+        <div className="absolute left-4 sm:left-8 top-16 sm:top-24 md:top-32 text-grey-mouse/20 font-display text-4xl sm:text-5xl md:text-6xl font-light -rotate-90 origin-left hidden lg:block">
           02
         </div>
         
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          className="max-w-3xl mx-auto text-center mb-32"
+          className="max-w-3xl mx-auto text-center mb-16 sm:mb-24 md:mb-32"
         >
           <motion.p
             initial={{ opacity: 0 }}
@@ -40,7 +40,7 @@ export function AboutSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.1 }}
-            className="font-display text-4xl md:text-5xl font-light mb-12 leading-tight text-black"
+            className="font-display text-3xl sm:text-4xl md:text-5xl font-light mb-8 sm:mb-10 md:mb-12 leading-tight text-black px-4 sm:px-0"
           >
             Founded by{' '}
             <span className="text-grey-mouse">
@@ -52,7 +52,7 @@ export function AboutSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-lg md:text-xl text-black-soft font-light leading-relaxed mb-8"
+            className="text-base sm:text-lg md:text-xl text-black-soft font-light leading-relaxed mb-6 sm:mb-8 px-4 sm:px-0"
           >
             Since 2001, Inscribe Architects has been creating thoughtful architectural
             and interior designs that blend practical design thinking with artistic
@@ -64,7 +64,7 @@ export function AboutSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="text-base text-grey-mouse font-light leading-relaxed"
+            className="text-sm sm:text-base text-grey-mouse font-light leading-relaxed px-4 sm:px-0"
           >
             Our work emphasizes function, aesthetics, and contextual detailing. We specialize
             in residential and commercial architecture, interior design, 3D visualization,
@@ -74,7 +74,7 @@ export function AboutSection() {
         </motion.div>
 
         {/* Stats */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8">
           {stats.map((stat, index) => (
             <motion.div
               key={stat.label}
@@ -83,7 +83,7 @@ export function AboutSection() {
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.6, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
               whileHover={{ y: -4, scale: 1.05 }}
-              className="text-center py-12 border-b border-grey-mouse/20 relative group cursor-default"
+              className="text-center py-6 sm:py-8 md:py-12 border-b border-grey-mouse/20 relative group cursor-default"
             >
               {/* Animated Corner Lines */}
               <motion.div
@@ -116,7 +116,7 @@ export function AboutSection() {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 + 0.2 }}
-                className="text-4xl lg:text-5xl font-light text-black mb-3"
+                className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-light text-black mb-2 sm:mb-3"
               >
                 <AnimatedCounter value={stat.number} duration={2} />
               </motion.h3>

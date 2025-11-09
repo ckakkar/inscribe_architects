@@ -6,6 +6,7 @@ import { Footer } from '@/components/layout/footer'
 import { CustomCursor } from '@/components/shared/cursor'
 import { SmoothScroll } from '@/components/shared/smooth-scroll'
 import { ScrollProgress } from '@/components/shared/scroll-progress'
+import { ErrorHandler } from '@/components/shared/error-handler'
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -54,6 +55,7 @@ export default function RootLayout({
         />
       </head>
       <body>
+        <ErrorHandler />
         <SmoothScroll>
           <CustomCursor />
           <ScrollProgress />

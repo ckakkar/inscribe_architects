@@ -28,26 +28,26 @@ export default function ContactPage() {
 
   return (
     <PageTransition>
-      <div className="min-h-screen pt-32 pb-20">
+      <div className="min-h-screen pt-20 sm:pt-24 md:pt-32 pb-12 sm:pb-16 md:pb-20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-5xl mx-auto">
-            <div className="text-center mb-20">
-              <p className="text-grey-mouse text-xs font-light uppercase tracking-[0.2em] mb-6">
+            <div className="text-center mb-12 sm:mb-16 md:mb-20">
+              <p className="text-grey-mouse text-xs font-light uppercase tracking-[0.2em] mb-4 sm:mb-6">
                 Contact
               </p>
-              <h1 className="font-display text-5xl md:text-6xl font-light mb-6 leading-tight text-black">
+              <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light mb-4 sm:mb-6 leading-tight text-black">
                 Get in <span className="text-grey-mouse">Touch</span>
               </h1>
             </div>
 
-            <div className="grid lg:grid-cols-2 gap-12 lg:gap-16">
+            <div className="grid lg:grid-cols-2 gap-8 sm:gap-10 md:gap-12 lg:gap-16">
               {/* Contact Info */}
-              <div className="space-y-6">
-                <div className="space-y-1 mb-8">
-                  <p className="text-grey-mouse text-xs font-light uppercase tracking-wider mb-6">
+              <div className="space-y-4 sm:space-y-6">
+                <div className="space-y-1 mb-6 sm:mb-8">
+                  <p className="text-grey-mouse text-xs font-light uppercase tracking-wider mb-4 sm:mb-6">
                     Contact Information
                   </p>
-                  <p className="text-base text-black-soft font-light leading-relaxed">
+                  <p className="text-sm sm:text-base text-black-soft font-light leading-relaxed">
                     Ready to start your next project? Get in touch with our team to discuss your architectural needs. We're here to help bring your vision to life.
                   </p>
                   {contactInfo.officeHours && (
@@ -57,17 +57,17 @@ export default function ContactPage() {
                   )}
                 </div>
 
-                <div className="space-y-4">
+                <div className="space-y-3 sm:space-y-4">
                   <a
                     href={`tel:${contactInfo.phone}`}
-                    className="flex items-start gap-4 p-4 border border-grey-mouse/20 hover:border-grey-mouse/40 transition-colors group"
+                    className="touch-target flex items-start gap-3 sm:gap-4 p-3 sm:p-4 border border-grey-mouse/20 hover:border-grey-mouse/40 active:border-grey-mouse/60 transition-colors group"
                   >
                     <div className="mt-0.5">
                       <Phone className="text-grey-mouse group-hover:text-black transition-colors" size={18} />
                     </div>
                     <div>
                       <p className="text-grey-mouse text-xs font-light uppercase tracking-wider mb-1">Phone</p>
-                      <p className="text-base text-black-soft group-hover:text-black transition-colors font-light">
+                      <p className="text-sm sm:text-base text-black-soft group-hover:text-black transition-colors font-light break-all">
                         {contactInfo.phone}
                       </p>
                     </div>
@@ -75,26 +75,26 @@ export default function ContactPage() {
 
                   <a
                     href={`mailto:${contactInfo.email}`}
-                    className="flex items-start gap-4 p-4 border border-grey-mouse/20 hover:border-grey-mouse/40 transition-colors group"
+                    className="touch-target flex items-start gap-3 sm:gap-4 p-3 sm:p-4 border border-grey-mouse/20 hover:border-grey-mouse/40 active:border-grey-mouse/60 transition-colors group"
                   >
                     <div className="mt-0.5">
                       <Mail className="text-grey-mouse group-hover:text-black transition-colors" size={18} />
                     </div>
                     <div>
                       <p className="text-grey-mouse text-xs font-light uppercase tracking-wider mb-1">Email</p>
-                      <p className="text-base text-black-soft group-hover:text-black transition-colors font-light">
+                      <p className="text-sm sm:text-base text-black-soft group-hover:text-black transition-colors font-light break-all">
                         {contactInfo.email}
                       </p>
                     </div>
                   </a>
 
-                  <div className="flex items-start gap-4 p-4 border border-grey-mouse/20">
+                  <div className="flex items-start gap-3 sm:gap-4 p-3 sm:p-4 border border-grey-mouse/20">
                     <div className="mt-0.5">
                       <MapPin className="text-grey-mouse" size={18} />
                     </div>
                     <div>
                       <p className="text-grey-mouse text-xs font-light uppercase tracking-wider mb-1">Location</p>
-                      <p className="text-grey-mouse text-sm font-light">
+                      <p className="text-grey-mouse text-xs sm:text-sm font-light">
                         {contactInfo.address}
                       </p>
                     </div>
@@ -103,8 +103,8 @@ export default function ContactPage() {
               </div>
 
               {/* Contact Form */}
-              <div>
-                <form onSubmit={handleSubmit} className="space-y-6">
+              <div className="mt-8 lg:mt-0">
+                <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
                   <div className="relative">
                     <label
                       htmlFor="name"

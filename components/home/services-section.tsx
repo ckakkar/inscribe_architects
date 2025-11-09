@@ -5,9 +5,9 @@ import { services } from '@/lib/constants'
 
 export function ServicesSection() {
   return (
-    <section className="py-32 relative">
+    <section className="py-16 sm:py-24 md:py-32 relative">
       {/* Architectural Section Numbering */}
-      <div className="absolute left-8 top-32 text-grey-mouse/20 font-display text-6xl font-light -rotate-90 origin-left">
+      <div className="absolute left-4 sm:left-8 top-16 sm:top-24 md:top-32 text-grey-mouse/20 font-display text-4xl sm:text-5xl md:text-6xl font-light -rotate-90 origin-left hidden lg:block">
         03
       </div>
       
@@ -15,14 +15,14 @@ export function ServicesSection() {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          className="text-center mb-24"
+          className="text-center mb-12 sm:mb-16 md:mb-24"
         >
           <p className="text-grey-mouse text-xs font-light uppercase tracking-[0.2em] mb-6">
             What We Do
           </p>
-          <h2 className="font-display text-4xl md:text-5xl font-light text-black">
+          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-light text-black">
             Our{' '}
             <span className="text-grey-mouse">
               Services
@@ -30,7 +30,7 @@ export function ServicesSection() {
           </h2>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {services.map((service, index) => (
             <motion.div
               key={service.id}
@@ -39,7 +39,7 @@ export function ServicesSection() {
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.6, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
               whileHover={{ y: -6, scale: 1.02 }}
-              className="h-full p-10 border border-grey-mouse/20 hover:border-grey-mouse/50 hover:shadow-xl transition-all duration-500 bg-beige-50/30 relative group arch-border-draw overflow-hidden"
+              className="h-full p-6 sm:p-8 md:p-10 border border-grey-mouse/20 hover:border-grey-mouse/50 hover:shadow-xl transition-all duration-500 bg-beige-50/30 relative group arch-border-draw overflow-hidden"
             >
               {/* Animated Corner Lines */}
               <motion.div
@@ -107,20 +107,20 @@ export function ServicesSection() {
               </motion.div>
               
               <motion.div
-                className="text-4xl mb-6 opacity-30"
+                className="text-3xl sm:text-4xl mb-4 sm:mb-6 opacity-30"
                 whileHover={{ opacity: 0.5, scale: 1.1, rotate: 5 }}
                 transition={{ duration: 0.4 }}
               >
                 {service.icon}
               </motion.div>
               <motion.h3
-                className="text-xl font-light mb-4 text-black"
+                className="text-lg sm:text-xl font-light mb-3 sm:mb-4 text-black"
                 whileHover={{ x: 4 }}
                 transition={{ duration: 0.3 }}
               >
                 {service.title}
               </motion.h3>
-              <p className="text-base text-grey-mouse font-light mb-6 leading-relaxed">{service.description}</p>
+              <p className="text-sm sm:text-base text-grey-mouse font-light mb-4 sm:mb-6 leading-relaxed">{service.description}</p>
               <ul className="space-y-2.5">
                 {service.features.map((feature, idx) => (
                   <motion.li

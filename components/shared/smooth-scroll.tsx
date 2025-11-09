@@ -35,7 +35,7 @@ export function SmoothScroll({ children }: SmoothScrollProps) {
       gestureOrientation: 'vertical',
       smoothWheel: !isMobile, // Disable smooth wheel on mobile for native feel
       wheelMultiplier: isMobile ? 0.8 : 1,
-      smoothTouch: false, // Disable on touch devices for better performance
+      syncTouch: false, // Disable sync touch for native touch scrolling on mobile
       touchMultiplier: isMobile ? 1.5 : 2,
       infinite: false,
     })
@@ -55,7 +55,7 @@ export function SmoothScroll({ children }: SmoothScrollProps) {
         e.preventDefault()
         const href = target.getAttribute('href')
         if (href && href !== '#') {
-          const element = document.querySelector(href)
+          const element = document.querySelector(href) as HTMLElement | null
           if (element) {
             lenis.scrollTo(element, {
               offset: -80, // Account for header

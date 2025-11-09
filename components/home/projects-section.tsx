@@ -9,30 +9,30 @@ import { ArrowRight } from 'lucide-react'
 
 export function ProjectsSection() {
   return (
-    <section className="py-32 relative">
-      {/* Architectural Section Dividers */}
-      <div className="absolute left-0 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-grey-mouse/10 to-transparent" />
-      <div className="absolute right-0 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-grey-mouse/10 to-transparent" />
+    <section className="py-16 sm:py-24 md:py-32 relative">
+      {/* Architectural Section Dividers - Hidden on mobile */}
+      <div className="absolute left-0 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-grey-mouse/10 to-transparent hidden sm:block" />
+      <div className="absolute right-0 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-grey-mouse/10 to-transparent hidden sm:block" />
       
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Architectural Section Number */}
-        <div className="absolute left-8 top-32 text-grey-mouse/20 font-display text-6xl font-light -rotate-90 origin-left hidden lg:block">
+        <div className="absolute left-4 sm:left-8 top-16 sm:top-24 md:top-32 text-grey-mouse/20 font-display text-4xl sm:text-5xl md:text-6xl font-light -rotate-90 origin-left hidden lg:block">
           01
         </div>
         
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          className="text-center mb-24"
+          className="text-center mb-12 sm:mb-16 md:mb-24"
         >
           <p className="text-grey-mouse text-xs font-light uppercase tracking-[0.2em] mb-6 relative inline-block">
             <span className="absolute -left-8 top-1/2 -translate-y-1/2 w-6 h-px bg-grey-mouse/30" />
             Portfolio
             <span className="absolute -right-8 top-1/2 -translate-y-1/2 w-6 h-px bg-grey-mouse/30" />
           </p>
-          <h2 className="font-display text-4xl md:text-5xl font-light text-black">
+          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-light text-black">
             Featured{' '}
             <span className="text-grey-mouse">
               Projects
@@ -40,7 +40,7 @@ export function ProjectsSection() {
           </h2>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8 mb-12 sm:mb-16">
           {projects.slice(0, 6).map((project, index) => (
             <motion.div
               key={project.id}
@@ -101,7 +101,7 @@ export function ProjectsSection() {
               
               {/* Content reveal */}
               <motion.div
-                className="absolute inset-0 p-6 flex flex-col justify-end"
+                className="absolute inset-0 p-4 sm:p-6 flex flex-col justify-end"
                 initial={{ opacity: 0, y: 20 }}
                 whileHover={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
@@ -115,7 +115,7 @@ export function ProjectsSection() {
                   {project.category}
                 </motion.span>
                 <motion.h3
-                  className="text-xl font-light mb-2 text-beige-100"
+                  className="text-lg sm:text-xl font-light mb-1 sm:mb-2 text-beige-100"
                   initial={{ x: -20, opacity: 0 }}
                   whileHover={{ x: 0, opacity: 1 }}
                   transition={{ duration: 0.4, delay: 0.15 }}
@@ -123,7 +123,7 @@ export function ProjectsSection() {
                   {project.title}
                 </motion.h3>
                 <motion.p
-                  className="text-sm text-beige-100/80 font-light mb-3"
+                  className="text-xs sm:text-sm text-beige-100/80 font-light mb-2 sm:mb-3"
                   initial={{ x: -20, opacity: 0 }}
                   whileHover={{ x: 0, opacity: 1 }}
                   transition={{ duration: 0.4, delay: 0.2 }}
@@ -131,7 +131,7 @@ export function ProjectsSection() {
                   {project.location} • {project.year}
                 </motion.p>
                 <motion.p
-                  className="text-sm text-beige-100/90 font-light leading-relaxed line-clamp-2"
+                  className="text-xs sm:text-sm text-beige-100/90 font-light leading-relaxed line-clamp-2"
                   initial={{ x: -20, opacity: 0 }}
                   whileHover={{ x: 0, opacity: 1 }}
                   transition={{ duration: 0.4, delay: 0.25 }}
@@ -150,9 +150,9 @@ export function ProjectsSection() {
           transition={{ duration: 0.6, delay: 0.3 }}
           className="text-center"
         >
-          <Link href="/projects">
-            <Button size="lg" variant="outline" className="group">
-              View All Projects
+          <Link href="/projects" className="inline-block">
+            <Button size="lg" variant="outline" className="group w-full sm:w-auto">
+              <span className="text-sm sm:text-base">View All Projects</span>
               <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform duration-300" size={16} />
             </Button>
           </Link>
