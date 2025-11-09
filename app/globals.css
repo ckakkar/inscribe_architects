@@ -133,6 +133,13 @@
     background-color: rgba(250, 248, 244, 0.85);
   }
 
+  /* Header with menu open - ensure solid background */
+  header[data-menu-open="true"] {
+    background-color: rgb(250, 248, 244) !important;
+    backdrop-filter: blur(20px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+  }
+
   /* Architectural Grid Pattern */
   .arch-grid {
     background-image: 

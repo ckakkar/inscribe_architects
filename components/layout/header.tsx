@@ -76,11 +76,23 @@ export function Header() {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+      data-menu-open={mobileMenuOpen}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled 
-          ? 'backdrop-blur-modern border-b border-grey-mouse/20 py-3 sm:py-4 shadow-soft' 
+        scrolled || mobileMenuOpen
+          ? 'border-b border-grey-mouse/20 py-3 sm:py-4 shadow-soft' 
           : 'py-4 sm:py-6'
+      } ${
+        mobileMenuOpen 
+          ? '' 
+          : scrolled 
+            ? 'backdrop-blur-modern' 
+            : ''
       }`}
+      style={mobileMenuOpen ? {
+        backgroundColor: 'rgb(250, 248, 244)',
+        backdropFilter: 'blur(20px) saturate(180%)',
+        WebkitBackdropFilter: 'blur(20px) saturate(180%)',
+      } : {}}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
