@@ -12,20 +12,26 @@ export default function AboutPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
+            className="max-w-4xl"
           >
-            <h1 className="font-display text-6xl md:text-8xl font-bold mb-8">
-              About <span className="bg-gradient-to-r from-primary-400 to-accent-orange bg-clip-text text-transparent">Us</span>
+            <p className="text-white/40 text-xs font-light uppercase tracking-[0.2em] mb-6">
+              About
+            </p>
+            <h1 className="font-display text-5xl md:text-7xl font-light mb-12 leading-tight">
+              About <span className="text-white/90">Us</span>
             </h1>
-            <p className="text-xl text-gray-400 max-w-3xl mb-8">
-              Inscribe Architects was founded in 2001 by Shelly Kakkar with a vision 
-              to redefine architectural excellence in India.
-            </p>
-            <p className="text-lg text-gray-400 max-w-3xl">
-              Over the past 23+ years, we have successfully completed over 200 projects, 
-              ranging from individual residences to large commercial complexes. Our approach 
-              blends contemporary aesthetics with functional excellence, always keeping our 
-              clients' needs at the forefront.
-            </p>
+            <div className="space-y-6">
+              <p className="text-base md:text-lg text-white/50 font-light leading-relaxed">
+                Inscribe Architects was founded in 2001 by Shelly Kakkar with a vision 
+                to redefine architectural excellence in India.
+              </p>
+              <p className="text-base md:text-lg text-white/50 font-light leading-relaxed">
+                Over the past 23+ years, we have successfully completed over 200 projects, 
+                ranging from individual residences to large commercial complexes. Our approach 
+                blends contemporary aesthetics with functional excellence, always keeping our 
+                clients' needs at the forefront.
+              </p>
+            </div>
           </motion.div>
         </div>
       </div>

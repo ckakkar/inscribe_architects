@@ -48,7 +48,7 @@ export function CustomCursor() {
     <>
       {/* Main Cursor Dot */}
       <motion.div
-        className="fixed top-0 left-0 w-4 h-4 bg-primary-500 rounded-full pointer-events-none z-[9999] mix-blend-difference"
+        className="fixed top-0 left-0 w-1 h-1 bg-white rounded-full pointer-events-none z-[9999] mix-blend-difference"
         style={{
           translateX: cursorXSpring,
           translateY: cursorYSpring,
@@ -58,13 +58,13 @@ export function CustomCursor() {
       
       {/* Cursor Ring */}
       <motion.div
-        className="fixed top-0 left-0 w-8 h-8 border-2 border-primary-500/50 rounded-full pointer-events-none z-[9998]"
+        className="fixed top-0 left-0 w-8 h-8 border border-white/30 rounded-full pointer-events-none z-[9998]"
         style={{
           translateX: cursorXSpring,
           translateY: cursorYSpring,
           x: -16,
           y: -16,
-          scale: isPointer ? 2 : 1,
+          scale: isPointer ? 1.5 : 1,
         }}
       />
     </>

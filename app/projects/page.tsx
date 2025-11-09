@@ -4,7 +4,6 @@ import { PageTransition } from '@/components/layout/page-transition'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
 import { projects } from '@/lib/constants'
-import { Card } from '@/components/ui/card'
 
 export default function ProjectsPage() {
   return (
@@ -15,44 +14,44 @@ export default function ProjectsPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="mb-16"
+            className="mb-20"
           >
-            <h1 className="font-display text-6xl md:text-8xl font-bold mb-8">
-              Our <span className="bg-gradient-to-r from-primary-400 to-accent-orange bg-clip-text text-transparent">Projects</span>
+            <p className="text-white/40 text-xs font-light uppercase tracking-[0.2em] mb-6">
+              Portfolio
+            </p>
+            <h1 className="font-display text-5xl md:text-7xl font-light mb-6 leading-tight">
+              Our <span className="text-white/90">Projects</span>
             </h1>
-            <p className="text-xl text-gray-400 max-w-3xl">
+            <p className="text-base md:text-lg text-white/50 font-light max-w-2xl">
               Explore our collection of innovative architectural masterpieces.
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {projects.map((project, index) => (
               <motion.div
                 key={project.id}
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1, duration: 0.6 }}
+                className="group relative overflow-hidden aspect-[4/5]"
               >
-                <Card className="overflow-hidden p-0 group">
-                  <div className="relative h-80">
-                    <Image
-                      src={project.image}
-                      alt={project.title}
-                      fill
-                      className="object-cover group-hover:scale-110 transition-transform duration-500"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                    <div className="absolute inset-0 p-6 flex flex-col justify-end opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <span className="text-primary-400 text-sm font-medium mb-2">
-                        {project.category}
-                      </span>
-                      <h3 className="text-2xl font-bold mb-2">{project.title}</h3>
-                      <p className="text-gray-300 text-sm">
-                        {project.location} • {project.year}
-                      </p>
-                    </div>
-                  </div>
-                </Card>
+                <Image
+                  src={project.image}
+                  alt={project.title}
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-700"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="absolute inset-0 p-6 flex flex-col justify-end opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                  <span className="text-white/40 text-xs font-light uppercase tracking-wider mb-2">
+                    {project.category}
+                  </span>
+                  <h3 className="text-xl font-light mb-1 text-white/90">{project.title}</h3>
+                  <p className="text-white/40 text-xs font-light">
+                    {project.location} • {project.year}
+                  </p>
+                </div>
               </motion.div>
             ))}
           </div>

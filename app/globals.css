@@ -9,11 +9,15 @@
   }
 
   body {
-    @apply bg-black text-white antialiased;
+    @apply bg-[#0a0a0a] text-white antialiased;
   }
 
   html {
     scroll-behavior: smooth;
+  }
+
+  * {
+    @apply transition-colors duration-200;
   }
 }
 
@@ -37,14 +41,14 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-gradient-to-b from-primary-500 to-accent-orange rounded-full;
+  @apply bg-white/20 rounded-full;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  @apply bg-primary-600;
+  @apply bg-white/30;
 }
 
 /* Selection */
 ::selection {
-  @apply bg-primary-500 text-white;
+  @apply bg-white/20 text-white;
 }

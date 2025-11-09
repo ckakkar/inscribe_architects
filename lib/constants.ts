@@ -8,8 +8,8 @@ export const navLinks: NavLink[] = [
 ]
 
 export const stats: Stat[] = [
-  { number: '23+', label: 'Years' },
-  { number: '200+', label: 'Projects' },
+  { number: '25+', label: 'Years' },
+  { number: '1100+', label: 'Projects' },
   { number: '100%', label: 'Satisfaction' },
   { number: '15+', label: 'Team' },
 ]
