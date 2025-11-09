@@ -37,25 +37,59 @@ export function AwardsSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 0.6, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
-                whileHover={{ y: -4 }}
-                className="p-8 border border-grey-mouse/20 hover:border-grey-mouse/40 hover:shadow-lg transition-all duration-300 bg-beige-50/30 relative group"
+                whileHover={{ y: -6, scale: 1.02 }}
+                className="p-8 border border-grey-mouse/20 hover:border-grey-mouse/50 hover:shadow-xl transition-all duration-500 bg-beige-50/30 relative group arch-reveal overflow-hidden"
               >
-                {/* Architectural Corner Brackets */}
-                <div className="absolute top-2 left-2 w-4 h-4 border-l-2 border-t-2 border-grey-mouse/20 opacity-0 group-hover:opacity-100 transition-opacity" />
-                <div className="absolute top-2 right-2 w-4 h-4 border-r-2 border-t-2 border-grey-mouse/20 opacity-0 group-hover:opacity-100 transition-opacity" />
+                {/* Animated Corner Lines */}
+                <motion.div
+                  className="absolute top-0 left-0 w-8 h-px bg-grey-mouse/30"
+                  initial={{ scaleX: 0 }}
+                  whileHover={{ scaleX: 1 }}
+                  transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                />
+                <motion.div
+                  className="absolute top-0 left-0 h-8 w-px bg-grey-mouse/30"
+                  initial={{ scaleY: 0 }}
+                  whileHover={{ scaleY: 1 }}
+                  transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                />
+                <motion.div
+                  className="absolute top-0 right-0 w-8 h-px bg-grey-mouse/30"
+                  initial={{ scaleX: 0 }}
+                  whileHover={{ scaleX: 1 }}
+                  transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                />
+                <motion.div
+                  className="absolute top-0 right-0 h-8 w-px bg-grey-mouse/30"
+                  initial={{ scaleY: 0 }}
+                  whileHover={{ scaleY: 1 }}
+                  transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                />
                 
                 <div className="flex items-start gap-4">
                   <motion.div
                     className="mt-1"
-                    whileHover={{ scale: 1.1, rotate: 5 }}
+                    whileHover={{ scale: 1.2, rotate: 10 }}
                     transition={{ duration: 0.3 }}
                   >
                     <Award className="text-grey-mouse" size={20} />
                   </motion.div>
                   <div className="flex-1">
-                    <h3 className="text-black text-base font-light mb-2">{award.title}</h3>
+                    <motion.h3
+                      className="text-black text-base font-light mb-2"
+                      whileHover={{ x: 4 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      {award.title}
+                    </motion.h3>
                     <p className="text-grey-mouse text-sm font-light mb-1">{award.organization}</p>
-                    <p className="text-grey-mouse/70 text-sm font-light">{award.year}</p>
+                    <motion.p
+                      className="text-grey-mouse/70 text-sm font-light"
+                      whileHover={{ x: 4 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      {award.year}
+                    </motion.p>
                   </div>
                 </div>
               </motion.div>

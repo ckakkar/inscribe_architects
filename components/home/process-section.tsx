@@ -42,16 +42,67 @@ export function ProcessSection() {
                   <motion.div
                     initial={{ opacity: 0, scale: 0.8 }}
                     whileInView={{ opacity: 1, scale: 1 }}
+                    whileHover={{ scale: 1.1, rotate: 5 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.5, delay: index * 0.1 + 0.2 }}
-                    className="w-16 h-16 border-2 border-grey-mouse/30 flex items-center justify-center relative group"
+                    className="w-16 h-16 border-2 border-grey-mouse/30 flex items-center justify-center relative group cursor-default"
                   >
-                    {/* Architectural Corner Indicators */}
-                    <div className="absolute top-0 left-0 w-3 h-3 border-l-2 border-t-2 border-grey-mouse/40 opacity-0 group-hover:opacity-100 transition-opacity" />
-                    <div className="absolute top-0 right-0 w-3 h-3 border-r-2 border-t-2 border-grey-mouse/40 opacity-0 group-hover:opacity-100 transition-opacity" />
-                    <div className="absolute bottom-0 left-0 w-3 h-3 border-l-2 border-b-2 border-grey-mouse/40 opacity-0 group-hover:opacity-100 transition-opacity" />
-                    <div className="absolute bottom-0 right-0 w-3 h-3 border-r-2 border-b-2 border-grey-mouse/40 opacity-0 group-hover:opacity-100 transition-opacity" />
-                    <span className="text-grey-mouse text-sm font-light relative z-10">{step.number}</span>
+                    {/* Animated Corner Lines */}
+                    <motion.div
+                      className="absolute top-0 left-0 w-4 h-px bg-grey-mouse/40"
+                      initial={{ scaleX: 0 }}
+                      whileHover={{ scaleX: 1 }}
+                      transition={{ duration: 0.3 }}
+                    />
+                    <motion.div
+                      className="absolute top-0 left-0 h-4 w-px bg-grey-mouse/40"
+                      initial={{ scaleY: 0 }}
+                      whileHover={{ scaleY: 1 }}
+                      transition={{ duration: 0.3 }}
+                    />
+                    <motion.div
+                      className="absolute top-0 right-0 w-4 h-px bg-grey-mouse/40"
+                      initial={{ scaleX: 0 }}
+                      whileHover={{ scaleX: 1 }}
+                      transition={{ duration: 0.3 }}
+                    />
+                    <motion.div
+                      className="absolute top-0 right-0 h-4 w-px bg-grey-mouse/40"
+                      initial={{ scaleY: 0 }}
+                      whileHover={{ scaleY: 1 }}
+                      transition={{ duration: 0.3 }}
+                    />
+                    <motion.div
+                      className="absolute bottom-0 left-0 w-4 h-px bg-grey-mouse/40"
+                      initial={{ scaleX: 0 }}
+                      whileHover={{ scaleX: 1 }}
+                      transition={{ duration: 0.3 }}
+                    />
+                    <motion.div
+                      className="absolute bottom-0 left-0 h-4 w-px bg-grey-mouse/40"
+                      initial={{ scaleY: 0 }}
+                      whileHover={{ scaleY: 1 }}
+                      transition={{ duration: 0.3 }}
+                    />
+                    <motion.div
+                      className="absolute bottom-0 right-0 w-4 h-px bg-grey-mouse/40"
+                      initial={{ scaleX: 0 }}
+                      whileHover={{ scaleX: 1 }}
+                      transition={{ duration: 0.3 }}
+                    />
+                    <motion.div
+                      className="absolute bottom-0 right-0 h-4 w-px bg-grey-mouse/40"
+                      initial={{ scaleY: 0 }}
+                      whileHover={{ scaleY: 1 }}
+                      transition={{ duration: 0.3 }}
+                    />
+                    <motion.span
+                      className="text-grey-mouse text-sm font-light relative z-10"
+                      whileHover={{ scale: 1.2 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      {step.number}
+                    </motion.span>
                   </motion.div>
                   {index < processSteps.length - 1 && (
                     <motion.div
@@ -68,12 +119,22 @@ export function ProcessSection() {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: index * 0.1 + 0.2 }}
-                  className="flex-1 pb-12"
+                  className="flex-1 pb-12 group/item"
                 >
-                  <h3 className="text-xl font-light text-black mb-4">{step.title}</h3>
-                  <p className="text-base text-black-soft font-light leading-relaxed">
+                  <motion.h3
+                    className="text-xl font-light text-black mb-4"
+                    whileHover={{ x: 4 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    {step.title}
+                  </motion.h3>
+                  <motion.p
+                    className="text-base text-black-soft font-light leading-relaxed"
+                    whileHover={{ x: 4 }}
+                    transition={{ duration: 0.2 }}
+                  >
                     {step.description}
-                  </p>
+                  </motion.p>
                 </motion.div>
               </motion.div>
             ))}

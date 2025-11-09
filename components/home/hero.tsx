@@ -61,13 +61,14 @@ export function Hero() {
             className="mb-20"
           >
             <p className="text-lg md:text-xl text-black-soft font-light leading-relaxed max-w-2xl mx-auto mb-6">
-              We don't just design buildings.
+              Designs that speak.
               <br />
-              <span className="text-black font-normal">We craft experiences.</span>
+              <span className="text-black font-normal">Spaces that feel.</span>
             </p>
             <p className="text-base text-grey-mouse font-light leading-relaxed max-w-xl mx-auto">
-              Award-winning architecture firm specializing in sustainable design,
-              commercial spaces, and heritage conservation across India.
+              Crafting thoughtful homes & commercial spaces since 2001.
+              <br />
+              A Ludhiana-based architecture and interior design firm.
             </p>
           </motion.div>
 
@@ -80,13 +81,26 @@ export function Hero() {
           >
             <div className="flex flex-col sm:flex-row items-center justify-center gap-12 sm:gap-16">
               <motion.div
-                className="text-center"
+                className="text-center relative"
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.6, delay: 0.8 }}
               >
-                <p className="text-3xl md:text-4xl font-light text-black mb-2">25+</p>
+                {/* Animated line decoration */}
+                <motion.div
+                  className="absolute -left-4 top-1/2 -translate-y-1/2 w-8 h-px bg-grey-mouse/20"
+                  initial={{ scaleX: 0 }}
+                  animate={{ scaleX: 1 }}
+                  transition={{ duration: 0.8, delay: 1 }}
+                />
+                <p className="text-3xl md:text-4xl font-light text-black mb-2">23+</p>
                 <p className="text-xs font-light text-grey-mouse uppercase tracking-wider">Years</p>
+                <motion.div
+                  className="absolute -right-4 top-1/2 -translate-y-1/2 w-8 h-px bg-grey-mouse/20"
+                  initial={{ scaleX: 0 }}
+                  animate={{ scaleX: 1 }}
+                  transition={{ duration: 0.8, delay: 1 }}
+                />
               </motion.div>
               <motion.div
                 className="w-px h-8 bg-grey-mouse/20 hidden sm:block"

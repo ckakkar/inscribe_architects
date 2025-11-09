@@ -48,16 +48,40 @@ export function ProjectsSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.6, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
-              whileHover={{ y: -6 }}
-              className="relative overflow-hidden aspect-[4/5] group cursor-pointer border border-grey-mouse/10 hover:border-grey-mouse/30 transition-colors"
+              whileHover={{ y: -8 }}
+              className="relative overflow-hidden aspect-[4/5] group cursor-pointer border border-grey-mouse/10 hover:border-grey-mouse/40 transition-all duration-500 arch-reveal"
             >
-              {/* Architectural Corner Indicators */}
-              <div className="absolute top-2 left-2 w-3 h-3 border-l border-t border-beige-100/30 z-10 opacity-0 group-hover:opacity-100 transition-opacity" />
-              <div className="absolute top-2 right-2 w-3 h-3 border-r border-t border-beige-100/30 z-10 opacity-0 group-hover:opacity-100 transition-opacity" />
+              {/* Animated Corner Lines */}
+              <motion.div
+                className="absolute top-0 left-0 w-8 h-px bg-grey-mouse/40 z-20"
+                initial={{ scaleX: 0 }}
+                whileHover={{ scaleX: 1 }}
+                transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+              />
+              <motion.div
+                className="absolute top-0 left-0 h-8 w-px bg-grey-mouse/40 z-20"
+                initial={{ scaleY: 0 }}
+                whileHover={{ scaleY: 1 }}
+                transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+              />
+              <motion.div
+                className="absolute top-0 right-0 w-8 h-px bg-grey-mouse/40 z-20"
+                initial={{ scaleX: 0 }}
+                whileHover={{ scaleX: 1 }}
+                transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+              />
+              <motion.div
+                className="absolute top-0 right-0 h-8 w-px bg-grey-mouse/40 z-20"
+                initial={{ scaleY: 0 }}
+                whileHover={{ scaleY: 1 }}
+                transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+              />
+              
+              {/* Image with reveal effect */}
               <motion.div
                 className="absolute inset-0"
-                whileHover={{ scale: 1.03 }}
-                transition={{ duration: 0.5 }}
+                whileHover={{ scale: 1.05 }}
+                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
               >
                 <Image
                   src={project.image}
@@ -66,28 +90,54 @@ export function ProjectsSection() {
                   className="object-cover"
                 />
               </motion.div>
+              
+              {/* Gradient overlay with animation */}
               <motion.div
-                className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"
-                initial={{ opacity: 0 }}
+                className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"
+                initial={{ opacity: 0.3 }}
                 whileHover={{ opacity: 1 }}
                 transition={{ duration: 0.4 }}
               />
+              
+              {/* Content reveal */}
               <motion.div
                 className="absolute inset-0 p-6 flex flex-col justify-end"
-                initial={{ opacity: 0, y: 10 }}
+                initial={{ opacity: 0, y: 20 }}
                 whileHover={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: 0.1 }}
+                transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
               >
-                <span className="text-beige-100/80 text-xs font-light uppercase tracking-wider mb-2">
+                <motion.span
+                  className="text-beige-100/80 text-xs font-light uppercase tracking-wider mb-2"
+                  initial={{ x: -20, opacity: 0 }}
+                  whileHover={{ x: 0, opacity: 1 }}
+                  transition={{ duration: 0.4, delay: 0.1 }}
+                >
                   {project.category}
-                </span>
-                <h3 className="text-xl font-light mb-2 text-beige-100">{project.title}</h3>
-                <p className="text-sm text-beige-100/80 font-light mb-3">
+                </motion.span>
+                <motion.h3
+                  className="text-xl font-light mb-2 text-beige-100"
+                  initial={{ x: -20, opacity: 0 }}
+                  whileHover={{ x: 0, opacity: 1 }}
+                  transition={{ duration: 0.4, delay: 0.15 }}
+                >
+                  {project.title}
+                </motion.h3>
+                <motion.p
+                  className="text-sm text-beige-100/80 font-light mb-3"
+                  initial={{ x: -20, opacity: 0 }}
+                  whileHover={{ x: 0, opacity: 1 }}
+                  transition={{ duration: 0.4, delay: 0.2 }}
+                >
                   {project.location} • {project.year}
-                </p>
-                <p className="text-sm text-beige-100/90 font-light leading-relaxed line-clamp-2">
+                </motion.p>
+                <motion.p
+                  className="text-sm text-beige-100/90 font-light leading-relaxed line-clamp-2"
+                  initial={{ x: -20, opacity: 0 }}
+                  whileHover={{ x: 0, opacity: 1 }}
+                  transition={{ duration: 0.4, delay: 0.25 }}
+                >
                   {project.description}
-                </p>
+                </motion.p>
               </motion.div>
             </motion.div>
           ))}

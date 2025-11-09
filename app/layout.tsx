@@ -20,9 +20,9 @@ const spaceGrotesk = Space_Grotesk({
 })
 
 export const metadata: Metadata = {
-  title: 'Inscribe Architects - Award Winning Architecture Firm | 25+ Years of Excellence',
-  description: 'Leading architecture firm in India specializing in commercial, residential, and heritage conservation projects. Over 1,100 completed projects with sustainable design excellence.',
-  keywords: 'architecture, architectural design, commercial architecture, residential design, heritage conservation, sustainable design, India architects',
+  title: 'Inscribe Architects - Architecture & Interior Design | Ludhiana, Punjab | 23+ Years',
+  description: 'Leading architecture and interior design firm in Ludhiana, Punjab. Founded in 2001 by Shelly Kakkar. Over 1,100 completed projects including residential, commercial, and institutional designs. Specializing in integrated architectural and interior solutions.',
+  keywords: 'architect in Ludhiana, Ludhiana architecture firm, residential architect Ludhiana, interior designer Ludhiana, commercial architecture Ludhiana, architecture firm Punjab, Shelly Kakkar architect',
 }
 
 export default function RootLayout({

@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { stats } from '@/lib/constants'
+import { AnimatedCounter } from '@/components/shared/animated-counter'
 
 export function AboutSection() {
   return (
@@ -53,10 +54,10 @@ export function AboutSection() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-lg md:text-xl text-black-soft font-light leading-relaxed mb-8"
           >
-            Since 2001, Inscribe Architects has been creating innovative,
-            sustainable architectural designs that transform spaces and inspire
-            communities. Our approach blends contemporary aesthetics with
-            functional excellence.
+            Since 2001, Inscribe Architects has been creating thoughtful architectural
+            and interior designs that blend practical design thinking with artistic
+            sensibility. Based in Ludhiana, Punjab, we have completed over 1,100 projects
+            ranging from private homes to commercial and institutional environments.
           </motion.p>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -65,10 +66,10 @@ export function AboutSection() {
             transition={{ duration: 0.8, delay: 0.3 }}
             className="text-base text-grey-mouse font-light leading-relaxed"
           >
-            We specialize in commercial, residential, and heritage conservation projects,
-            with a strong commitment to sustainable design practices and environmental
-            responsibility. Our team of experienced architects and designers work closely
-            with clients to deliver exceptional results that exceed expectations.
+            Our work emphasizes function, aesthetics, and contextual detailing. We specialize
+            in residential and commercial architecture, interior design, 3D visualization,
+            and turnkey project execution. Our team works closely with clients to deliver
+            exceptional results that tell their own story through form, light, and materiality.
           </motion.p>
         </motion.div>
 
@@ -81,11 +82,34 @@ export function AboutSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.6, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
-              className="text-center py-12 border-b border-grey-mouse/20 relative group"
+              whileHover={{ y: -4, scale: 1.05 }}
+              className="text-center py-12 border-b border-grey-mouse/20 relative group cursor-default"
             >
-              {/* Architectural Corner Markers */}
-              <div className="absolute top-0 left-0 w-4 h-4 border-l border-t border-grey-mouse/20 opacity-0 group-hover:opacity-100 transition-opacity" />
-              <div className="absolute top-0 right-0 w-4 h-4 border-r border-t border-grey-mouse/20 opacity-0 group-hover:opacity-100 transition-opacity" />
+              {/* Animated Corner Lines */}
+              <motion.div
+                className="absolute top-0 left-0 w-6 h-px bg-grey-mouse/30"
+                initial={{ scaleX: 0 }}
+                whileHover={{ scaleX: 1 }}
+                transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+              />
+              <motion.div
+                className="absolute top-0 left-0 h-6 w-px bg-grey-mouse/30"
+                initial={{ scaleY: 0 }}
+                whileHover={{ scaleY: 1 }}
+                transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+              />
+              <motion.div
+                className="absolute top-0 right-0 w-6 h-px bg-grey-mouse/30"
+                initial={{ scaleX: 0 }}
+                whileHover={{ scaleX: 1 }}
+                transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+              />
+              <motion.div
+                className="absolute top-0 right-0 h-6 w-px bg-grey-mouse/30"
+                initial={{ scaleY: 0 }}
+                whileHover={{ scaleY: 1 }}
+                transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+              />
               
               <motion.h3
                 initial={{ opacity: 0, scale: 0.9 }}
@@ -94,9 +118,15 @@ export function AboutSection() {
                 transition={{ duration: 0.5, delay: index * 0.1 + 0.2 }}
                 className="text-4xl lg:text-5xl font-light text-black mb-3"
               >
-                {stat.number}
+                <AnimatedCounter value={stat.number} duration={2} />
               </motion.h3>
-              <p className="text-grey-mouse text-xs font-light uppercase tracking-wider">{stat.label}</p>
+              <motion.p
+                className="text-grey-mouse text-xs font-light uppercase tracking-wider"
+                whileHover={{ x: 2 }}
+                transition={{ duration: 0.2 }}
+              >
+                {stat.label}
+              </motion.p>
             </motion.div>
           ))}
         </div>

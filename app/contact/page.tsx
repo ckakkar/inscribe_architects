@@ -172,7 +172,7 @@ export default function ContactPage() {
                       onFocus={() => setFocused('message')}
                       onBlur={() => setFocused(null)}
                       rows={6}
-                      className="w-full pt-6 pb-3 px-0 bg-transparent border-0 border-b border-white/10 focus:border-white/30 focus:outline-none transition-colors resize-none text-white/80 font-light placeholder-transparent"
+                      className="w-full pt-6 pb-3 px-0 bg-transparent border-0 border-b border-grey-mouse/30 focus:border-grey-mouse/60 focus:outline-none transition-colors resize-none text-black font-light placeholder-transparent"
                       required
                     />
                   </div>

@@ -23,7 +23,7 @@ export default function ProjectsPage() {
               Our <span className="text-black">Projects</span>
             </h1>
             <p className="text-lg md:text-xl text-black-soft font-light max-w-2xl leading-relaxed">
-              Explore our collection of innovative architectural masterpieces.
+              Explore our portfolio of over 1,100 completed projects across residential, commercial, and institutional sectors in Ludhiana, Punjab, and beyond.
             </p>
           </motion.div>
 

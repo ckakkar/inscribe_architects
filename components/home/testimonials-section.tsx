@@ -37,35 +37,81 @@ export function TestimonialsSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 0.6, delay: index * 0.15, ease: [0.22, 1, 0.36, 1] }}
-                whileHover={{ y: -4 }}
-                className="p-10 border border-grey-mouse/20 hover:border-grey-mouse/40 hover:shadow-lg transition-all duration-300 bg-beige-50/30 relative group"
+                whileHover={{ y: -6, scale: 1.02 }}
+                className="p-10 border border-grey-mouse/20 hover:border-grey-mouse/50 hover:shadow-xl transition-all duration-500 bg-beige-50/30 relative group arch-reveal overflow-hidden"
               >
-                {/* Architectural Corner Markers */}
-                <div className="absolute top-3 left-3 w-4 h-4 border-l border-t border-grey-mouse/20 opacity-0 group-hover:opacity-100 transition-opacity" />
-                <div className="absolute top-3 right-3 w-4 h-4 border-r border-t border-grey-mouse/20 opacity-0 group-hover:opacity-100 transition-opacity" />
+                {/* Animated Corner Lines */}
+                <motion.div
+                  className="absolute top-0 left-0 w-10 h-px bg-grey-mouse/30"
+                  initial={{ scaleX: 0 }}
+                  whileHover={{ scaleX: 1 }}
+                  transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                />
+                <motion.div
+                  className="absolute top-0 left-0 h-10 w-px bg-grey-mouse/30"
+                  initial={{ scaleY: 0 }}
+                  whileHover={{ scaleY: 1 }}
+                  transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                />
+                <motion.div
+                  className="absolute top-0 right-0 w-10 h-px bg-grey-mouse/30"
+                  initial={{ scaleX: 0 }}
+                  whileHover={{ scaleX: 1 }}
+                  transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                />
+                <motion.div
+                  className="absolute top-0 right-0 h-10 w-px bg-grey-mouse/30"
+                  initial={{ scaleY: 0 }}
+                  whileHover={{ scaleY: 1 }}
+                  transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                />
                 
                 <motion.div
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
+                  initial={{ opacity: 0, scale: 0.9, rotate: -5 }}
+                  whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
+                  whileHover={{ scale: 1.1, rotate: 5 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.15 + 0.2 }}
                 >
                   <Quote className="text-grey-mouse/30 mb-6" size={24} />
                 </motion.div>
-                <p className="text-base text-black-soft font-light leading-relaxed mb-8">
+                <motion.p
+                  className="text-base text-black-soft font-light leading-relaxed mb-8"
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  whileHover={{ x: 4 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.15 + 0.3 }}
+                >
                   "{testimonial.content}"
-                </p>
-                <div className="border-t border-grey-mouse/20 pt-6">
-                  <p className="text-base font-light mb-2 text-black">{testimonial.name}</p>
+                </motion.p>
+                <motion.div
+                  className="border-t border-grey-mouse/20 pt-6"
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.15 + 0.4 }}
+                >
+                  <motion.p
+                    className="text-base font-light mb-2 text-black"
+                    whileHover={{ x: 4 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    {testimonial.name}
+                  </motion.p>
                   <p className="text-sm text-grey-mouse font-light mb-2">
                     {testimonial.role}, {testimonial.company}
                   </p>
                   {testimonial.project && (
-                    <p className="text-grey-mouse/70 text-xs font-light uppercase tracking-wider">
+                    <motion.p
+                      className="text-grey-mouse/70 text-xs font-light uppercase tracking-wider"
+                      whileHover={{ x: 4 }}
+                      transition={{ duration: 0.2 }}
+                    >
                       {testimonial.project}
-                    </p>
+                    </motion.p>
                   )}
-                </div>
+                </motion.div>
               </motion.div>
             ))}
           </div>

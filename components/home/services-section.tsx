@@ -38,23 +38,88 @@ export function ServicesSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.6, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
-              whileHover={{ y: -4 }}
-              className="h-full p-10 border border-grey-mouse/20 hover:border-grey-mouse/40 hover:shadow-lg transition-all duration-300 bg-beige-50/30 relative group"
+              whileHover={{ y: -6, scale: 1.02 }}
+              className="h-full p-10 border border-grey-mouse/20 hover:border-grey-mouse/50 hover:shadow-xl transition-all duration-500 bg-beige-50/30 relative group arch-border-draw overflow-hidden"
             >
-              {/* Architectural Corner Brackets */}
-              <div className="absolute top-4 left-4 w-6 h-6 border-l-2 border-t-2 border-grey-mouse/20 opacity-0 group-hover:opacity-100 transition-opacity" />
-              <div className="absolute top-4 right-4 w-6 h-6 border-r-2 border-t-2 border-grey-mouse/20 opacity-0 group-hover:opacity-100 transition-opacity" />
-              <div className="absolute bottom-4 left-4 w-6 h-6 border-l-2 border-b-2 border-grey-mouse/20 opacity-0 group-hover:opacity-100 transition-opacity" />
-              <div className="absolute bottom-4 right-4 w-6 h-6 border-r-2 border-b-2 border-grey-mouse/20 opacity-0 group-hover:opacity-100 transition-opacity" />
+              {/* Animated Corner Lines */}
+              <motion.div
+                className="absolute top-0 left-0 w-12 h-px bg-grey-mouse/30"
+                initial={{ scaleX: 0 }}
+                whileHover={{ scaleX: 1 }}
+                transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+              />
+              <motion.div
+                className="absolute top-0 left-0 h-12 w-px bg-grey-mouse/30"
+                initial={{ scaleY: 0 }}
+                whileHover={{ scaleY: 1 }}
+                transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+              />
+              <motion.div
+                className="absolute top-0 right-0 w-12 h-px bg-grey-mouse/30"
+                initial={{ scaleX: 0 }}
+                whileHover={{ scaleX: 1 }}
+                transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+              />
+              <motion.div
+                className="absolute top-0 right-0 h-12 w-px bg-grey-mouse/30"
+                initial={{ scaleY: 0 }}
+                whileHover={{ scaleY: 1 }}
+                transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+              />
+              <motion.div
+                className="absolute bottom-0 left-0 w-12 h-px bg-grey-mouse/30"
+                initial={{ scaleX: 0 }}
+                whileHover={{ scaleX: 1 }}
+                transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+              />
+              <motion.div
+                className="absolute bottom-0 left-0 h-12 w-px bg-grey-mouse/30"
+                initial={{ scaleY: 0 }}
+                whileHover={{ scaleY: 1 }}
+                transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+              />
+              <motion.div
+                className="absolute bottom-0 right-0 w-12 h-px bg-grey-mouse/30"
+                initial={{ scaleX: 0 }}
+                whileHover={{ scaleX: 1 }}
+                transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+              />
+              <motion.div
+                className="absolute bottom-0 right-0 h-12 w-px bg-grey-mouse/30"
+                initial={{ scaleY: 0 }}
+                whileHover={{ scaleY: 1 }}
+                transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+              />
+              
+              {/* Diagonal line on hover */}
+              <motion.div
+                className="absolute inset-0 pointer-events-none"
+                initial={{ opacity: 0 }}
+                whileHover={{ opacity: 1 }}
+                transition={{ duration: 0.3 }}
+              >
+                <motion.div
+                  className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-grey-mouse/20 to-transparent"
+                  initial={{ x: '-100%' }}
+                  whileHover={{ x: '100%' }}
+                  transition={{ duration: 0.8, ease: 'easeInOut' }}
+                />
+              </motion.div>
               
               <motion.div
                 className="text-4xl mb-6 opacity-30"
-                whileHover={{ opacity: 0.4 }}
-                transition={{ duration: 0.3 }}
+                whileHover={{ opacity: 0.5, scale: 1.1, rotate: 5 }}
+                transition={{ duration: 0.4 }}
               >
                 {service.icon}
               </motion.div>
-              <h3 className="text-xl font-light mb-4 text-black">{service.title}</h3>
+              <motion.h3
+                className="text-xl font-light mb-4 text-black"
+                whileHover={{ x: 4 }}
+                transition={{ duration: 0.3 }}
+              >
+                {service.title}
+              </motion.h3>
               <p className="text-base text-grey-mouse font-light mb-6 leading-relaxed">{service.description}</p>
               <ul className="space-y-2.5">
                 {service.features.map((feature, idx) => (
@@ -64,9 +129,14 @@ export function ServicesSection() {
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.4, delay: index * 0.1 + idx * 0.05 }}
-                    className="flex items-center gap-3 text-base text-black-soft font-light"
+                    whileHover={{ x: 4 }}
+                    className="flex items-center gap-3 text-base text-black-soft font-light group/item"
                   >
-                    <div className="w-1 h-1 rounded-full bg-grey-mouse/50 flex-shrink-0" />
+                    <motion.div
+                      className="w-1 h-1 rounded-full bg-grey-mouse/50 flex-shrink-0"
+                      whileHover={{ scale: 1.5, backgroundColor: 'rgba(139, 139, 122, 0.8)' }}
+                      transition={{ duration: 0.2 }}
+                    />
                     <span>{feature}</span>
                   </motion.li>
                 ))}

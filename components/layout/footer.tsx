@@ -18,7 +18,7 @@ export function Footer() {
               </h3>
             </Link>
             <p className="text-grey-mouse text-sm font-light leading-relaxed">
-              Creating innovative architectural designs since 2001
+              Crafting thoughtful homes & commercial spaces since 2001. Based in Ludhiana, Punjab.
             </p>
           </div>
 
@@ -42,10 +42,10 @@ export function Footer() {
           <div>
             <h4 className="font-light text-sm mb-4 uppercase tracking-wider text-grey-mouse">Services</h4>
             <nav className="flex flex-col gap-3">
+              <span className="text-grey-mouse text-sm font-light">Residential Architecture</span>
               <span className="text-grey-mouse text-sm font-light">Commercial Architecture</span>
-              <span className="text-grey-mouse text-sm font-light">Residential Design</span>
-              <span className="text-grey-mouse text-sm font-light">Heritage Conservation</span>
-              <span className="text-grey-mouse text-sm font-light">Urban Planning</span>
+              <span className="text-grey-mouse text-sm font-light">Interior Design</span>
+              <span className="text-grey-mouse text-sm font-light">3D Visualization</span>
             </nav>
           </div>
 
