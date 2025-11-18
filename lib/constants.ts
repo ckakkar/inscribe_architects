@@ -2,14 +2,14 @@ import { NavLink, Stat, Service, Project, Award, Testimonial, ProcessStep } from
 
 export const navLinks: NavLink[] = [
   { name: 'Home', href: '/' },
-  { name: 'About', href: '/about' },
-  { name: 'Projects', href: '/projects' },
+  { name: 'Studio', href: '/about' },
+  { name: 'Projekts', href: '/projects' },
   { name: 'Contact', href: '/contact' },
 ]
 
 export const stats: Stat[] = [
   { number: '23+', label: 'Years' },
-  { number: '1100+', label: 'Projects' },
+  { number: '1100+', label: 'Projekts' },
   { number: '100%', label: 'Satisfaction' },
   { number: '12+', label: 'Team' },
 ]

@@ -56,7 +56,7 @@ export function Header() {
       transition={{ duration: 0.5, ease: "easeOut" }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? 'bg-beige-100/95 backdrop-blur-md border-b border-grey-mouse/10 py-3'
+          ? 'bg-dutch-white/95 backdrop-blur-md border-b border-umber/10 py-3'
           : 'bg-transparent py-4'
       }`}
     >
@@ -69,8 +69,8 @@ export function Header() {
             onClick={() => setMobileMenuOpen(false)}
           >
             <h1 className="font-display text-lg sm:text-xl font-light tracking-[0.15em]">
-              <span className="text-black">INSCRIBE</span>
-              <span className="text-grey-mouse/60 hidden sm:inline"> ARCHITECTS</span>
+              <span className="text-umber">INSCRIBE</span>
+              <span className="text-umber/70 hidden sm:inline"> ARCHITECTS</span>
             </h1>
           </Link>
 
@@ -82,15 +82,15 @@ export function Header() {
                 href={link.href}
                 className={`text-xs font-light transition-colors duration-300 uppercase tracking-[0.15em] relative ${
                   pathname === link.href 
-                    ? 'text-black' 
-                    : 'text-grey-mouse/80 hover:text-black'
+                    ? 'text-umber' 
+                    : 'text-umber/75 hover:text-umber'
                 }`}
               >
                 {link.name}
                 {pathname === link.href && (
                   <motion.div
                     layoutId="activeNav"
-                    className="absolute -bottom-1 left-0 right-0 h-px bg-black"
+                    className="absolute -bottom-1 left-0 right-0 h-px bg-umber"
                     transition={{ type: "spring", stiffness: 300, damping: 30 }}
                   />
                 )}
@@ -101,7 +101,7 @@ export function Header() {
           {/* Mobile Menu Button - Minimal */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden p-2 -mr-2 text-grey-mouse/70 hover:text-black transition-colors relative z-50"
+            className="lg:hidden p-2 -mr-2 text-umber/75 hover:text-umber transition-colors relative z-50"
             aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
             aria-expanded={mobileMenuOpen}
           >
@@ -125,7 +125,7 @@ export function Header() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setMobileMenuOpen(false)}
-              className="lg:hidden fixed inset-0 bg-black/20 backdrop-blur-sm z-40"
+              className="lg:hidden fixed inset-0 bg-umber/20 backdrop-blur-sm z-40"
               transition={{ duration: 0.2 }}
             />
             
@@ -135,17 +135,17 @@ export function Header() {
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: "spring", damping: 30, stiffness: 300 }}
-              className="lg:hidden fixed top-0 right-0 bottom-0 w-80 max-w-[85vw] bg-beige-100 z-50 shadow-2xl"
+              className="lg:hidden fixed top-0 right-0 bottom-0 w-80 max-w-[85vw] bg-dutch-white z-50 shadow-2xl"
             >
               <div className="h-full flex flex-col">
                 {/* Menu Header */}
-                <div className="flex items-center justify-between p-6 border-b border-grey-mouse/10">
-                  <h2 className="font-display text-sm font-light tracking-[0.15em] text-grey-mouse/60 uppercase">
+                <div className="flex items-center justify-between p-6 border-b border-umber/10">
+                  <h2 className="font-display text-sm font-light tracking-[0.15em] text-umber/70 uppercase">
                     Menu
                   </h2>
                   <button
                     onClick={() => setMobileMenuOpen(false)}
-                    className="p-2 -mr-2 text-grey-mouse/70 hover:text-black transition-colors"
+                    className="p-2 -mr-2 text-umber/75 hover:text-umber transition-colors"
                     aria-label="Close menu"
                   >
                     <X size={18} />
@@ -171,14 +171,14 @@ export function Header() {
                           onClick={() => setMobileMenuOpen(false)}
                         className={`block py-3 text-base font-light transition-colors uppercase tracking-[0.15em] ${
                           pathname === link.href
-                            ? 'text-black'
-                            : 'text-grey-mouse/80 hover:text-black'
+                            ? 'text-umber'
+                            : 'text-umber/75 hover:text-umber'
                         }`}
                         >
                           {link.name}
                         </Link>
                         {index < navLinks.length - 1 && (
-                          <div className="h-px bg-grey-mouse/5 my-2" />
+                          <div className="h-px bg-umber/5 my-2" />
                         )}
                       </motion.div>
                     ))}
@@ -186,8 +186,8 @@ export function Header() {
                 </nav>
 
                 {/* Menu Footer */}
-                <div className="p-6 border-t border-grey-mouse/10">
-                  <p className="text-xs text-grey-mouse/50 font-light">
+                <div className="p-6 border-t border-umber/10">
+                  <p className="text-xs text-umber/60 font-light">
                     © 2024 Inscribe Architects
                   </p>
                 </div>

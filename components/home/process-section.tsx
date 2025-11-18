@@ -6,19 +6,19 @@ import { fadeInUpViewportWithDelay } from '@/lib/utils/animations'
 
 export function ProcessSection() {
   return (
-    <section className="py-16 sm:py-24 md:py-32 border-t border-grey-mouse/20">
+    <section className="py-16 sm:py-24 md:py-32 border-t border-umber/20">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           {...fadeInUpViewportWithDelay(0)}
           className="text-center mb-12 sm:mb-16 md:mb-20"
         >
-          <p className="text-grey-mouse/70 text-xs font-light uppercase tracking-[0.15em] mb-6">
-            Our Process
+          <p className="text-umber/70 text-xs font-light uppercase tracking-[0.15em] mb-6">
+            Methodology
           </p>
-          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-light text-black">
-            How We{' '}
-            <span className="text-grey-mouse">
-              Work
+          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-light text-umber">
+            Our{' '}
+            <span className="text-umber/85">
+              Approach
             </span>
           </h2>
         </motion.div>
@@ -32,20 +32,20 @@ export function ProcessSection() {
                 className="flex gap-4 sm:gap-6 md:gap-8 lg:gap-12"
               >
                 <div className="flex-shrink-0">
-                  <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 border-2 border-grey-mouse/30 flex items-center justify-center relative">
-                    <span className="text-grey-mouse text-xs sm:text-sm font-light">
+                  <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 border-2 border-umber/30 flex items-center justify-center relative">
+                    <span className="text-umber/80 text-xs sm:text-sm font-light">
                       {step.number}
                     </span>
                   </div>
                   {index < processSteps.length - 1 && (
-                    <div className="w-px h-8 sm:h-10 md:h-12 bg-grey-mouse/20 mx-auto mt-3 sm:mt-4" />
+                    <div className="w-px h-8 sm:h-10 md:h-12 bg-umber/20 mx-auto mt-3 sm:mt-4" />
                   )}
                 </div>
                 <div className="flex-1 pb-8 sm:pb-10 md:pb-12">
-                  <h3 className="text-lg sm:text-xl font-light text-black mb-3 sm:mb-4">
+                  <h3 className="text-lg sm:text-xl font-light text-umber mb-3 sm:mb-4">
                     {step.title}
                   </h3>
-                  <p className="text-sm sm:text-base text-grey-mouse/80 font-light leading-relaxed">
+                  <p className="text-sm sm:text-base text-umber/85 font-light leading-relaxed">
                     {step.description}
                   </p>
                 </div>

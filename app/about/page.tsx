@@ -14,11 +14,11 @@ export default function AboutPage() {
             {...fadeInUp}
             className="mb-8 sm:mb-10 md:mb-12"
           >
-            <p className="text-grey-mouse text-xs font-light uppercase tracking-[0.2em] mb-4 sm:mb-6">
-              About
+            <p className="text-umber/70 text-xs font-light uppercase tracking-[0.2em] mb-4 sm:mb-6">
+              Studio
             </p>
             <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-light mb-8 sm:mb-10 md:mb-12 leading-tight">
-              About <span className="text-black">Us</span>
+              The <span className="text-umber">Studio</span>
             </h1>
           </motion.div>
 
@@ -28,44 +28,44 @@ export default function AboutPage() {
               {...fadeInUpViewportWithDelay(0.1)}
               className="space-y-6 sm:space-y-8"
             >
-              <p className="text-base sm:text-lg md:text-xl text-grey-mouse/80 font-light leading-relaxed">
+              <p className="text-base sm:text-lg md:text-xl text-umber/85 font-light leading-relaxed">
                 Inscribe Architects is a Ludhiana-based architecture and interior design firm 
                 led by founder Shelly Kakkar. Since its inception in 2001, the firm has delivered 
                 diverse architectural and interior projects, blending practical design thinking 
                 with an artistic sensibility. Our portfolio spans private homes, commercial spaces, 
                 and institutional environments across Punjab and beyond.
               </p>
-              <p className="text-base sm:text-lg md:text-xl text-grey-mouse/80 font-light leading-relaxed">
-                With over 1,100 completed projects, we specialize in creating spaces that are 
+              <p className="text-base sm:text-lg md:text-xl text-umber/85 font-light leading-relaxed">
+                With over 1,100 completed projekts, we specialize in creating spaces that are 
                 not only aesthetically pleasing but also functional, sustainable, and responsive 
                 to their context. Our work emphasizes function, aesthetics, and contextual 
                 detailing, ensuring each project tells its own story through form, light, and 
                 materiality.
               </p>
-              <p className="text-base sm:text-lg md:text-xl text-grey-mouse/80 font-light leading-relaxed">
+              <p className="text-base sm:text-lg md:text-xl text-umber/85 font-light leading-relaxed">
                 Our team of experienced architects and designers brings together diverse expertise 
                 in integrated architectural and interior design. We work closely with clients, 
-                consultants, and contractors to ensure every project meets the highest standards 
+                consultants, and contractors to ensure every projekt meets the highest standards 
                 of quality and design excellence, from initial concept through turnkey execution.
               </p>
-              <div className="pt-4 sm:pt-6 border-t border-grey-mouse/20">
-                <h3 className="text-lg sm:text-xl font-light text-black mb-3 sm:mb-4">Our Approach</h3>
+              <div className="pt-4 sm:pt-6 border-t border-umber/20">
+                <h3 className="text-lg sm:text-xl font-light text-umber mb-3 sm:mb-4">Our Approach</h3>
                 <ul className="space-y-2 sm:space-y-3">
-                  <li className="flex items-start gap-2 sm:gap-3 text-sm sm:text-base text-grey-mouse/80 font-light">
-                    <span className="text-grey-mouse/60 mt-1">•</span>
-                    <span><strong className="text-black">Context-Driven Design:</strong> Each project responds thoughtfully to its unique context, climate, and cultural setting.</span>
+                  <li className="flex items-start gap-2 sm:gap-3 text-sm sm:text-base text-umber/85 font-light">
+                    <span className="text-umber/70 mt-1">•</span>
+                    <span><strong className="text-umber">Context-Driven Design:</strong> Each project responds thoughtfully to its unique context, climate, and cultural setting.</span>
                   </li>
-                  <li className="flex items-start gap-2 sm:gap-3 text-sm sm:text-base text-grey-mouse/80 font-light">
-                    <span className="text-grey-mouse/60 mt-1">•</span>
-                    <span><strong className="text-black">Client-Focused:</strong> We prioritize understanding your vision, requirements, and lifestyle to create spaces that truly serve you.</span>
+                  <li className="flex items-start gap-2 sm:gap-3 text-sm sm:text-base text-umber/85 font-light">
+                    <span className="text-umber/70 mt-1">•</span>
+                    <span><strong className="text-umber">Client-Focused:</strong> We prioritize understanding your vision, requirements, and lifestyle to create spaces that truly serve you.</span>
                   </li>
-                  <li className="flex items-start gap-2 sm:gap-3 text-sm sm:text-base text-grey-mouse/80 font-light">
-                    <span className="text-grey-mouse/60 mt-1">•</span>
-                    <span><strong className="text-black">Integrated Solutions:</strong> Seamlessly blending architecture and interior design for cohesive, complete projects.</span>
+                  <li className="flex items-start gap-2 sm:gap-3 text-sm sm:text-base text-umber/85 font-light">
+                    <span className="text-umber/70 mt-1">•</span>
+                    <span><strong className="text-umber">Integrated Solutions:</strong> Seamlessly blending architecture and interior design for cohesive, complete projects.</span>
                   </li>
-                  <li className="flex items-start gap-2 sm:gap-3 text-sm sm:text-base text-grey-mouse/80 font-light">
-                    <span className="text-grey-mouse/60 mt-1">•</span>
-                    <span><strong className="text-black">Quality Craftsmanship:</strong> Maintaining the highest standards in every aspect of our work, from design to execution.</span>
+                  <li className="flex items-start gap-2 sm:gap-3 text-sm sm:text-base text-umber/85 font-light">
+                    <span className="text-umber/70 mt-1">•</span>
+                    <span><strong className="text-umber">Quality Craftsmanship:</strong> Maintaining the highest standards in every aspect of our work, from design to execution.</span>
                   </li>
                 </ul>
               </div>
@@ -93,11 +93,11 @@ export default function AboutPage() {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </div>
               <div className="mt-4 sm:mt-6 text-center">
-                <h3 className="text-lg sm:text-xl font-light text-black mb-1">
+                <h3 className="text-lg sm:text-xl font-light text-umber mb-1">
                   Shelly Kakkar
                 </h3>
-                <p className="text-xs sm:text-sm text-grey-mouse font-light mb-2 sm:mb-3">Founder & Principal Architect</p>
-                <p className="text-xs sm:text-sm text-grey-mouse/80 font-light leading-relaxed max-w-sm mx-auto px-4 sm:px-0">
+                <p className="text-xs sm:text-sm text-umber/80 font-light mb-2 sm:mb-3">Founder & Principal Architect</p>
+                <p className="text-xs sm:text-sm text-umber/85 font-light leading-relaxed max-w-sm mx-auto px-4 sm:px-0">
                   Shelly began her architectural career with Royal Builders and later founded 
                   Inscribe Architects. With over two decades of professional experience, she 
                   leads the firm's creative and technical direction, focusing on integrated 

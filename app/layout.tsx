@@ -4,7 +4,6 @@ import './globals.css'
 import { Header } from '@/components/layout/header'
 import { Footer } from '@/components/layout/footer'
 import { CustomCursor } from '@/components/shared/cursor'
-import { SmoothScroll } from '@/components/shared/smooth-scroll'
 import { ScrollProgress } from '@/components/shared/scroll-progress'
 import { ErrorHandler } from '@/components/shared/error-handler'
 
@@ -27,7 +26,7 @@ export const metadata: Metadata = {
 }
 
 export const viewport: Viewport = {
-  themeColor: '#FAF8F4',
+  themeColor: '#F5F1E8',
   width: 'device-width',
   initialScale: 1,
   maximumScale: 5,
@@ -56,22 +55,20 @@ export default function RootLayout({
       </head>
       <body>
         <ErrorHandler />
-        <SmoothScroll>
-          <CustomCursor />
-          <ScrollProgress />
-          
-          <div className="relative min-h-screen">
-            {/* Background - Minimal */}
-            <div className="fixed inset-0 -z-10 bg-beige-100">
-              {/* Subtle grid pattern */}
-              <div className="absolute inset-0 bg-[linear-gradient(to_right,#00000001_1px,transparent_1px),linear-gradient(to_bottom,#00000001_1px,transparent_1px)] bg-[size:32px_32px] opacity-30" />
-            </div>
-
-            <Header />
-            <main id="main-content">{children}</main>
-            <Footer />
+        <CustomCursor />
+        <ScrollProgress />
+        
+        <div className="relative min-h-screen">
+          {/* Background - Minimal */}
+          <div className="fixed inset-0 -z-10 bg-dutch-white">
+            {/* Subtle grid pattern */}
+            <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(99,81,71,0.01)_1px,transparent_1px),linear-gradient(to_bottom,rgba(99,81,71,0.01)_1px,transparent_1px)] bg-[size:32px_32px] opacity-30" />
           </div>
-        </SmoothScroll>
+
+          <Header />
+          <main id="main-content">{children}</main>
+          <Footer />
+        </div>
       </body>
     </html>
   )

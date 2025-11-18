@@ -15,14 +15,14 @@ export default function ProjectsPage() {
             {...fadeInUp}
             className="mb-12 sm:mb-16 md:mb-20"
           >
-            <p className="text-grey-mouse/70 text-xs font-light uppercase tracking-[0.15em] mb-4 sm:mb-6">
+            <p className="text-umber/70 text-xs font-light uppercase tracking-[0.15em] mb-4 sm:mb-6">
               Portfolio
             </p>
             <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-light mb-4 sm:mb-6 leading-tight">
-              Our <span className="text-black">Projects</span>
+              Our <span className="text-umber">Projekts</span>
             </h1>
-            <p className="text-base sm:text-lg md:text-xl text-grey-mouse/80 font-light max-w-2xl leading-relaxed">
-              Explore our portfolio of over 1,100 completed projects across residential, commercial, and institutional sectors in Ludhiana, Punjab, and beyond.
+            <p className="text-base sm:text-lg md:text-xl text-umber/85 font-light max-w-2xl leading-relaxed">
+              Explore our portfolio of over 1,100 completed projekts across residential, commercial, and institutional sectors in Ludhiana, Punjab, and beyond.
             </p>
           </motion.div>
 

@@ -34,7 +34,9 @@
   }
 
   body {
-    @apply bg-beige-100 text-black-soft antialiased;
+    background-color: #F5F1E8; /* dutch-white */
+    color: #1A1A1A; /* darker text for better contrast */
+    @apply antialiased;
     font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1;
     text-rendering: optimizeLegibility;
     line-height: 1.6;
@@ -80,7 +82,7 @@
   
   /* Improve readability for body text */
   .text-black-soft {
-    color: rgba(0, 0, 0, 0.85);
+    color: rgba(0, 0, 0, 0.92); /* increased from 0.85 for better contrast */
   }
 
   * {
@@ -135,12 +137,12 @@
   .backdrop-blur-modern {
     backdrop-filter: blur(20px) saturate(180%);
     -webkit-backdrop-filter: blur(20px) saturate(180%);
-    background-color: rgba(250, 248, 244, 0.85);
+    background-color: rgba(245, 241, 232, 0.85);
   }
 
   /* Header with menu open - ensure solid background */
   header[data-menu-open="true"] {
-    background-color: rgb(250, 248, 244) !important;
+    background-color: rgb(245, 241, 232) !important;
     backdrop-filter: blur(20px) saturate(180%) !important;
     -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
   }
@@ -165,7 +167,7 @@
     top: 50%;
     width: 40px;
     height: 1px;
-    background: linear-gradient(to right, rgba(139, 139, 122, 0.3), transparent);
+    background: linear-gradient(to right, rgba(99, 81, 71, 0.2), transparent);
   }
 
   .arch-line::after {
@@ -175,7 +177,7 @@
     top: 50%;
     width: 40px;
     height: 1px;
-    background: linear-gradient(to left, rgba(139, 139, 122, 0.3), transparent);
+    background: linear-gradient(to left, rgba(99, 81, 71, 0.2), transparent);
   }
 
   /* Animated Border Drawing */
@@ -191,7 +193,7 @@
     left: 0;
     width: 100%;
     height: 1px;
-    background: rgba(139, 139, 122, 0.2);
+    background: rgba(99, 81, 71, 0.15);
     transform: scaleX(0);
     transform-origin: left;
     transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
@@ -204,7 +206,7 @@
     right: 0;
     width: 100%;
     height: 1px;
-    background: rgba(139, 139, 122, 0.2);
+    background: rgba(99, 81, 71, 0.15);
     transform: scaleX(0);
     transform-origin: right;
     transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
@@ -406,19 +408,22 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-grey-mouse/30 rounded-full;
+  background-color: rgba(99, 81, 71, 0.3); /* umber/30 */
+  border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  @apply bg-grey-mouse/50;
+  background-color: rgba(99, 81, 71, 0.5); /* umber/50 */
 }
 
 /* Selection */
 ::selection {
-  @apply bg-black text-beige-100;
+  background-color: #635147; /* umber */
+  color: #F5F1E8; /* dutch-white */
 }
 
 /* Better focus styles */
 :focus-visible {
-  @apply outline-2 outline-offset-2 outline-grey-mouse/50;
+  outline: 2px solid rgba(99, 81, 71, 0.5); /* umber/50 */
+  outline-offset: 2px;
 }

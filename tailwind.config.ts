@@ -9,6 +9,38 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        // New Earthy Palette
+        umber: {
+          DEFAULT: '#635147',
+          light: '#7A6256',
+          dark: '#4A3D35',
+        },
+        taupe: {
+          DEFAULT: '#B8A99A',
+          light: '#D4C7BA',
+          dark: '#9B8D7F',
+        },
+        'earth-yellow': {
+          DEFAULT: '#D4A574',
+          light: '#E5B890',
+          dark: '#B8905A',
+        },
+        'dutch-white': {
+          DEFAULT: '#F5F1E8',
+          light: '#FAF8F4',
+          dark: '#EDE8DC',
+        },
+        blush: {
+          DEFAULT: '#E8C4B8',
+          light: '#F2D8CE',
+          dark: '#D4A99C',
+        },
+        terracotta: {
+          DEFAULT: '#C97D60',
+          light: '#E09A7F',
+          dark: '#B05D42',
+        },
+        // Legacy colors for compatibility
         beige: {
           50: '#FDFCFA',
           100: '#FAF8F4',
@@ -29,14 +61,15 @@ const config: Config = {
           deep: '#0F0F0F',
         },
         primary: {
-          50: '#FDFCFA',
-          100: '#FAF8F4',
-          200: '#F5F1E8',
-          300: '#EDE8DC',
-          400: '#E5DDCE',
-          500: '#D9CFBC',
-          600: '#8B8B7A',
-          700: '#6B6B5A',
+          DEFAULT: '#635147', // umber
+          50: '#F5F1E8', // dutch white
+          100: '#F5F1E8',
+          200: '#E8C4B8', // blush
+          300: '#D4A574', // earth yellow
+          400: '#C97D60', // terracotta
+          500: '#B8A99A', // taupe
+          600: '#635147', // umber
+          700: '#4A3D35',
           800: '#2C2C2C',
           900: '#1A1A1A',
         },

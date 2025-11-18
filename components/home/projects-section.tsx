@@ -17,13 +17,13 @@ export function ProjectsSection() {
           {...fadeInUpViewportWithDelay(0)}
           className="text-center mb-12 sm:mb-16 md:mb-24"
         >
-          <p className="text-grey-mouse/70 text-xs font-light uppercase tracking-[0.15em] mb-6">
+          <p className="text-umber/70 text-xs font-light uppercase tracking-[0.15em] mb-6">
             Portfolio
           </p>
-          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-light text-black">
+          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-light text-umber">
             Featured{' '}
-            <span className="text-grey-mouse">
-              Projects
+            <span className="text-umber/85">
+              Projekts
             </span>
           </h2>
         </motion.div>
@@ -33,7 +33,7 @@ export function ProjectsSection() {
             <motion.div
               key={project.id}
               {...fadeInUpViewportWithDelay(index * 0.05)}
-              className="relative overflow-hidden aspect-[4/5] group cursor-pointer border border-grey-mouse/10 hover:border-grey-mouse/30 transition-colors duration-300"
+              className="relative overflow-hidden aspect-[4/5] group cursor-pointer border border-taupe/10 hover:border-umber/30 transition-colors duration-300"
             >
               {/* Image */}
               <div className="absolute inset-0">
@@ -72,10 +72,10 @@ export function ProjectsSection() {
           className="text-center"
         >
           <Link href="/projects" className="inline-block">
-            <Button size="lg" variant="outline" className="group w-full sm:w-auto">
-              <span className="text-sm sm:text-base">View All Projects</span>
-              <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform duration-300" size={16} />
-            </Button>
+              <Button size="lg" variant="outline" className="group w-full sm:w-auto">
+                <span className="text-sm sm:text-base">View All Projekts</span>
+                <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform duration-300" size={16} />
+              </Button>
           </Link>
         </motion.div>
       </div>
