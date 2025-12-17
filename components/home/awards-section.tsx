@@ -30,18 +30,19 @@ export function AwardsSection() {
               <motion.div
                 key={award.id}
                 {...fadeInUpViewportWithDelay(index * 0.05)}
-                className="p-8 border border-umber/20 hover:border-umber/40 transition-colors duration-300 bg-dutch-white/50"
+                className="p-8 border border-umber/20 hover:border-umber/40 transition-all duration-300 bg-dutch-white/50 hover:bg-dutch-white hover:shadow-medium group"
+                whileHover={{ y: -4 }}
               >
                 <div className="flex items-start gap-4">
                   <div className="mt-1">
-                    <Award className="text-umber/80" size={20} />
+                    <Award className="text-umber/80 group-hover:text-umber transition-colors" size={20} />
                   </div>
                   <div className="flex-1">
-                    <h3 className="text-umber text-base font-light mb-2">
+                    <h3 className="text-umber text-base font-light mb-2 group-hover:text-umber-dark transition-colors">
                       {award.title}
                     </h3>
-                    <p className="text-umber/85 text-sm font-light mb-1">{award.organization}</p>
-                    <p className="text-umber/75 text-sm font-light">
+                    <p className="text-umber/85 group-hover:text-umber/90 text-sm font-light mb-1 transition-colors">{award.organization}</p>
+                    <p className="text-umber/75 group-hover:text-umber/85 text-sm font-light transition-colors">
                       {award.year}
                     </p>
                   </div>

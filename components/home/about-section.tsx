@@ -43,12 +43,13 @@ export function AboutSection() {
             <motion.div
               key={stat.label}
               {...fadeInUpViewportWithDelay(index * 0.05)}
-              className="text-center py-6 sm:py-8 md:py-12 border-b border-umber/20 relative"
+              className="text-center py-6 sm:py-8 md:py-12 border-b border-umber/20 hover:border-umber/40 relative group transition-colors duration-300"
+              whileHover={{ y: -4 }}
             >
-              <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-light text-umber mb-2 sm:mb-3">
+              <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-light text-umber mb-2 sm:mb-3 group-hover:text-umber-dark transition-colors">
                 <AnimatedCounter value={stat.number} duration={2} />
               </h3>
-              <p className="text-umber/75 text-xs font-light uppercase tracking-wider">
+              <p className="text-umber/75 group-hover:text-umber/90 text-xs font-light uppercase tracking-wider transition-colors">
                 {stat.label}
               </p>
             </motion.div>

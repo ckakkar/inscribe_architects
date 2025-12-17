@@ -29,23 +29,25 @@ export function ProcessSection() {
               <motion.div
                 key={step.id}
                 {...fadeInUpViewportWithDelay(index * 0.05)}
-                className="flex gap-4 sm:gap-6 md:gap-8 lg:gap-12"
+                className="flex gap-4 sm:gap-6 md:gap-8 lg:gap-12 group"
+                whileHover={{ x: 4 }}
+                transition={{ duration: 0.3 }}
               >
                 <div className="flex-shrink-0">
-                  <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 border-2 border-umber/30 flex items-center justify-center relative">
-                    <span className="text-umber/80 text-xs sm:text-sm font-light">
+                  <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 border-2 border-umber/30 group-hover:border-umber/50 flex items-center justify-center relative transition-colors duration-300 bg-dutch-white group-hover:bg-umber/5">
+                    <span className="text-umber/80 group-hover:text-umber text-xs sm:text-sm font-light transition-colors">
                       {step.number}
                     </span>
                   </div>
                   {index < processSteps.length - 1 && (
-                    <div className="w-px h-8 sm:h-10 md:h-12 bg-umber/20 mx-auto mt-3 sm:mt-4" />
+                    <div className="w-px h-8 sm:h-10 md:h-12 bg-umber/20 mx-auto mt-3 sm:mt-4 group-hover:bg-umber/30 transition-colors" />
                   )}
                 </div>
-                <div className="flex-1 pb-8 sm:pb-10 md:pb-12">
-                  <h3 className="text-lg sm:text-xl font-light text-umber mb-3 sm:mb-4">
+                <div className="flex-1 pb-8 sm:pb-10 md:pb-12 border-b border-umber/10 group-hover:border-umber/20 transition-colors last:border-0">
+                  <h3 className="text-lg sm:text-xl font-light text-umber mb-3 sm:mb-4 group-hover:text-umber-dark transition-colors">
                     {step.title}
                   </h3>
-                  <p className="text-sm sm:text-base text-umber/85 font-light leading-relaxed">
+                  <p className="text-sm sm:text-base text-umber/85 group-hover:text-umber/90 font-light leading-relaxed transition-colors">
                     {step.description}
                   </p>
                 </div>

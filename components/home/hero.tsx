@@ -65,11 +65,17 @@ export function Hero() {
           {/* CTA */}
           <motion.div
             {...fadeInUpViewportWithDelay(0.3)}
+            className="flex flex-col sm:flex-row items-center justify-center gap-4"
           >
             <Link href="/projects" className="inline-block">
               <Button size="lg" variant="outline" className="group touch-target w-full sm:w-auto">
                 <span className="text-sm sm:text-base">Explore Our Work</span>
                 <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform duration-300" size={16} />
+              </Button>
+            </Link>
+            <Link href="/contact" className="inline-block">
+              <Button size="lg" variant="default" className="group touch-target w-full sm:w-auto">
+                <span className="text-sm sm:text-base">Get In Touch</span>
               </Button>
             </Link>
           </motion.div>

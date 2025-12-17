@@ -33,24 +33,34 @@ export function ProjectsSection() {
             <motion.div
               key={project.id}
               {...fadeInUpViewportWithDelay(index * 0.05)}
-              className="relative overflow-hidden aspect-[4/5] group cursor-pointer border border-taupe/10 hover:border-umber/30 transition-colors duration-300"
+              className="relative overflow-hidden aspect-[4/5] group cursor-pointer border border-taupe/10 hover:border-umber/30 transition-all duration-500 hover:shadow-large"
+              whileHover={{ y: -8 }}
             >
               {/* Image */}
-              <div className="absolute inset-0">
+              <motion.div 
+                className="absolute inset-0"
+                whileHover={{ scale: 1.05 }}
+                transition={{ duration: 0.5, ease: "easeOut" }}
+              >
                 <Image
                   src={project.image}
                   alt={project.title}
                   fill
                   className="object-cover"
                 />
-              </div>
+              </motion.div>
               
               {/* Gradient overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               
               {/* Content */}
-              <div className="absolute inset-0 p-4 sm:p-6 flex flex-col justify-end opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <span className="text-beige-100/80 text-xs font-light uppercase tracking-wider mb-2">
+              <motion.div 
+                className="absolute inset-0 p-4 sm:p-6 flex flex-col justify-end opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                initial={{ y: 20 }}
+                whileHover={{ y: 0 }}
+                transition={{ duration: 0.3 }}
+              >
+                <span className="text-beige-100/90 text-xs font-light uppercase tracking-wider mb-2">
                   {project.category}
                 </span>
                 <h3 className="text-lg sm:text-xl font-light mb-1 sm:mb-2 text-beige-100">
@@ -62,7 +72,7 @@ export function ProjectsSection() {
                 <p className="text-xs sm:text-sm text-beige-100/90 font-light leading-relaxed line-clamp-2">
                   {project.description}
                 </p>
-              </div>
+              </motion.div>
             </motion.div>
           ))}
         </div>

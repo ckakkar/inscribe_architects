@@ -6,6 +6,7 @@ import { Footer } from '@/components/layout/footer'
 import { CustomCursor } from '@/components/shared/cursor'
 import { ScrollProgress } from '@/components/shared/scroll-progress'
 import { ErrorHandler } from '@/components/shared/error-handler'
+import { Chatbot } from '@/components/shared/chatbot'
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -57,6 +58,7 @@ export default function RootLayout({
         <ErrorHandler />
         <CustomCursor />
         <ScrollProgress />
+        <Chatbot />
         
         <div className="relative min-h-screen">
           {/* Background - Minimal */}

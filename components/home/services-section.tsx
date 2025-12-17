@@ -28,12 +28,13 @@ export function ServicesSection() {
             <motion.div
               key={service.id}
               {...fadeInUpViewportWithDelay(index * 0.05)}
-              className="h-full p-6 sm:p-8 md:p-10 border border-taupe/20 hover:border-umber/40 transition-colors duration-300 bg-dutch-white/50"
+              className="h-full p-6 sm:p-8 md:p-10 border border-taupe/20 hover:border-umber/40 transition-all duration-300 bg-dutch-white/50 hover:bg-dutch-white hover:shadow-medium group"
+              whileHover={{ y: -4 }}
             >
-              <div className="text-3xl sm:text-4xl mb-4 sm:mb-6 opacity-30">
+              <div className="text-3xl sm:text-4xl mb-4 sm:mb-6 opacity-30 group-hover:opacity-40 transition-opacity duration-300">
                 {service.icon}
               </div>
-              <h3 className="text-lg sm:text-xl font-light mb-3 sm:mb-4 text-umber">
+              <h3 className="text-lg sm:text-xl font-light mb-3 sm:mb-4 text-umber group-hover:text-umber-dark transition-colors">
                 {service.title}
               </h3>
               <p className="text-sm sm:text-base text-umber/85 font-light mb-4 sm:mb-6 leading-relaxed">{service.description}</p>
@@ -41,10 +42,10 @@ export function ServicesSection() {
                 {service.features.map((feature) => (
                   <li
                     key={feature}
-                    className="flex items-center gap-3 text-base text-umber/90 font-light"
+                    className="flex items-center gap-3 text-sm sm:text-base text-umber/90 font-light group-hover:text-umber transition-colors"
                   >
-                    <div className="w-1 h-1 rounded-full bg-terracotta/60 flex-shrink-0" />
-                    <span className="text-umber/85">{feature}</span>
+                    <div className="w-1.5 h-1.5 rounded-full bg-terracotta/60 flex-shrink-0 group-hover:bg-terracotta transition-colors" />
+                    <span className="text-umber/85 group-hover:text-umber">{feature}</span>
                   </li>
                 ))}
               </ul>

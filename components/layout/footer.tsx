@@ -6,7 +6,7 @@ import { contactInfo } from '@/lib/constants'
 
 export function Footer() {
   return (
-    <footer className="relative border-t border-umber/10 bg-dutch-white">
+    <footer className="relative border-t border-umber/20 bg-dutch-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-16">
           {/* Brand */}
@@ -26,13 +26,13 @@ export function Footer() {
           <div>
             <h4 className="font-light text-xs mb-6 uppercase tracking-[0.15em] text-umber/80">Navigation</h4>
             <nav className="flex flex-col gap-4">
-              <Link href="/about" className="text-umber/85 hover:text-umber transition-colors text-sm font-light">
+              <Link href="/about" className="text-umber/85 hover:text-umber transition-all duration-300 text-sm font-light hover:translate-x-1 inline-block">
                 Studio
               </Link>
-              <Link href="/projects" className="text-umber/85 hover:text-umber transition-colors text-sm font-light">
+              <Link href="/projects" className="text-umber/85 hover:text-umber transition-all duration-300 text-sm font-light hover:translate-x-1 inline-block">
                 Projekts
               </Link>
-              <Link href="/contact" className="text-umber/85 hover:text-umber transition-colors text-sm font-light">
+              <Link href="/contact" className="text-umber/85 hover:text-umber transition-all duration-300 text-sm font-light hover:translate-x-1 inline-block">
                 Contact
               </Link>
             </nav>
@@ -42,12 +42,12 @@ export function Footer() {
           <div>
             <h4 className="font-light text-xs mb-6 uppercase tracking-[0.15em] text-umber/80">Contact</h4>
             <div className="flex flex-col gap-4">
-              <a href={`tel:${contactInfo.phone}`} className="flex items-center gap-3 text-umber/85 hover:text-umber transition-colors text-sm font-light">
-                <Phone size={14} className="text-umber/75" />
+              <a href={`tel:${contactInfo.phone}`} className="flex items-center gap-3 text-umber/85 hover:text-umber transition-all duration-300 text-sm font-light group">
+                <Phone size={14} className="text-umber/75 group-hover:text-umber transition-colors" />
                 <span>{contactInfo.phone}</span>
               </a>
-              <a href={`mailto:${contactInfo.email}`} className="flex items-center gap-3 text-umber/85 hover:text-umber transition-colors text-sm font-light">
-                <Mail size={14} className="text-umber/75" />
+              <a href={`mailto:${contactInfo.email}`} className="flex items-center gap-3 text-umber/85 hover:text-umber transition-all duration-300 text-sm font-light group">
+                <Mail size={14} className="text-umber/75 group-hover:text-umber transition-colors" />
                 <span>{contactInfo.email}</span>
               </a>
               <div className="flex items-start gap-3 text-umber/85 text-sm font-light">

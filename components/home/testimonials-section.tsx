@@ -30,20 +30,21 @@ export function TestimonialsSection() {
               <motion.div
                 key={testimonial.id}
                 {...fadeInUpViewportWithDelay(index * 0.05)}
-                className="p-6 sm:p-8 md:p-10 border border-umber/20 hover:border-umber/40 transition-colors duration-300 bg-dutch-white/50"
+                className="p-6 sm:p-8 md:p-10 border border-umber/20 hover:border-umber/40 transition-all duration-300 bg-dutch-white/50 hover:bg-dutch-white hover:shadow-medium group"
+                whileHover={{ y: -4 }}
               >
                 <div>
-                  <Quote className="text-umber/30 mb-6" size={24} />
+                  <Quote className="text-umber/30 mb-6 group-hover:text-umber/40 transition-colors" size={24} />
                 </div>
-                <p className="text-sm sm:text-base text-umber/85 font-light leading-relaxed mb-6 sm:mb-8">
+                <p className="text-sm sm:text-base text-umber/85 font-light leading-relaxed mb-6 sm:mb-8 group-hover:text-umber transition-colors">
                   "{testimonial.content}"
                 </p>
-                <div className="border-t border-umber/20 pt-4 sm:pt-6">
-                  <p className="text-sm sm:text-base font-light mb-1 sm:mb-2 text-umber">
+                <div className="border-t border-umber/20 pt-4 sm:pt-6 group-hover:border-umber/30 transition-colors">
+                  <p className="text-sm sm:text-base font-light mb-1 sm:mb-2 text-umber group-hover:text-umber-dark transition-colors">
                     {testimonial.name}
                   </p>
                   <p className="text-xs sm:text-sm text-umber/80 font-light mb-1 sm:mb-2">
-                    {testimonial.role}, {testimonial.company}
+                    {testimonial.role}{testimonial.company && `, ${testimonial.company}`}
                   </p>
                   {testimonial.project && (
                     <p className="text-umber/70 text-xs font-light uppercase tracking-wider">
